@@ -1,0 +1,1512 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		D80BFAFE2DB5CDFA005058EB /* InterVariable.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D80BFACF2DB5CDFA005058EB /* InterVariable.ttf */; };
+		D80BFAFF2DB5CDFA005058EB /* MigrationLog.md in Resources */ = {isa = PBXBuildFile; fileRef = D80BFABF2DB5CDFA005058EB /* MigrationLog.md */; };
+		D80BFB002DB5CDFA005058EB /* InterVariable-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = D80BFAD02DB5CDFA005058EB /* InterVariable-Italic.ttf */; };
+		D80BFB012DB5CDFA005058EB /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D80BFA7C2DB5CDFA005058EB /* Info.plist */; };
+		D80BFB022DB5CDFA005058EB /* DataSynchronizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF22DB5CDFA005058EB /* DataSynchronizer.swift */; };
+		D80BFB032DB5CDFA005058EB /* CoupleProfileServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD82DB5CDFA005058EB /* CoupleProfileServiceAdapter.swift */; };
+		D80BFB042DB5CDFA005058EB /* PersonasViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB72DB5CDFA005058EB /* PersonasViewModel.swift */; };
+		D80BFB052DB5CDFA005058EB /* ActivityPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAAE2DB5CDFA005058EB /* ActivityPreferencesView.swift */; };
+		D80BFB062DB5CDFA005058EB /* AvailabilityComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA802DB5CDFA005058EB /* AvailabilityComponents.swift */; };
+		D80BFB072DB5CDFA005058EB /* TimeSelectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAAB2DB5CDFA005058EB /* TimeSelectionViewModel.swift */; };
+		D80BFB082DB5CDFA005058EB /* HomeComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA92DB5CDFA005058EB /* HomeComponents.swift */; };
+		D80BFB092DB5CDFA005058EB /* MutualAvailabilityHelpers.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA8B2DB5CDFA005058EB /* MutualAvailabilityHelpers.swift */; };
+		D80BFB0A2DB5CDFA005058EB /* HangoutComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA9F2DB5CDFA005058EB /* HangoutComponents.swift */; };
+		D80BFB0B2DB5CDFA005058EB /* StandardFirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFADD2DB5CDFA005058EB /* StandardFirestoreService.swift */; };
+		D80BFB0C2DB5CDFA005058EB /* Friendship.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC52DB5CDFA005058EB /* Friendship.swift */; };
+		D80BFB0D2DB5CDFA005058EB /* PersonaFormView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB52DB5CDFA005058EB /* PersonaFormView.swift */; };
+		D80BFB0E2DB5CDFA005058EB /* AuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA7E2DB5CDFA005058EB /* AuthViewModel.swift */; };
+		D80BFB0F2DB5CDFA005058EB /* TimeModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFACC2DB5CDFA005058EB /* TimeModels.swift */; };
+		D80BFB102DB5CDFA005058EB /* ServiceError.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD32DB5CDFA005058EB /* ServiceError.swift */; };
+		D80BFB112DB5CDFA005058EB /* DateRangePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA742DB5CDFA005058EB /* DateRangePickerView.swift */; };
+		D80BFB122DB5CDFA005058EB /* HangoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA5D2DB5CDFA005058EB /* HangoutCard.swift */; };
+		D80BFB132DB5CDFA005058EB /* CalendarEventView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA962DB5CDFA005058EB /* CalendarEventView.swift */; };
+		D80BFB142DB5CDFA005058EB /* CalendarAuthViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA952DB5CDFA005058EB /* CalendarAuthViewModel.swift */; };
+		D80BFB152DB5CDFA005058EB /* SplashView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA722DB5CDFA005058EB /* SplashView.swift */; };
+		D80BFB162DB5CDFA005058EB /* EditProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB02DB5CDFA005058EB /* EditProfileView.swift */; };
+		D80BFB172DB5CDFA005058EB /* CalendarSynchronizationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAEC2DB5CDFA005058EB /* CalendarSynchronizationService.swift */; };
+		D80BFB182DB5CDFA005058EB /* SwipeableHangoutCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA662DB5CDFA005058EB /* SwipeableHangoutCardView.swift */; };
+		D80BFB192DB5CDFA005058EB /* FirestoreEncoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD22DB5CDFA005058EB /* FirestoreEncoder.swift */; };
+		D80BFB1A2DB5CDFA005058EB /* CalendarProviderProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE02DB5CDFA005058EB /* CalendarProviderProtocol.swift */; };
+		D80BFB1B2DB5CDFA005058EB /* CoupleAvailability.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC32DB5CDFA005058EB /* CoupleAvailability.swift */; };
+		D80BFB1C2DB5CDFA005058EB /* HangoutCreationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA12DB5CDFA005058EB /* HangoutCreationViewModel.swift */; };
+		D80BFB1D2DB5CDFA005058EB /* HangoutDetailComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA22DB5CDFA005058EB /* HangoutDetailComponents.swift */; };
+		D80BFB1E2DB5CDFA005058EB /* CalendarOperationsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD72DB5CDFA005058EB /* CalendarOperationsService.swift */; };
+		D80BFB1F2DB5CDFA005058EB /* AvailabilityCoordinatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA812DB5CDFA005058EB /* AvailabilityCoordinatorView.swift */; };
+		D80BFB202DB5CDFA005058EB /* FontInspector.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA692DB5CDFA005058EB /* FontInspector.swift */; };
+		D80BFB212DB5CDFA005058EB /* OutlookCalendarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE42DB5CDFA005058EB /* OutlookCalendarProvider.swift */; };
+		D80BFB222DB5CDFA005058EB /* GoogleCalendarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE32DB5CDFA005058EB /* GoogleCalendarProvider.swift */; };
+		D80BFB232DB5CDFA005058EB /* MutualAvailabilityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA902DB5CDFA005058EB /* MutualAvailabilityViewModel.swift */; };
+		D80BFB242DB5CDFA005058EB /* AvailabilityErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA822DB5CDFA005058EB /* AvailabilityErrors.swift */; };
+		D80BFB252DB5CDFA005058EB /* HangoutsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA5E2DB5CDFA005058EB /* HangoutsView.swift */; };
+		D80BFB262DB5CDFA005058EB /* MutualAvailabilityErrorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA892DB5CDFA005058EB /* MutualAvailabilityErrorView.swift */; };
+		D80BFB272DB5CDFA005058EB /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA702DB5CDFA005058EB /* ContentView.swift */; };
+		D80BFB282DB5CDFA005058EB /* NotificationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF62DB5CDFA005058EB /* NotificationService.swift */; };
+		D80BFB292DB5CDFA005058EB /* UserPreferencesView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFABB2DB5CDFA005058EB /* UserPreferencesView.swift */; };
+		D80BFB2A2DB5CDFA005058EB /* PersonaCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA632DB5CDFA005058EB /* PersonaCard.swift */; };
+		D80BFB2B2DB5CDFA005058EB /* ServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFADC2DB5CDFA005058EB /* ServiceProtocol.swift */; };
+		D80BFB2C2DB5CDFA005058EB /* MutualAvailabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA8F2DB5CDFA005058EB /* MutualAvailabilityView.swift */; };
+		D80BFB2D2DB5CDFA005058EB /* TimeSlotComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA922DB5CDFA005058EB /* TimeSlotComponents.swift */; };
+		D80BFB2E2DB5CDFA005058EB /* CalendarServiceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAEB2DB5CDFA005058EB /* CalendarServiceFactory.swift */; };
+		D80BFB2F2DB5CDFA005058EB /* HangoutsService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF42DB5CDFA005058EB /* HangoutsService.swift */; };
+		D80BFB302DB5CDFA005058EB /* FloatingButtonStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA602DB5CDFA005058EB /* FloatingButtonStyle.swift */; };
+		D80BFB312DB5CDFA005058EB /* MutualAvailabilityEmptyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA882DB5CDFA005058EB /* MutualAvailabilityEmptyView.swift */; };
+		D80BFB322DB5CDFA005058EB /* PersonaDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB42DB5CDFA005058EB /* PersonaDetailView.swift */; };
+		D80BFB332DB5CDFA005058EB /* MutualAvailabilityComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA862DB5CDFA005058EB /* MutualAvailabilityComponents.swift */; };
+		D80BFB342DB5CDFA005058EB /* VisibilitySettingsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFABC2DB5CDFA005058EB /* VisibilitySettingsView.swift */; };
+		D80BFB352DB5CDFA005058EB /* CalendarOperationsServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE92DB5CDFA005058EB /* CalendarOperationsServiceImpl.swift */; };
+		D80BFB362DB5CDFA005058EB /* CalendarDataFetchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE72DB5CDFA005058EB /* CalendarDataFetchService.swift */; };
+		D80BFB372DB5CDFA005058EB /* CoupleProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC42DB5CDFA005058EB /* CoupleProfile.swift */; };
+		D80BFB382DB5CDFA005058EB /* MicrosoftGraphService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF52DB5CDFA005058EB /* MicrosoftGraphService.swift */; };
+		D80BFB392DB5CDFA005058EB /* HangoutErrors.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA32DB5CDFA005058EB /* HangoutErrors.swift */; };
+		D80BFB3A2DB5CDFA005058EB /* PartnerSectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB32DB5CDFA005058EB /* PartnerSectionView.swift */; };
+		D80BFB3B2DB5CDFA005058EB /* FontTestView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA6A2DB5CDFA005058EB /* FontTestView.swift */; };
+		D80BFB3C2DB5CDFA005058EB /* Persona.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFACA2DB5CDFA005058EB /* Persona.swift */; };
+		D80BFB3D2DB5CDFA005058EB /* CalendarIntegrationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA992DB5CDFA005058EB /* CalendarIntegrationViewModel.swift */; };
+		D80BFB3E2DB5CDFA005058EB /* RelationshipService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF92DB5CDFA005058EB /* RelationshipService.swift */; };
+		D80BFB3F2DB5CDFA005058EB /* PartnerPersonasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA622DB5CDFA005058EB /* PartnerPersonasView.swift */; };
+		D80BFB402DB5CDFA005058EB /* MutualAvailabilityViewModel+Combine.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA912DB5CDFA005058EB /* MutualAvailabilityViewModel+Combine.swift */; };
+		D80BFB412DB5CDFA005058EB /* CalendarIntegrationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE82DB5CDFA005058EB /* CalendarIntegrationService.swift */; };
+		D80BFB422DB5CDFA005058EB /* HangoutFormComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA42DB5CDFA005058EB /* HangoutFormComponents.swift */; };
+		D80BFB432DB5CDFA005058EB /* Relationship.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFACB2DB5CDFA005058EB /* Relationship.swift */; };
+		D80BFB442DB5CDFA005058EB /* ThemedList.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA7A2DB5CDFA005058EB /* ThemedList.swift */; };
+		D80BFB452DB5CDFA005058EB /* FriendCouplePickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA852DB5CDFA005058EB /* FriendCouplePickerView.swift */; };
+		D80BFB462DB5CDFA005058EB /* CalendarService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAEF2DB5CDFA005058EB /* CalendarService.swift */; };
+		D80BFB472DB5CDFA005058EB /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFADA2DB5CDFA005058EB /* NetworkService.swift */; };
+		D80BFB482DB5CDFA005058EB /* DurationPickerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA752DB5CDFA005058EB /* DurationPickerView.swift */; };
+		D80BFB492DB5CDFA005058EB /* HangoutNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA62DB5CDFA005058EB /* HangoutNavigation.swift */; };
+		D80BFB4A2DB5CDFA005058EB /* CalendarEventViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA972DB5CDFA005058EB /* CalendarEventViewModel.swift */; };
+		D80BFB4B2DB5CDFA005058EB /* HangoutTypeCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA82DB5CDFA005058EB /* HangoutTypeCard.swift */; };
+		D80BFB4C2DB5CDFA005058EB /* AuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA5B2DB5CDFA005058EB /* AuthView.swift */; };
+		D80BFB4D2DB5CDFA005058EB /* HangoutsServiceAdapter.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD92DB5CDFA005058EB /* HangoutsServiceAdapter.swift */; };
+		D80BFB4E2DB5CDFA005058EB /* CreateHangoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA9C2DB5CDFA005058EB /* CreateHangoutView.swift */; };
+		D80BFB4F2DB5CDFA005058EB /* CalendarProviderViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAEA2DB5CDFA005058EB /* CalendarProviderViewModel.swift */; };
+		D80BFB502DB5CDFA005058EB /* GoogleCalendarAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA9A2DB5CDFA005058EB /* GoogleCalendarAuthView.swift */; };
+		D80BFB512DB5CDFA005058EB /* AddPersonaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAAF2DB5CDFA005058EB /* AddPersonaView.swift */; };
+		D80BFB522DB5CDFA005058EB /* CoupleProfileService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF12DB5CDFA005058EB /* CoupleProfileService.swift */; };
+		D80BFB532DB5CDFA005058EB /* CoupleAvailabilityViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA842DB5CDFA005058EB /* CoupleAvailabilityViewModel.swift */; };
+		D80BFB542DB5CDFA005058EB /* AppleCalendarProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE22DB5CDFA005058EB /* AppleCalendarProvider.swift */; };
+		D80BFB552DB5CDFA005058EB /* SwipeableHangoutCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAAA2DB5CDFA005058EB /* SwipeableHangoutCard.swift */; };
+		D80BFB562DB5CDFA005058EB /* UnhingedApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA6F2DB5CDFA005058EB /* UnhingedApp.swift */; };
+		D80BFB572DB5CDFA005058EB /* MainTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA712DB5CDFA005058EB /* MainTabView.swift */; };
+		D80BFB582DB5CDFA005058EB /* HangoutCreationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA02DB5CDFA005058EB /* HangoutCreationView.swift */; };
+		D80BFB592DB5CDFA005058EB /* AlertItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC22DB5CDFA005058EB /* AlertItem.swift */; };
+		D80BFB5A2DB5CDFA005058EB /* BaseService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD52DB5CDFA005058EB /* BaseService.swift */; };
+		D80BFB5B2DB5CDFA005058EB /* EmptyRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA652DB5CDFA005058EB /* EmptyRequestsView.swift */; };
+		D80BFB5C2DB5CDFA005058EB /* HangoutListComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA52DB5CDFA005058EB /* HangoutListComponents.swift */; };
+		D80BFB5D2DB5CDFA005058EB /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA6E2DB5CDFA005058EB /* AppDelegate.swift */; };
+		D80BFB5E2DB5CDFA005058EB /* PersonaManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF72DB5CDFA005058EB /* PersonaManager.swift */; };
+		D80BFB5F2DB5CDFA005058EB /* CalendarAuthService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAE62DB5CDFA005058EB /* CalendarAuthService.swift */; };
+		D80BFB602DB5CDFA005058EB /* ProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB92DB5CDFA005058EB /* ProfileView.swift */; };
+		D80BFB612DB5CDFA005058EB /* FontVerificationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA6B2DB5CDFA005058EB /* FontVerificationView.swift */; };
+		D80BFB622DB5CDFA005058EB /* MutualAvailabilityLoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA8C2DB5CDFA005058EB /* MutualAvailabilityLoadingView.swift */; };
+		D80BFB632DB5CDFA005058EB /* CalendarEvent.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAD62DB5CDFA005058EB /* CalendarEvent.swift */; };
+		D80BFB642DB5CDFA005058EB /* CoupleAvailabilityView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA832DB5CDFA005058EB /* CoupleAvailabilityView.swift */; };
+		D80BFB652DB5CDFA005058EB /* CoupleReferral.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC02DB5CDFA005058EB /* CoupleReferral.swift */; };
+		D80BFB662DB5CDFA005058EB /* OnboardingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA6C2DB5CDFA005058EB /* OnboardingView.swift */; };
+		D80BFB672DB5CDFA005058EB /* ReferralService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF82DB5CDFA005058EB /* ReferralService.swift */; };
+		D80BFB682DB5CDFA005058EB /* SwipeableRequestsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA672DB5CDFA005058EB /* SwipeableRequestsView.swift */; };
+		D80BFB692DB5CDFA005058EB /* MutualAvailabilityCreateHangoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA872DB5CDFA005058EB /* MutualAvailabilityCreateHangoutView.swift */; };
+		D80BFB6A2DB5CDFA005058EB /* EditProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB12DB5CDFA005058EB /* EditProfileViewModel.swift */; };
+		D80BFB6B2DB5CDFA005058EB /* ServiceManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFADB2DB5CDFA005058EB /* ServiceManager.swift */; };
+		D80BFB6C2DB5CDFA005058EB /* CreateHangoutViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA9D2DB5CDFA005058EB /* CreateHangoutViewModel.swift */; };
+		D80BFB6D2DB5CDFA005058EB /* DurationCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA9E2DB5CDFA005058EB /* DurationCard.swift */; };
+		D80BFB6E2DB5CDFA005058EB /* Notification.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC82DB5CDFA005058EB /* Notification.swift */; };
+		D80BFB6F2DB5CDFA005058EB /* HangoutModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC72DB5CDFA005058EB /* HangoutModels.swift */; };
+		D80BFB702DB5CDFA005058EB /* CalendarIntegrationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA982DB5CDFA005058EB /* CalendarIntegrationView.swift */; };
+		D80BFB712DB5CDFA005058EB /* FirestoreService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF32DB5CDFA005058EB /* FirestoreService.swift */; };
+		D80BFB722DB5CDFA005058EB /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFACD2DB5CDFA005058EB /* User.swift */; };
+		D80BFB732DB5CDFA005058EB /* ThemedForm.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA792DB5CDFA005058EB /* ThemedForm.swift */; };
+		D80BFB742DB5CDFA005058EB /* PartnerInvitation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC92DB5CDFA005058EB /* PartnerInvitation.swift */; };
+		D80BFB752DB5CDFA005058EB /* MainProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB22DB5CDFA005058EB /* MainProfileView.swift */; };
+		D80BFB762DB5CDFA005058EB /* MutualAvailabilityResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA8D2DB5CDFA005058EB /* MutualAvailabilityResultsView.swift */; };
+		D80BFB772DB5CDFA005058EB /* UserService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAFA2DB5CDFA005058EB /* UserService.swift */; };
+		D80BFB782DB5CDFA005058EB /* PersonasView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB62DB5CDFA005058EB /* PersonasView.swift */; };
+		D80BFB792DB5CDFA005058EB /* HangoutsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAA72DB5CDFA005058EB /* HangoutsViewModel.swift */; };
+		D80BFB7A2DB5CDFA005058EB /* CoupleAvailabilityService.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAF02DB5CDFA005058EB /* CoupleAvailabilityService.swift */; };
+		D80BFB7B2DB5CDFA005058EB /* CalendarAuthView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA942DB5CDFA005058EB /* CalendarAuthView.swift */; };
+		D80BFB7C2DB5CDFA005058EB /* ProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFABA2DB5CDFA005058EB /* ProfileViewModel.swift */; };
+		D80BFB7D2DB5CDFA005058EB /* LoadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA772DB5CDFA005058EB /* LoadingView.swift */; };
+		D80BFB7E2DB5CDFA005058EB /* MutualAvailabilitySuccessView.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA8E2DB5CDFA005058EB /* MutualAvailabilitySuccessView.swift */; };
+		D80BFB7F2DB5CDFA005058EB /* AuthManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAEE2DB5CDFA005058EB /* AuthManager.swift */; };
+		D80BFB802DB5CDFA005058EB /* MutualAvailabilityFeature.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA8A2DB5CDFA005058EB /* MutualAvailabilityFeature.swift */; };
+		D80BFB812DB5CDFA005058EB /* Hangout.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAC62DB5CDFA005058EB /* Hangout.swift */; };
+		D80BFB822DB5CDFA005058EB /* ThemedCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFA782DB5CDFA005058EB /* ThemedCard.swift */; };
+		D80BFB832DB5CDFA005058EB /* ProfileComponents.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFAB82DB5CDFA005058EB /* ProfileComponents.swift */; };
+		D80BFB942DB5CE05005058EB /* PublisherUtility.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB8F2DB5CE05005058EB /* PublisherUtility.swift */; };
+		D80BFB952DB5CE05005058EB /* PlatformUtilities.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB8E2DB5CE05005058EB /* PlatformUtilities.swift */; };
+		D80BFB962DB5CE05005058EB /* ErrorMonitor.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB8B2DB5CE05005058EB /* ErrorMonitor.swift */; };
+		D80BFB972DB5CE05005058EB /* CallbackHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB852DB5CE05005058EB /* CallbackHandler.swift */; };
+		D80BFB982DB5CE05005058EB /* MVVMTemplate.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB8C2DB5CE05005058EB /* MVVMTemplate.swift */; };
+		D80BFB992DB5CE05005058EB /* QRCodeGenerator.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB902DB5CE05005058EB /* QRCodeGenerator.swift */; };
+		D80BFB9A2DB5CE05005058EB /* ThemeConfig.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB922DB5CE05005058EB /* ThemeConfig.swift */; };
+		D80BFB9B2DB5CE05005058EB /* CallbackProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB872DB5CE05005058EB /* CallbackProtocols.swift */; };
+		D80BFB9C2DB5CE05005058EB /* SampleCallbackImplementation.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB912DB5CE05005058EB /* SampleCallbackImplementation.swift */; };
+		D80BFB9D2DB5CE05005058EB /* PerformanceOptimizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB8D2DB5CE05005058EB /* PerformanceOptimizer.swift */; };
+		D80BFB9E2DB5CE05005058EB /* AlertModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB842DB5CE05005058EB /* AlertModels.swift */; };
+		D80BFB9F2DB5CE05005058EB /* ErrorHandling.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB8A2DB5CE05005058EB /* ErrorHandling.swift */; };
+		D80BFBA02DB5CE05005058EB /* CallbackManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB862DB5CE05005058EB /* CallbackManager.swift */; };
+		D80BFBA12DB5CE05005058EB /* ErrorHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB892DB5CE05005058EB /* ErrorHandler.swift */; };
+		D80BFBA22DB5CE05005058EB /* ColorExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = D80BFB882DB5CE05005058EB /* ColorExtensions.swift */; };
+		D8E49A9B2DB5BA2A009D0352 /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49A9A2DB5BA2A009D0352 /* FirebaseAnalytics */; };
+		D8E49A9D2DB5BA2A009D0352 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49A9C2DB5BA2A009D0352 /* FirebaseAuth */; };
+		D8E49A9F2DB5BA2A009D0352 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49A9E2DB5BA2A009D0352 /* FirebaseCore */; };
+		D8E49AA12DB5BA2A009D0352 /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AA02DB5BA2A009D0352 /* FirebaseFirestore */; };
+		D8E49AA32DB5BA2A009D0352 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AA22DB5BA2A009D0352 /* FirebaseFunctions */; };
+		D8E49AA52DB5BA2A009D0352 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AA42DB5BA2A009D0352 /* FirebaseMessaging */; };
+		D8E49AA72DB5BA2A009D0352 /* FirebaseRemoteConfig in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AA62DB5BA2A009D0352 /* FirebaseRemoteConfig */; };
+		D8E49AA92DB5BA2A009D0352 /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AA82DB5BA2A009D0352 /* FirebaseStorage */; };
+		D8E49AAC2DB5BA42009D0352 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AAB2DB5BA42009D0352 /* GoogleSignIn */; };
+		D8E49AAE2DB5BA42009D0352 /* GoogleSignInSwift in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AAD2DB5BA42009D0352 /* GoogleSignInSwift */; };
+		D8E49AB12DB5BA50009D0352 /* Kingfisher in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AB02DB5BA50009D0352 /* Kingfisher */; };
+		D8E49AB42DB5BA5C009D0352 /* GoogleDataTransport in Frameworks */ = {isa = PBXBuildFile; productRef = D8E49AB32DB5BA5C009D0352 /* GoogleDataTransport */; };
+		D8E49AB82DB5BB58009D0352 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = D8E49AB72DB5BB58009D0352 /* GoogleService-Info.plist */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		D8ED59A22DB578F800E706FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8ED598C2DB578F600E706FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8ED59932DB578F600E706FA;
+			remoteInfo = Unhinged;
+		};
+		D8ED59AC2DB578F800E706FA /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = D8ED598C2DB578F600E706FA /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = D8ED59932DB578F600E706FA;
+			remoteInfo = Unhinged;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		D80BFA5B2DB5CDFA005058EB /* AuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthView.swift; sourceTree = "<group>"; };
+		D80BFA5D2DB5CDFA005058EB /* HangoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutCard.swift; sourceTree = "<group>"; };
+		D80BFA5E2DB5CDFA005058EB /* HangoutsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutsView.swift; sourceTree = "<group>"; };
+		D80BFA602DB5CDFA005058EB /* FloatingButtonStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FloatingButtonStyle.swift; sourceTree = "<group>"; };
+		D80BFA622DB5CDFA005058EB /* PartnerPersonasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerPersonasView.swift; sourceTree = "<group>"; };
+		D80BFA632DB5CDFA005058EB /* PersonaCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaCard.swift; sourceTree = "<group>"; };
+		D80BFA652DB5CDFA005058EB /* EmptyRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmptyRequestsView.swift; sourceTree = "<group>"; };
+		D80BFA662DB5CDFA005058EB /* SwipeableHangoutCardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableHangoutCardView.swift; sourceTree = "<group>"; };
+		D80BFA672DB5CDFA005058EB /* SwipeableRequestsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableRequestsView.swift; sourceTree = "<group>"; };
+		D80BFA692DB5CDFA005058EB /* FontInspector.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontInspector.swift; sourceTree = "<group>"; };
+		D80BFA6A2DB5CDFA005058EB /* FontTestView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontTestView.swift; sourceTree = "<group>"; };
+		D80BFA6B2DB5CDFA005058EB /* FontVerificationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FontVerificationView.swift; sourceTree = "<group>"; };
+		D80BFA6C2DB5CDFA005058EB /* OnboardingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OnboardingView.swift; sourceTree = "<group>"; };
+		D80BFA6E2DB5CDFA005058EB /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		D80BFA6F2DB5CDFA005058EB /* UnhingedApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UnhingedApp.swift; sourceTree = "<group>"; };
+		D80BFA702DB5CDFA005058EB /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		D80BFA712DB5CDFA005058EB /* MainTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabView.swift; sourceTree = "<group>"; };
+		D80BFA722DB5CDFA005058EB /* SplashView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SplashView.swift; sourceTree = "<group>"; };
+		D80BFA742DB5CDFA005058EB /* DateRangePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DateRangePickerView.swift; sourceTree = "<group>"; };
+		D80BFA752DB5CDFA005058EB /* DurationPickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationPickerView.swift; sourceTree = "<group>"; };
+		D80BFA772DB5CDFA005058EB /* LoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LoadingView.swift; sourceTree = "<group>"; };
+		D80BFA782DB5CDFA005058EB /* ThemedCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedCard.swift; sourceTree = "<group>"; };
+		D80BFA792DB5CDFA005058EB /* ThemedForm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedForm.swift; sourceTree = "<group>"; };
+		D80BFA7A2DB5CDFA005058EB /* ThemedList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemedList.swift; sourceTree = "<group>"; };
+		D80BFA7C2DB5CDFA005058EB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		D80BFA7E2DB5CDFA005058EB /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
+		D80BFA802DB5CDFA005058EB /* AvailabilityComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityComponents.swift; sourceTree = "<group>"; };
+		D80BFA812DB5CDFA005058EB /* AvailabilityCoordinatorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityCoordinatorView.swift; sourceTree = "<group>"; };
+		D80BFA822DB5CDFA005058EB /* AvailabilityErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AvailabilityErrors.swift; sourceTree = "<group>"; };
+		D80BFA832DB5CDFA005058EB /* CoupleAvailabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleAvailabilityView.swift; sourceTree = "<group>"; };
+		D80BFA842DB5CDFA005058EB /* CoupleAvailabilityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleAvailabilityViewModel.swift; sourceTree = "<group>"; };
+		D80BFA852DB5CDFA005058EB /* FriendCouplePickerView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FriendCouplePickerView.swift; sourceTree = "<group>"; };
+		D80BFA862DB5CDFA005058EB /* MutualAvailabilityComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityComponents.swift; sourceTree = "<group>"; };
+		D80BFA872DB5CDFA005058EB /* MutualAvailabilityCreateHangoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityCreateHangoutView.swift; sourceTree = "<group>"; };
+		D80BFA882DB5CDFA005058EB /* MutualAvailabilityEmptyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityEmptyView.swift; sourceTree = "<group>"; };
+		D80BFA892DB5CDFA005058EB /* MutualAvailabilityErrorView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityErrorView.swift; sourceTree = "<group>"; };
+		D80BFA8A2DB5CDFA005058EB /* MutualAvailabilityFeature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityFeature.swift; sourceTree = "<group>"; };
+		D80BFA8B2DB5CDFA005058EB /* MutualAvailabilityHelpers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityHelpers.swift; sourceTree = "<group>"; };
+		D80BFA8C2DB5CDFA005058EB /* MutualAvailabilityLoadingView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityLoadingView.swift; sourceTree = "<group>"; };
+		D80BFA8D2DB5CDFA005058EB /* MutualAvailabilityResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityResultsView.swift; sourceTree = "<group>"; };
+		D80BFA8E2DB5CDFA005058EB /* MutualAvailabilitySuccessView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilitySuccessView.swift; sourceTree = "<group>"; };
+		D80BFA8F2DB5CDFA005058EB /* MutualAvailabilityView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityView.swift; sourceTree = "<group>"; };
+		D80BFA902DB5CDFA005058EB /* MutualAvailabilityViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MutualAvailabilityViewModel.swift; sourceTree = "<group>"; };
+		D80BFA912DB5CDFA005058EB /* MutualAvailabilityViewModel+Combine.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "MutualAvailabilityViewModel+Combine.swift"; sourceTree = "<group>"; };
+		D80BFA922DB5CDFA005058EB /* TimeSlotComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSlotComponents.swift; sourceTree = "<group>"; };
+		D80BFA942DB5CDFA005058EB /* CalendarAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAuthView.swift; sourceTree = "<group>"; };
+		D80BFA952DB5CDFA005058EB /* CalendarAuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAuthViewModel.swift; sourceTree = "<group>"; };
+		D80BFA962DB5CDFA005058EB /* CalendarEventView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventView.swift; sourceTree = "<group>"; };
+		D80BFA972DB5CDFA005058EB /* CalendarEventViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEventViewModel.swift; sourceTree = "<group>"; };
+		D80BFA982DB5CDFA005058EB /* CalendarIntegrationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarIntegrationView.swift; sourceTree = "<group>"; };
+		D80BFA992DB5CDFA005058EB /* CalendarIntegrationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarIntegrationViewModel.swift; sourceTree = "<group>"; };
+		D80BFA9A2DB5CDFA005058EB /* GoogleCalendarAuthView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarAuthView.swift; sourceTree = "<group>"; };
+		D80BFA9C2DB5CDFA005058EB /* CreateHangoutView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHangoutView.swift; sourceTree = "<group>"; };
+		D80BFA9D2DB5CDFA005058EB /* CreateHangoutViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateHangoutViewModel.swift; sourceTree = "<group>"; };
+		D80BFA9E2DB5CDFA005058EB /* DurationCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DurationCard.swift; sourceTree = "<group>"; };
+		D80BFA9F2DB5CDFA005058EB /* HangoutComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutComponents.swift; sourceTree = "<group>"; };
+		D80BFAA02DB5CDFA005058EB /* HangoutCreationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutCreationView.swift; sourceTree = "<group>"; };
+		D80BFAA12DB5CDFA005058EB /* HangoutCreationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutCreationViewModel.swift; sourceTree = "<group>"; };
+		D80BFAA22DB5CDFA005058EB /* HangoutDetailComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutDetailComponents.swift; sourceTree = "<group>"; };
+		D80BFAA32DB5CDFA005058EB /* HangoutErrors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutErrors.swift; sourceTree = "<group>"; };
+		D80BFAA42DB5CDFA005058EB /* HangoutFormComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutFormComponents.swift; sourceTree = "<group>"; };
+		D80BFAA52DB5CDFA005058EB /* HangoutListComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutListComponents.swift; sourceTree = "<group>"; };
+		D80BFAA62DB5CDFA005058EB /* HangoutNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutNavigation.swift; sourceTree = "<group>"; };
+		D80BFAA72DB5CDFA005058EB /* HangoutsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutsViewModel.swift; sourceTree = "<group>"; };
+		D80BFAA82DB5CDFA005058EB /* HangoutTypeCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutTypeCard.swift; sourceTree = "<group>"; };
+		D80BFAA92DB5CDFA005058EB /* HomeComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeComponents.swift; sourceTree = "<group>"; };
+		D80BFAAA2DB5CDFA005058EB /* SwipeableHangoutCard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SwipeableHangoutCard.swift; sourceTree = "<group>"; };
+		D80BFAAB2DB5CDFA005058EB /* TimeSelectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeSelectionViewModel.swift; sourceTree = "<group>"; };
+		D80BFAAE2DB5CDFA005058EB /* ActivityPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ActivityPreferencesView.swift; sourceTree = "<group>"; };
+		D80BFAAF2DB5CDFA005058EB /* AddPersonaView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPersonaView.swift; sourceTree = "<group>"; };
+		D80BFAB02DB5CDFA005058EB /* EditProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileView.swift; sourceTree = "<group>"; };
+		D80BFAB12DB5CDFA005058EB /* EditProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EditProfileViewModel.swift; sourceTree = "<group>"; };
+		D80BFAB22DB5CDFA005058EB /* MainProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainProfileView.swift; sourceTree = "<group>"; };
+		D80BFAB32DB5CDFA005058EB /* PartnerSectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerSectionView.swift; sourceTree = "<group>"; };
+		D80BFAB42DB5CDFA005058EB /* PersonaDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaDetailView.swift; sourceTree = "<group>"; };
+		D80BFAB52DB5CDFA005058EB /* PersonaFormView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaFormView.swift; sourceTree = "<group>"; };
+		D80BFAB62DB5CDFA005058EB /* PersonasView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonasView.swift; sourceTree = "<group>"; };
+		D80BFAB72DB5CDFA005058EB /* PersonasViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonasViewModel.swift; sourceTree = "<group>"; };
+		D80BFAB82DB5CDFA005058EB /* ProfileComponents.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileComponents.swift; sourceTree = "<group>"; };
+		D80BFAB92DB5CDFA005058EB /* ProfileView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileView.swift; sourceTree = "<group>"; };
+		D80BFABA2DB5CDFA005058EB /* ProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewModel.swift; sourceTree = "<group>"; };
+		D80BFABB2DB5CDFA005058EB /* UserPreferencesView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPreferencesView.swift; sourceTree = "<group>"; };
+		D80BFABC2DB5CDFA005058EB /* VisibilitySettingsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = VisibilitySettingsView.swift; sourceTree = "<group>"; };
+		D80BFABF2DB5CDFA005058EB /* MigrationLog.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = MigrationLog.md; sourceTree = "<group>"; };
+		D80BFAC02DB5CDFA005058EB /* CoupleReferral.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleReferral.swift; sourceTree = "<group>"; };
+		D80BFAC22DB5CDFA005058EB /* AlertItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertItem.swift; sourceTree = "<group>"; };
+		D80BFAC32DB5CDFA005058EB /* CoupleAvailability.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleAvailability.swift; sourceTree = "<group>"; };
+		D80BFAC42DB5CDFA005058EB /* CoupleProfile.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleProfile.swift; sourceTree = "<group>"; };
+		D80BFAC52DB5CDFA005058EB /* Friendship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Friendship.swift; sourceTree = "<group>"; };
+		D80BFAC62DB5CDFA005058EB /* Hangout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Hangout.swift; sourceTree = "<group>"; };
+		D80BFAC72DB5CDFA005058EB /* HangoutModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutModels.swift; sourceTree = "<group>"; };
+		D80BFAC82DB5CDFA005058EB /* Notification.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Notification.swift; sourceTree = "<group>"; };
+		D80BFAC92DB5CDFA005058EB /* PartnerInvitation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PartnerInvitation.swift; sourceTree = "<group>"; };
+		D80BFACA2DB5CDFA005058EB /* Persona.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Persona.swift; sourceTree = "<group>"; };
+		D80BFACB2DB5CDFA005058EB /* Relationship.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Relationship.swift; sourceTree = "<group>"; };
+		D80BFACC2DB5CDFA005058EB /* TimeModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeModels.swift; sourceTree = "<group>"; };
+		D80BFACD2DB5CDFA005058EB /* User.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		D80BFACF2DB5CDFA005058EB /* InterVariable.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = InterVariable.ttf; sourceTree = "<group>"; };
+		D80BFAD02DB5CDFA005058EB /* InterVariable-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "InterVariable-Italic.ttf"; sourceTree = "<group>"; };
+		D80BFAD22DB5CDFA005058EB /* FirestoreEncoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreEncoder.swift; sourceTree = "<group>"; };
+		D80BFAD32DB5CDFA005058EB /* ServiceError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceError.swift; sourceTree = "<group>"; };
+		D80BFAD52DB5CDFA005058EB /* BaseService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseService.swift; sourceTree = "<group>"; };
+		D80BFAD62DB5CDFA005058EB /* CalendarEvent.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarEvent.swift; sourceTree = "<group>"; };
+		D80BFAD72DB5CDFA005058EB /* CalendarOperationsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOperationsService.swift; sourceTree = "<group>"; };
+		D80BFAD82DB5CDFA005058EB /* CoupleProfileServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleProfileServiceAdapter.swift; sourceTree = "<group>"; };
+		D80BFAD92DB5CDFA005058EB /* HangoutsServiceAdapter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutsServiceAdapter.swift; sourceTree = "<group>"; };
+		D80BFADA2DB5CDFA005058EB /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
+		D80BFADB2DB5CDFA005058EB /* ServiceManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceManager.swift; sourceTree = "<group>"; };
+		D80BFADC2DB5CDFA005058EB /* ServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ServiceProtocol.swift; sourceTree = "<group>"; };
+		D80BFADD2DB5CDFA005058EB /* StandardFirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandardFirestoreService.swift; sourceTree = "<group>"; };
+		D80BFAE02DB5CDFA005058EB /* CalendarProviderProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProviderProtocol.swift; sourceTree = "<group>"; };
+		D80BFAE22DB5CDFA005058EB /* AppleCalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppleCalendarProvider.swift; sourceTree = "<group>"; };
+		D80BFAE32DB5CDFA005058EB /* GoogleCalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GoogleCalendarProvider.swift; sourceTree = "<group>"; };
+		D80BFAE42DB5CDFA005058EB /* OutlookCalendarProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutlookCalendarProvider.swift; sourceTree = "<group>"; };
+		D80BFAE62DB5CDFA005058EB /* CalendarAuthService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarAuthService.swift; sourceTree = "<group>"; };
+		D80BFAE72DB5CDFA005058EB /* CalendarDataFetchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarDataFetchService.swift; sourceTree = "<group>"; };
+		D80BFAE82DB5CDFA005058EB /* CalendarIntegrationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarIntegrationService.swift; sourceTree = "<group>"; };
+		D80BFAE92DB5CDFA005058EB /* CalendarOperationsServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarOperationsServiceImpl.swift; sourceTree = "<group>"; };
+		D80BFAEA2DB5CDFA005058EB /* CalendarProviderViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarProviderViewModel.swift; sourceTree = "<group>"; };
+		D80BFAEB2DB5CDFA005058EB /* CalendarServiceFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarServiceFactory.swift; sourceTree = "<group>"; };
+		D80BFAEC2DB5CDFA005058EB /* CalendarSynchronizationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarSynchronizationService.swift; sourceTree = "<group>"; };
+		D80BFAEE2DB5CDFA005058EB /* AuthManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthManager.swift; sourceTree = "<group>"; };
+		D80BFAEF2DB5CDFA005058EB /* CalendarService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CalendarService.swift; sourceTree = "<group>"; };
+		D80BFAF02DB5CDFA005058EB /* CoupleAvailabilityService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleAvailabilityService.swift; sourceTree = "<group>"; };
+		D80BFAF12DB5CDFA005058EB /* CoupleProfileService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleProfileService.swift; sourceTree = "<group>"; };
+		D80BFAF22DB5CDFA005058EB /* DataSynchronizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DataSynchronizer.swift; sourceTree = "<group>"; };
+		D80BFAF32DB5CDFA005058EB /* FirestoreService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FirestoreService.swift; sourceTree = "<group>"; };
+		D80BFAF42DB5CDFA005058EB /* HangoutsService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HangoutsService.swift; sourceTree = "<group>"; };
+		D80BFAF52DB5CDFA005058EB /* MicrosoftGraphService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MicrosoftGraphService.swift; sourceTree = "<group>"; };
+		D80BFAF62DB5CDFA005058EB /* NotificationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationService.swift; sourceTree = "<group>"; };
+		D80BFAF72DB5CDFA005058EB /* PersonaManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonaManager.swift; sourceTree = "<group>"; };
+		D80BFAF82DB5CDFA005058EB /* ReferralService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReferralService.swift; sourceTree = "<group>"; };
+		D80BFAF92DB5CDFA005058EB /* RelationshipService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelationshipService.swift; sourceTree = "<group>"; };
+		D80BFAFA2DB5CDFA005058EB /* UserService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserService.swift; sourceTree = "<group>"; };
+		D80BFB842DB5CE05005058EB /* AlertModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModels.swift; sourceTree = "<group>"; };
+		D80BFB852DB5CE05005058EB /* CallbackHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackHandler.swift; sourceTree = "<group>"; };
+		D80BFB862DB5CE05005058EB /* CallbackManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackManager.swift; sourceTree = "<group>"; };
+		D80BFB872DB5CE05005058EB /* CallbackProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CallbackProtocols.swift; sourceTree = "<group>"; };
+		D80BFB882DB5CE05005058EB /* ColorExtensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ColorExtensions.swift; sourceTree = "<group>"; };
+		D80BFB892DB5CE05005058EB /* ErrorHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandler.swift; sourceTree = "<group>"; };
+		D80BFB8A2DB5CE05005058EB /* ErrorHandling.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorHandling.swift; sourceTree = "<group>"; };
+		D80BFB8B2DB5CE05005058EB /* ErrorMonitor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorMonitor.swift; sourceTree = "<group>"; };
+		D80BFB8C2DB5CE05005058EB /* MVVMTemplate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MVVMTemplate.swift; sourceTree = "<group>"; };
+		D80BFB8D2DB5CE05005058EB /* PerformanceOptimizer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PerformanceOptimizer.swift; sourceTree = "<group>"; };
+		D80BFB8E2DB5CE05005058EB /* PlatformUtilities.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlatformUtilities.swift; sourceTree = "<group>"; };
+		D80BFB8F2DB5CE05005058EB /* PublisherUtility.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PublisherUtility.swift; sourceTree = "<group>"; };
+		D80BFB902DB5CE05005058EB /* QRCodeGenerator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QRCodeGenerator.swift; sourceTree = "<group>"; };
+		D80BFB912DB5CE05005058EB /* SampleCallbackImplementation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SampleCallbackImplementation.swift; sourceTree = "<group>"; };
+		D80BFB922DB5CE05005058EB /* ThemeConfig.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ThemeConfig.swift; sourceTree = "<group>"; };
+		D80BFBA32DB5D9A5005058EB /* UnhingedTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnhingedTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D80BFBA42DB5D9A5005058EB /* UnhingedUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = UnhingedUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		D80BFBA52DB6769C005058EB /* Unhinged-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = "Unhinged-Info.plist"; sourceTree = "<group>"; };
+		D8E49A962DB5B73E009D0352 /* Unhinged.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Unhinged.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		D8E49AB72DB5BB58009D0352 /* GoogleService-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		D8ED59912DB578F600E706FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D8E49AA52DB5BA2A009D0352 /* FirebaseMessaging in Frameworks */,
+				D8E49A9B2DB5BA2A009D0352 /* FirebaseAnalytics in Frameworks */,
+				D8E49AA12DB5BA2A009D0352 /* FirebaseFirestore in Frameworks */,
+				D8E49AA72DB5BA2A009D0352 /* FirebaseRemoteConfig in Frameworks */,
+				D8E49AA32DB5BA2A009D0352 /* FirebaseFunctions in Frameworks */,
+				D8E49AAE2DB5BA42009D0352 /* GoogleSignInSwift in Frameworks */,
+				D8E49AA92DB5BA2A009D0352 /* FirebaseStorage in Frameworks */,
+				D8E49A9F2DB5BA2A009D0352 /* FirebaseCore in Frameworks */,
+				D8E49AB12DB5BA50009D0352 /* Kingfisher in Frameworks */,
+				D8E49A9D2DB5BA2A009D0352 /* FirebaseAuth in Frameworks */,
+				D8E49AAC2DB5BA42009D0352 /* GoogleSignIn in Frameworks */,
+				D8E49AB42DB5BA5C009D0352 /* GoogleDataTransport in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8ED599E2DB578F800E706FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8ED59A82DB578F800E706FA /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		D80BFA5C2DB5CDFA005058EB /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA5B2DB5CDFA005058EB /* AuthView.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		D80BFA5F2DB5CDFA005058EB /* Hangouts */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA5D2DB5CDFA005058EB /* HangoutCard.swift */,
+				D80BFA5E2DB5CDFA005058EB /* HangoutsView.swift */,
+			);
+			path = Hangouts;
+			sourceTree = "<group>";
+		};
+		D80BFA612DB5CDFA005058EB /* Partials */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA602DB5CDFA005058EB /* FloatingButtonStyle.swift */,
+			);
+			path = Partials;
+			sourceTree = "<group>";
+		};
+		D80BFA642DB5CDFA005058EB /* Partner */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA622DB5CDFA005058EB /* PartnerPersonasView.swift */,
+				D80BFA632DB5CDFA005058EB /* PersonaCard.swift */,
+			);
+			path = Partner;
+			sourceTree = "<group>";
+		};
+		D80BFA682DB5CDFA005058EB /* Requests */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA652DB5CDFA005058EB /* EmptyRequestsView.swift */,
+				D80BFA662DB5CDFA005058EB /* SwipeableHangoutCardView.swift */,
+				D80BFA672DB5CDFA005058EB /* SwipeableRequestsView.swift */,
+			);
+			path = Requests;
+			sourceTree = "<group>";
+		};
+		D80BFA6D2DB5CDFA005058EB /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA5C2DB5CDFA005058EB /* Authentication */,
+				D80BFA5F2DB5CDFA005058EB /* Hangouts */,
+				D80BFA612DB5CDFA005058EB /* Partials */,
+				D80BFA642DB5CDFA005058EB /* Partner */,
+				D80BFA682DB5CDFA005058EB /* Requests */,
+				D80BFA692DB5CDFA005058EB /* FontInspector.swift */,
+				D80BFA6A2DB5CDFA005058EB /* FontTestView.swift */,
+				D80BFA6B2DB5CDFA005058EB /* FontVerificationView.swift */,
+				D80BFA6C2DB5CDFA005058EB /* OnboardingView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		D80BFA732DB5CDFA005058EB /* App */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA6D2DB5CDFA005058EB /* Views */,
+				D80BFA6E2DB5CDFA005058EB /* AppDelegate.swift */,
+				D80BFA6F2DB5CDFA005058EB /* UnhingedApp.swift */,
+				D80BFA702DB5CDFA005058EB /* ContentView.swift */,
+				D80BFA712DB5CDFA005058EB /* MainTabView.swift */,
+				D80BFA722DB5CDFA005058EB /* SplashView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		D80BFA762DB5CDFA005058EB /* DatePickers */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA742DB5CDFA005058EB /* DateRangePickerView.swift */,
+				D80BFA752DB5CDFA005058EB /* DurationPickerView.swift */,
+			);
+			path = DatePickers;
+			sourceTree = "<group>";
+		};
+		D80BFA7B2DB5CDFA005058EB /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA762DB5CDFA005058EB /* DatePickers */,
+				D80BFA772DB5CDFA005058EB /* LoadingView.swift */,
+				D80BFA782DB5CDFA005058EB /* ThemedCard.swift */,
+				D80BFA792DB5CDFA005058EB /* ThemedForm.swift */,
+				D80BFA7A2DB5CDFA005058EB /* ThemedList.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		D80BFA7D2DB5CDFA005058EB /* Configuration */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA7C2DB5CDFA005058EB /* Info.plist */,
+			);
+			path = Configuration;
+			sourceTree = "<group>";
+		};
+		D80BFA7F2DB5CDFA005058EB /* Authentication */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA7E2DB5CDFA005058EB /* AuthViewModel.swift */,
+			);
+			path = Authentication;
+			sourceTree = "<group>";
+		};
+		D80BFA932DB5CDFA005058EB /* Availability */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA802DB5CDFA005058EB /* AvailabilityComponents.swift */,
+				D80BFA812DB5CDFA005058EB /* AvailabilityCoordinatorView.swift */,
+				D80BFA822DB5CDFA005058EB /* AvailabilityErrors.swift */,
+				D80BFA832DB5CDFA005058EB /* CoupleAvailabilityView.swift */,
+				D80BFA842DB5CDFA005058EB /* CoupleAvailabilityViewModel.swift */,
+				D80BFA852DB5CDFA005058EB /* FriendCouplePickerView.swift */,
+				D80BFA862DB5CDFA005058EB /* MutualAvailabilityComponents.swift */,
+				D80BFA872DB5CDFA005058EB /* MutualAvailabilityCreateHangoutView.swift */,
+				D80BFA882DB5CDFA005058EB /* MutualAvailabilityEmptyView.swift */,
+				D80BFA892DB5CDFA005058EB /* MutualAvailabilityErrorView.swift */,
+				D80BFA8A2DB5CDFA005058EB /* MutualAvailabilityFeature.swift */,
+				D80BFA8B2DB5CDFA005058EB /* MutualAvailabilityHelpers.swift */,
+				D80BFA8C2DB5CDFA005058EB /* MutualAvailabilityLoadingView.swift */,
+				D80BFA8D2DB5CDFA005058EB /* MutualAvailabilityResultsView.swift */,
+				D80BFA8E2DB5CDFA005058EB /* MutualAvailabilitySuccessView.swift */,
+				D80BFA8F2DB5CDFA005058EB /* MutualAvailabilityView.swift */,
+				D80BFA902DB5CDFA005058EB /* MutualAvailabilityViewModel.swift */,
+				D80BFA912DB5CDFA005058EB /* MutualAvailabilityViewModel+Combine.swift */,
+				D80BFA922DB5CDFA005058EB /* TimeSlotComponents.swift */,
+			);
+			path = Availability;
+			sourceTree = "<group>";
+		};
+		D80BFA9B2DB5CDFA005058EB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA942DB5CDFA005058EB /* CalendarAuthView.swift */,
+				D80BFA952DB5CDFA005058EB /* CalendarAuthViewModel.swift */,
+				D80BFA962DB5CDFA005058EB /* CalendarEventView.swift */,
+				D80BFA972DB5CDFA005058EB /* CalendarEventViewModel.swift */,
+				D80BFA982DB5CDFA005058EB /* CalendarIntegrationView.swift */,
+				D80BFA992DB5CDFA005058EB /* CalendarIntegrationViewModel.swift */,
+				D80BFA9A2DB5CDFA005058EB /* GoogleCalendarAuthView.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		D80BFAAC2DB5CDFA005058EB /* Hangouts */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA9C2DB5CDFA005058EB /* CreateHangoutView.swift */,
+				D80BFA9D2DB5CDFA005058EB /* CreateHangoutViewModel.swift */,
+				D80BFA9E2DB5CDFA005058EB /* DurationCard.swift */,
+				D80BFA9F2DB5CDFA005058EB /* HangoutComponents.swift */,
+				D80BFAA02DB5CDFA005058EB /* HangoutCreationView.swift */,
+				D80BFAA12DB5CDFA005058EB /* HangoutCreationViewModel.swift */,
+				D80BFAA22DB5CDFA005058EB /* HangoutDetailComponents.swift */,
+				D80BFAA32DB5CDFA005058EB /* HangoutErrors.swift */,
+				D80BFAA42DB5CDFA005058EB /* HangoutFormComponents.swift */,
+				D80BFAA52DB5CDFA005058EB /* HangoutListComponents.swift */,
+				D80BFAA62DB5CDFA005058EB /* HangoutNavigation.swift */,
+				D80BFAA72DB5CDFA005058EB /* HangoutsViewModel.swift */,
+				D80BFAA82DB5CDFA005058EB /* HangoutTypeCard.swift */,
+				D80BFAA92DB5CDFA005058EB /* HomeComponents.swift */,
+				D80BFAAA2DB5CDFA005058EB /* SwipeableHangoutCard.swift */,
+				D80BFAAB2DB5CDFA005058EB /* TimeSelectionViewModel.swift */,
+			);
+			path = Hangouts;
+			sourceTree = "<group>";
+		};
+		D80BFAAD2DB5CDFA005058EB /* Notifications */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Notifications;
+			sourceTree = "<group>";
+		};
+		D80BFABD2DB5CDFA005058EB /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAAE2DB5CDFA005058EB /* ActivityPreferencesView.swift */,
+				D80BFAAF2DB5CDFA005058EB /* AddPersonaView.swift */,
+				D80BFAB02DB5CDFA005058EB /* EditProfileView.swift */,
+				D80BFAB12DB5CDFA005058EB /* EditProfileViewModel.swift */,
+				D80BFAB22DB5CDFA005058EB /* MainProfileView.swift */,
+				D80BFAB32DB5CDFA005058EB /* PartnerSectionView.swift */,
+				D80BFAB42DB5CDFA005058EB /* PersonaDetailView.swift */,
+				D80BFAB52DB5CDFA005058EB /* PersonaFormView.swift */,
+				D80BFAB62DB5CDFA005058EB /* PersonasView.swift */,
+				D80BFAB72DB5CDFA005058EB /* PersonasViewModel.swift */,
+				D80BFAB82DB5CDFA005058EB /* ProfileComponents.swift */,
+				D80BFAB92DB5CDFA005058EB /* ProfileView.swift */,
+				D80BFABA2DB5CDFA005058EB /* ProfileViewModel.swift */,
+				D80BFABB2DB5CDFA005058EB /* UserPreferencesView.swift */,
+				D80BFABC2DB5CDFA005058EB /* VisibilitySettingsView.swift */,
+			);
+			path = Profile;
+			sourceTree = "<group>";
+		};
+		D80BFABE2DB5CDFA005058EB /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFA7F2DB5CDFA005058EB /* Authentication */,
+				D80BFA932DB5CDFA005058EB /* Availability */,
+				D80BFA9B2DB5CDFA005058EB /* Calendar */,
+				D80BFAAC2DB5CDFA005058EB /* Hangouts */,
+				D80BFAAD2DB5CDFA005058EB /* Notifications */,
+				D80BFABD2DB5CDFA005058EB /* Profile */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		D80BFAC12DB5CDFA005058EB /* Referrals */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAC02DB5CDFA005058EB /* CoupleReferral.swift */,
+			);
+			path = Referrals;
+			sourceTree = "<group>";
+		};
+		D80BFACE2DB5CDFA005058EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAC12DB5CDFA005058EB /* Referrals */,
+				D80BFAC22DB5CDFA005058EB /* AlertItem.swift */,
+				D80BFAC32DB5CDFA005058EB /* CoupleAvailability.swift */,
+				D80BFAC42DB5CDFA005058EB /* CoupleProfile.swift */,
+				D80BFAC52DB5CDFA005058EB /* Friendship.swift */,
+				D80BFAC62DB5CDFA005058EB /* Hangout.swift */,
+				D80BFAC72DB5CDFA005058EB /* HangoutModels.swift */,
+				D80BFAC82DB5CDFA005058EB /* Notification.swift */,
+				D80BFAC92DB5CDFA005058EB /* PartnerInvitation.swift */,
+				D80BFACA2DB5CDFA005058EB /* Persona.swift */,
+				D80BFACB2DB5CDFA005058EB /* Relationship.swift */,
+				D80BFACC2DB5CDFA005058EB /* TimeModels.swift */,
+				D80BFACD2DB5CDFA005058EB /* User.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D80BFAD12DB5CDFA005058EB /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFACF2DB5CDFA005058EB /* InterVariable.ttf */,
+				D80BFAD02DB5CDFA005058EB /* InterVariable-Italic.ttf */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		D80BFAD42DB5CDFA005058EB /* Adapters */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAD22DB5CDFA005058EB /* FirestoreEncoder.swift */,
+				D80BFAD32DB5CDFA005058EB /* ServiceError.swift */,
+			);
+			path = Adapters;
+			sourceTree = "<group>";
+		};
+		D80BFADE2DB5CDFA005058EB /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAD52DB5CDFA005058EB /* BaseService.swift */,
+				D80BFAD62DB5CDFA005058EB /* CalendarEvent.swift */,
+				D80BFAD72DB5CDFA005058EB /* CalendarOperationsService.swift */,
+				D80BFAD82DB5CDFA005058EB /* CoupleProfileServiceAdapter.swift */,
+				D80BFAD92DB5CDFA005058EB /* HangoutsServiceAdapter.swift */,
+				D80BFADA2DB5CDFA005058EB /* NetworkService.swift */,
+				D80BFADB2DB5CDFA005058EB /* ServiceManager.swift */,
+				D80BFADC2DB5CDFA005058EB /* ServiceProtocol.swift */,
+				D80BFADD2DB5CDFA005058EB /* StandardFirestoreService.swift */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		D80BFADF2DB5CDFA005058EB /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		D80BFAE12DB5CDFA005058EB /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAE02DB5CDFA005058EB /* CalendarProviderProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		D80BFAE52DB5CDFA005058EB /* Providers */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAE22DB5CDFA005058EB /* AppleCalendarProvider.swift */,
+				D80BFAE32DB5CDFA005058EB /* GoogleCalendarProvider.swift */,
+				D80BFAE42DB5CDFA005058EB /* OutlookCalendarProvider.swift */,
+			);
+			path = Providers;
+			sourceTree = "<group>";
+		};
+		D80BFAED2DB5CDFA005058EB /* Calendar */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFADF2DB5CDFA005058EB /* Models */,
+				D80BFAE12DB5CDFA005058EB /* Protocols */,
+				D80BFAE52DB5CDFA005058EB /* Providers */,
+				D80BFAE62DB5CDFA005058EB /* CalendarAuthService.swift */,
+				D80BFAE72DB5CDFA005058EB /* CalendarDataFetchService.swift */,
+				D80BFAE82DB5CDFA005058EB /* CalendarIntegrationService.swift */,
+				D80BFAE92DB5CDFA005058EB /* CalendarOperationsServiceImpl.swift */,
+				D80BFAEA2DB5CDFA005058EB /* CalendarProviderViewModel.swift */,
+				D80BFAEB2DB5CDFA005058EB /* CalendarServiceFactory.swift */,
+				D80BFAEC2DB5CDFA005058EB /* CalendarSynchronizationService.swift */,
+			);
+			path = Calendar;
+			sourceTree = "<group>";
+		};
+		D80BFAFB2DB5CDFA005058EB /* Legacy */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAEE2DB5CDFA005058EB /* AuthManager.swift */,
+				D80BFAEF2DB5CDFA005058EB /* CalendarService.swift */,
+				D80BFAF02DB5CDFA005058EB /* CoupleAvailabilityService.swift */,
+				D80BFAF12DB5CDFA005058EB /* CoupleProfileService.swift */,
+				D80BFAF22DB5CDFA005058EB /* DataSynchronizer.swift */,
+				D80BFAF32DB5CDFA005058EB /* FirestoreService.swift */,
+				D80BFAF42DB5CDFA005058EB /* HangoutsService.swift */,
+				D80BFAF52DB5CDFA005058EB /* MicrosoftGraphService.swift */,
+				D80BFAF62DB5CDFA005058EB /* NotificationService.swift */,
+				D80BFAF72DB5CDFA005058EB /* PersonaManager.swift */,
+				D80BFAF82DB5CDFA005058EB /* ReferralService.swift */,
+				D80BFAF92DB5CDFA005058EB /* RelationshipService.swift */,
+				D80BFAFA2DB5CDFA005058EB /* UserService.swift */,
+			);
+			path = Legacy;
+			sourceTree = "<group>";
+		};
+		D80BFAFC2DB5CDFA005058EB /* Implementations */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAED2DB5CDFA005058EB /* Calendar */,
+				D80BFAFB2DB5CDFA005058EB /* Legacy */,
+			);
+			path = Implementations;
+			sourceTree = "<group>";
+		};
+		D80BFAFD2DB5CDFA005058EB /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFAD42DB5CDFA005058EB /* Adapters */,
+				D80BFADE2DB5CDFA005058EB /* Core */,
+				D80BFAFC2DB5CDFA005058EB /* Implementations */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		D80BFB932DB5CE05005058EB /* Utilities */ = {
+			isa = PBXGroup;
+			children = (
+				D80BFB842DB5CE05005058EB /* AlertModels.swift */,
+				D80BFB852DB5CE05005058EB /* CallbackHandler.swift */,
+				D80BFB862DB5CE05005058EB /* CallbackManager.swift */,
+				D80BFB872DB5CE05005058EB /* CallbackProtocols.swift */,
+				D80BFB882DB5CE05005058EB /* ColorExtensions.swift */,
+				D80BFB892DB5CE05005058EB /* ErrorHandler.swift */,
+				D80BFB8A2DB5CE05005058EB /* ErrorHandling.swift */,
+				D80BFB8B2DB5CE05005058EB /* ErrorMonitor.swift */,
+				D80BFB8C2DB5CE05005058EB /* MVVMTemplate.swift */,
+				D80BFB8D2DB5CE05005058EB /* PerformanceOptimizer.swift */,
+				D80BFB8E2DB5CE05005058EB /* PlatformUtilities.swift */,
+				D80BFB8F2DB5CE05005058EB /* PublisherUtility.swift */,
+				D80BFB902DB5CE05005058EB /* QRCodeGenerator.swift */,
+				D80BFB912DB5CE05005058EB /* SampleCallbackImplementation.swift */,
+				D80BFB922DB5CE05005058EB /* ThemeConfig.swift */,
+			);
+			path = Utilities;
+			sourceTree = "<group>";
+		};
+		D8ED598B2DB578F600E706FA = {
+			isa = PBXGroup;
+			children = (
+				D80BFBA52DB6769C005058EB /* Unhinged-Info.plist */,
+				D80BFA732DB5CDFA005058EB /* App */,
+				D80BFA7B2DB5CDFA005058EB /* Components */,
+				D80BFA7D2DB5CDFA005058EB /* Configuration */,
+				D80BFABE2DB5CDFA005058EB /* Features */,
+				D80BFABF2DB5CDFA005058EB /* MigrationLog.md */,
+				D80BFACE2DB5CDFA005058EB /* Models */,
+				D80BFAD12DB5CDFA005058EB /* Resources */,
+				D80BFAFD2DB5CDFA005058EB /* Services */,
+				D80BFB932DB5CE05005058EB /* Utilities */,
+				D8E49AB72DB5BB58009D0352 /* GoogleService-Info.plist */,
+				D8E49A962DB5B73E009D0352 /* Unhinged.app */,
+				D80BFBA32DB5D9A5005058EB /* UnhingedTests.xctest */,
+				D80BFBA42DB5D9A5005058EB /* UnhingedUITests.xctest */,
+			);
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		D8ED59932DB578F600E706FA /* Unhinged */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8ED59B52DB578F800E706FA /* Build configuration list for PBXNativeTarget "Unhinged" */;
+			buildPhases = (
+				D8ED59902DB578F600E706FA /* Sources */,
+				D8ED59912DB578F600E706FA /* Frameworks */,
+				D8ED59922DB578F600E706FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Unhinged;
+			packageProductDependencies = (
+				D8E49A9A2DB5BA2A009D0352 /* FirebaseAnalytics */,
+				D8E49A9C2DB5BA2A009D0352 /* FirebaseAuth */,
+				D8E49A9E2DB5BA2A009D0352 /* FirebaseCore */,
+				D8E49AA02DB5BA2A009D0352 /* FirebaseFirestore */,
+				D8E49AA22DB5BA2A009D0352 /* FirebaseFunctions */,
+				D8E49AA42DB5BA2A009D0352 /* FirebaseMessaging */,
+				D8E49AA62DB5BA2A009D0352 /* FirebaseRemoteConfig */,
+				D8E49AA82DB5BA2A009D0352 /* FirebaseStorage */,
+				D8E49AAB2DB5BA42009D0352 /* GoogleSignIn */,
+				D8E49AAD2DB5BA42009D0352 /* GoogleSignInSwift */,
+				D8E49AB02DB5BA50009D0352 /* Kingfisher */,
+				D8E49AB32DB5BA5C009D0352 /* GoogleDataTransport */,
+			);
+			productName = Unhinged;
+			productReference = D8E49A962DB5B73E009D0352 /* Unhinged.app */;
+			productType = "com.apple.product-type.application";
+		};
+		D8ED59A02DB578F800E706FA /* UnhingedTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8ED59B82DB578F800E706FA /* Build configuration list for PBXNativeTarget "UnhingedTests" */;
+			buildPhases = (
+				D8ED599D2DB578F800E706FA /* Sources */,
+				D8ED599E2DB578F800E706FA /* Frameworks */,
+				D8ED599F2DB578F800E706FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8ED59A32DB578F800E706FA /* PBXTargetDependency */,
+			);
+			name = UnhingedTests;
+			packageProductDependencies = (
+			);
+			productName = UnhingedTests;
+			productReference = D80BFBA32DB5D9A5005058EB /* UnhingedTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		D8ED59AA2DB578F800E706FA /* UnhingedUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = D8ED59BB2DB578F800E706FA /* Build configuration list for PBXNativeTarget "UnhingedUITests" */;
+			buildPhases = (
+				D8ED59A72DB578F800E706FA /* Sources */,
+				D8ED59A82DB578F800E706FA /* Frameworks */,
+				D8ED59A92DB578F800E706FA /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				D8ED59AD2DB578F800E706FA /* PBXTargetDependency */,
+			);
+			name = UnhingedUITests;
+			packageProductDependencies = (
+			);
+			productName = UnhingedUITests;
+			productReference = D80BFBA42DB5D9A5005058EB /* UnhingedUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		D8ED598C2DB578F600E706FA /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1630;
+				LastUpgradeCheck = 1630;
+				TargetAttributes = {
+					D8ED59932DB578F600E706FA = {
+						CreatedOnToolsVersion = 16.3;
+					};
+					D8ED59A02DB578F800E706FA = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D8ED59932DB578F600E706FA;
+					};
+					D8ED59AA2DB578F800E706FA = {
+						CreatedOnToolsVersion = 16.3;
+						TestTargetID = D8ED59932DB578F600E706FA;
+					};
+				};
+			};
+			buildConfigurationList = D8ED598F2DB578F600E706FA /* Build configuration list for PBXProject "Unhinged" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = D8ED598B2DB578F600E706FA;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
+				D8E49AAA2DB5BA42009D0352 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
+				D8E49AAF2DB5BA50009D0352 /* XCRemoteSwiftPackageReference "Kingfisher" */,
+				D8E49AB22DB5BA5C009D0352 /* XCRemoteSwiftPackageReference "GoogleDataTransport" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = D8ED598B2DB578F600E706FA;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				D8ED59932DB578F600E706FA /* Unhinged */,
+				D8ED59A02DB578F800E706FA /* UnhingedTests */,
+				D8ED59AA2DB578F800E706FA /* UnhingedUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		D8ED59922DB578F600E706FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D80BFAFE2DB5CDFA005058EB /* InterVariable.ttf in Resources */,
+				D80BFAFF2DB5CDFA005058EB /* MigrationLog.md in Resources */,
+				D80BFB002DB5CDFA005058EB /* InterVariable-Italic.ttf in Resources */,
+				D80BFB012DB5CDFA005058EB /* Info.plist in Resources */,
+				D8E49AB82DB5BB58009D0352 /* GoogleService-Info.plist in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8ED599F2DB578F800E706FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8ED59A92DB578F800E706FA /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		D8ED59902DB578F600E706FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				D80BFB022DB5CDFA005058EB /* DataSynchronizer.swift in Sources */,
+				D80BFB032DB5CDFA005058EB /* CoupleProfileServiceAdapter.swift in Sources */,
+				D80BFB042DB5CDFA005058EB /* PersonasViewModel.swift in Sources */,
+				D80BFB052DB5CDFA005058EB /* ActivityPreferencesView.swift in Sources */,
+				D80BFB062DB5CDFA005058EB /* AvailabilityComponents.swift in Sources */,
+				D80BFB072DB5CDFA005058EB /* TimeSelectionViewModel.swift in Sources */,
+				D80BFB082DB5CDFA005058EB /* HomeComponents.swift in Sources */,
+				D80BFB092DB5CDFA005058EB /* MutualAvailabilityHelpers.swift in Sources */,
+				D80BFB0A2DB5CDFA005058EB /* HangoutComponents.swift in Sources */,
+				D80BFB0B2DB5CDFA005058EB /* StandardFirestoreService.swift in Sources */,
+				D80BFB0C2DB5CDFA005058EB /* Friendship.swift in Sources */,
+				D80BFB0D2DB5CDFA005058EB /* PersonaFormView.swift in Sources */,
+				D80BFB0E2DB5CDFA005058EB /* AuthViewModel.swift in Sources */,
+				D80BFB0F2DB5CDFA005058EB /* TimeModels.swift in Sources */,
+				D80BFB102DB5CDFA005058EB /* ServiceError.swift in Sources */,
+				D80BFB112DB5CDFA005058EB /* DateRangePickerView.swift in Sources */,
+				D80BFB122DB5CDFA005058EB /* HangoutCard.swift in Sources */,
+				D80BFB132DB5CDFA005058EB /* CalendarEventView.swift in Sources */,
+				D80BFB142DB5CDFA005058EB /* CalendarAuthViewModel.swift in Sources */,
+				D80BFB152DB5CDFA005058EB /* SplashView.swift in Sources */,
+				D80BFB162DB5CDFA005058EB /* EditProfileView.swift in Sources */,
+				D80BFB172DB5CDFA005058EB /* CalendarSynchronizationService.swift in Sources */,
+				D80BFB182DB5CDFA005058EB /* SwipeableHangoutCardView.swift in Sources */,
+				D80BFB192DB5CDFA005058EB /* FirestoreEncoder.swift in Sources */,
+				D80BFB1A2DB5CDFA005058EB /* CalendarProviderProtocol.swift in Sources */,
+				D80BFB1B2DB5CDFA005058EB /* CoupleAvailability.swift in Sources */,
+				D80BFB1C2DB5CDFA005058EB /* HangoutCreationViewModel.swift in Sources */,
+				D80BFB1D2DB5CDFA005058EB /* HangoutDetailComponents.swift in Sources */,
+				D80BFB1E2DB5CDFA005058EB /* CalendarOperationsService.swift in Sources */,
+				D80BFB1F2DB5CDFA005058EB /* AvailabilityCoordinatorView.swift in Sources */,
+				D80BFB202DB5CDFA005058EB /* FontInspector.swift in Sources */,
+				D80BFB212DB5CDFA005058EB /* OutlookCalendarProvider.swift in Sources */,
+				D80BFB222DB5CDFA005058EB /* GoogleCalendarProvider.swift in Sources */,
+				D80BFB232DB5CDFA005058EB /* MutualAvailabilityViewModel.swift in Sources */,
+				D80BFB242DB5CDFA005058EB /* AvailabilityErrors.swift in Sources */,
+				D80BFB252DB5CDFA005058EB /* HangoutsView.swift in Sources */,
+				D80BFB262DB5CDFA005058EB /* MutualAvailabilityErrorView.swift in Sources */,
+				D80BFB272DB5CDFA005058EB /* ContentView.swift in Sources */,
+				D80BFB282DB5CDFA005058EB /* NotificationService.swift in Sources */,
+				D80BFB292DB5CDFA005058EB /* UserPreferencesView.swift in Sources */,
+				D80BFB2A2DB5CDFA005058EB /* PersonaCard.swift in Sources */,
+				D80BFB2B2DB5CDFA005058EB /* ServiceProtocol.swift in Sources */,
+				D80BFB2C2DB5CDFA005058EB /* MutualAvailabilityView.swift in Sources */,
+				D80BFB2D2DB5CDFA005058EB /* TimeSlotComponents.swift in Sources */,
+				D80BFB2E2DB5CDFA005058EB /* CalendarServiceFactory.swift in Sources */,
+				D80BFB2F2DB5CDFA005058EB /* HangoutsService.swift in Sources */,
+				D80BFB302DB5CDFA005058EB /* FloatingButtonStyle.swift in Sources */,
+				D80BFB312DB5CDFA005058EB /* MutualAvailabilityEmptyView.swift in Sources */,
+				D80BFB322DB5CDFA005058EB /* PersonaDetailView.swift in Sources */,
+				D80BFB332DB5CDFA005058EB /* MutualAvailabilityComponents.swift in Sources */,
+				D80BFB342DB5CDFA005058EB /* VisibilitySettingsView.swift in Sources */,
+				D80BFB352DB5CDFA005058EB /* CalendarOperationsServiceImpl.swift in Sources */,
+				D80BFB362DB5CDFA005058EB /* CalendarDataFetchService.swift in Sources */,
+				D80BFB372DB5CDFA005058EB /* CoupleProfile.swift in Sources */,
+				D80BFB382DB5CDFA005058EB /* MicrosoftGraphService.swift in Sources */,
+				D80BFB392DB5CDFA005058EB /* HangoutErrors.swift in Sources */,
+				D80BFB3A2DB5CDFA005058EB /* PartnerSectionView.swift in Sources */,
+				D80BFB3B2DB5CDFA005058EB /* FontTestView.swift in Sources */,
+				D80BFB3C2DB5CDFA005058EB /* Persona.swift in Sources */,
+				D80BFB3D2DB5CDFA005058EB /* CalendarIntegrationViewModel.swift in Sources */,
+				D80BFB3E2DB5CDFA005058EB /* RelationshipService.swift in Sources */,
+				D80BFB3F2DB5CDFA005058EB /* PartnerPersonasView.swift in Sources */,
+				D80BFB402DB5CDFA005058EB /* MutualAvailabilityViewModel+Combine.swift in Sources */,
+				D80BFB412DB5CDFA005058EB /* CalendarIntegrationService.swift in Sources */,
+				D80BFB422DB5CDFA005058EB /* HangoutFormComponents.swift in Sources */,
+				D80BFB432DB5CDFA005058EB /* Relationship.swift in Sources */,
+				D80BFB442DB5CDFA005058EB /* ThemedList.swift in Sources */,
+				D80BFB452DB5CDFA005058EB /* FriendCouplePickerView.swift in Sources */,
+				D80BFB462DB5CDFA005058EB /* CalendarService.swift in Sources */,
+				D80BFB472DB5CDFA005058EB /* NetworkService.swift in Sources */,
+				D80BFB482DB5CDFA005058EB /* DurationPickerView.swift in Sources */,
+				D80BFB492DB5CDFA005058EB /* HangoutNavigation.swift in Sources */,
+				D80BFB4A2DB5CDFA005058EB /* CalendarEventViewModel.swift in Sources */,
+				D80BFB4B2DB5CDFA005058EB /* HangoutTypeCard.swift in Sources */,
+				D80BFB4C2DB5CDFA005058EB /* AuthView.swift in Sources */,
+				D80BFB942DB5CE05005058EB /* PublisherUtility.swift in Sources */,
+				D80BFB952DB5CE05005058EB /* PlatformUtilities.swift in Sources */,
+				D80BFB962DB5CE05005058EB /* ErrorMonitor.swift in Sources */,
+				D80BFB972DB5CE05005058EB /* CallbackHandler.swift in Sources */,
+				D80BFB982DB5CE05005058EB /* MVVMTemplate.swift in Sources */,
+				D80BFB992DB5CE05005058EB /* QRCodeGenerator.swift in Sources */,
+				D80BFB9A2DB5CE05005058EB /* ThemeConfig.swift in Sources */,
+				D80BFB9B2DB5CE05005058EB /* CallbackProtocols.swift in Sources */,
+				D80BFB9C2DB5CE05005058EB /* SampleCallbackImplementation.swift in Sources */,
+				D80BFB9D2DB5CE05005058EB /* PerformanceOptimizer.swift in Sources */,
+				D80BFB9E2DB5CE05005058EB /* AlertModels.swift in Sources */,
+				D80BFB9F2DB5CE05005058EB /* ErrorHandling.swift in Sources */,
+				D80BFBA02DB5CE05005058EB /* CallbackManager.swift in Sources */,
+				D80BFBA12DB5CE05005058EB /* ErrorHandler.swift in Sources */,
+				D80BFBA22DB5CE05005058EB /* ColorExtensions.swift in Sources */,
+				D80BFB4D2DB5CDFA005058EB /* HangoutsServiceAdapter.swift in Sources */,
+				D80BFB4E2DB5CDFA005058EB /* CreateHangoutView.swift in Sources */,
+				D80BFB4F2DB5CDFA005058EB /* CalendarProviderViewModel.swift in Sources */,
+				D80BFB502DB5CDFA005058EB /* GoogleCalendarAuthView.swift in Sources */,
+				D80BFB512DB5CDFA005058EB /* AddPersonaView.swift in Sources */,
+				D80BFB522DB5CDFA005058EB /* CoupleProfileService.swift in Sources */,
+				D80BFB532DB5CDFA005058EB /* CoupleAvailabilityViewModel.swift in Sources */,
+				D80BFB542DB5CDFA005058EB /* AppleCalendarProvider.swift in Sources */,
+				D80BFB552DB5CDFA005058EB /* SwipeableHangoutCard.swift in Sources */,
+				D80BFB562DB5CDFA005058EB /* UnhingedApp.swift in Sources */,
+				D80BFB572DB5CDFA005058EB /* MainTabView.swift in Sources */,
+				D80BFB582DB5CDFA005058EB /* HangoutCreationView.swift in Sources */,
+				D80BFB592DB5CDFA005058EB /* AlertItem.swift in Sources */,
+				D80BFB5A2DB5CDFA005058EB /* BaseService.swift in Sources */,
+				D80BFB5B2DB5CDFA005058EB /* EmptyRequestsView.swift in Sources */,
+				D80BFB5C2DB5CDFA005058EB /* HangoutListComponents.swift in Sources */,
+				D80BFB5D2DB5CDFA005058EB /* AppDelegate.swift in Sources */,
+				D80BFB5E2DB5CDFA005058EB /* PersonaManager.swift in Sources */,
+				D80BFB5F2DB5CDFA005058EB /* CalendarAuthService.swift in Sources */,
+				D80BFB602DB5CDFA005058EB /* ProfileView.swift in Sources */,
+				D80BFB612DB5CDFA005058EB /* FontVerificationView.swift in Sources */,
+				D80BFB622DB5CDFA005058EB /* MutualAvailabilityLoadingView.swift in Sources */,
+				D80BFB632DB5CDFA005058EB /* CalendarEvent.swift in Sources */,
+				D80BFB642DB5CDFA005058EB /* CoupleAvailabilityView.swift in Sources */,
+				D80BFB652DB5CDFA005058EB /* CoupleReferral.swift in Sources */,
+				D80BFB662DB5CDFA005058EB /* OnboardingView.swift in Sources */,
+				D80BFB672DB5CDFA005058EB /* ReferralService.swift in Sources */,
+				D80BFB682DB5CDFA005058EB /* SwipeableRequestsView.swift in Sources */,
+				D80BFB692DB5CDFA005058EB /* MutualAvailabilityCreateHangoutView.swift in Sources */,
+				D80BFB6A2DB5CDFA005058EB /* EditProfileViewModel.swift in Sources */,
+				D80BFB6B2DB5CDFA005058EB /* ServiceManager.swift in Sources */,
+				D80BFB6C2DB5CDFA005058EB /* CreateHangoutViewModel.swift in Sources */,
+				D80BFB6D2DB5CDFA005058EB /* DurationCard.swift in Sources */,
+				D80BFB6E2DB5CDFA005058EB /* Notification.swift in Sources */,
+				D80BFB6F2DB5CDFA005058EB /* HangoutModels.swift in Sources */,
+				D80BFB702DB5CDFA005058EB /* CalendarIntegrationView.swift in Sources */,
+				D80BFB712DB5CDFA005058EB /* FirestoreService.swift in Sources */,
+				D80BFB722DB5CDFA005058EB /* User.swift in Sources */,
+				D80BFB732DB5CDFA005058EB /* ThemedForm.swift in Sources */,
+				D80BFB742DB5CDFA005058EB /* PartnerInvitation.swift in Sources */,
+				D80BFB752DB5CDFA005058EB /* MainProfileView.swift in Sources */,
+				D80BFB762DB5CDFA005058EB /* MutualAvailabilityResultsView.swift in Sources */,
+				D80BFB772DB5CDFA005058EB /* UserService.swift in Sources */,
+				D80BFB782DB5CDFA005058EB /* PersonasView.swift in Sources */,
+				D80BFB792DB5CDFA005058EB /* HangoutsViewModel.swift in Sources */,
+				D80BFB7A2DB5CDFA005058EB /* CoupleAvailabilityService.swift in Sources */,
+				D80BFB7B2DB5CDFA005058EB /* CalendarAuthView.swift in Sources */,
+				D80BFB7C2DB5CDFA005058EB /* ProfileViewModel.swift in Sources */,
+				D80BFB7D2DB5CDFA005058EB /* LoadingView.swift in Sources */,
+				D80BFB7E2DB5CDFA005058EB /* MutualAvailabilitySuccessView.swift in Sources */,
+				D80BFB7F2DB5CDFA005058EB /* AuthManager.swift in Sources */,
+				D80BFB802DB5CDFA005058EB /* MutualAvailabilityFeature.swift in Sources */,
+				D80BFB812DB5CDFA005058EB /* Hangout.swift in Sources */,
+				D80BFB822DB5CDFA005058EB /* ThemedCard.swift in Sources */,
+				D80BFB832DB5CDFA005058EB /* ProfileComponents.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8ED599D2DB578F800E706FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		D8ED59A72DB578F800E706FA /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		D8ED59A32DB578F800E706FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8ED59932DB578F600E706FA /* Unhinged */;
+			targetProxy = D8ED59A22DB578F800E706FA /* PBXContainerItemProxy */;
+		};
+		D8ED59AD2DB578F800E706FA /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = D8ED59932DB578F600E706FA /* Unhinged */;
+			targetProxy = D8ED59AC2DB578F800E706FA /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		D8ED59B32DB578F800E706FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		D8ED59B42DB578F800E706FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		D8ED59B62DB578F800E706FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Unhinged-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SlicedBread.Unhinged;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		D8ED59B72DB578F800E706FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "Unhinged-Info.plist";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SlicedBread.Unhinged;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		D8ED59B92DB578F800E706FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SlicedBread.UnhingedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unhinged.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Unhinged";
+			};
+			name = Debug;
+		};
+		D8ED59BA2DB578F800E706FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 18.4;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SlicedBread.UnhingedTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Unhinged.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Unhinged";
+			};
+			name = Release;
+		};
+		D8ED59BC2DB578F800E706FA /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SlicedBread.UnhingedUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Unhinged;
+			};
+			name = Debug;
+		};
+		D8ED59BD2DB578F800E706FA /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = TTJG29GNRP;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = SlicedBread.UnhingedUITests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = Unhinged;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		D8ED598F2DB578F600E706FA /* Build configuration list for PBXProject "Unhinged" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8ED59B32DB578F800E706FA /* Debug */,
+				D8ED59B42DB578F800E706FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8ED59B52DB578F800E706FA /* Build configuration list for PBXNativeTarget "Unhinged" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8ED59B62DB578F800E706FA /* Debug */,
+				D8ED59B72DB578F800E706FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8ED59B82DB578F800E706FA /* Build configuration list for PBXNativeTarget "UnhingedTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8ED59B92DB578F800E706FA /* Debug */,
+				D8ED59BA2DB578F800E706FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		D8ED59BB2DB578F800E706FA /* Build configuration list for PBXNativeTarget "UnhingedUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				D8ED59BC2DB578F800E706FA /* Debug */,
+				D8ED59BD2DB578F800E706FA /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/firebase/firebase-ios-sdk.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 11.11.0;
+			};
+		};
+		D8E49AAA2DB5BA42009D0352 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleSignIn-iOS";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.0.0;
+			};
+		};
+		D8E49AAF2DB5BA50009D0352 /* XCRemoteSwiftPackageReference "Kingfisher" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/onevcat/Kingfisher.git";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 8.3.2;
+			};
+		};
+		D8E49AB22DB5BA5C009D0352 /* XCRemoteSwiftPackageReference "GoogleDataTransport" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/google/GoogleDataTransport";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 10.1.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		D8E49A9A2DB5BA2A009D0352 /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		D8E49A9C2DB5BA2A009D0352 /* FirebaseAuth */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAuth;
+		};
+		D8E49A9E2DB5BA2A009D0352 /* FirebaseCore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseCore;
+		};
+		D8E49AA02DB5BA2A009D0352 /* FirebaseFirestore */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFirestore;
+		};
+		D8E49AA22DB5BA2A009D0352 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
+		};
+		D8E49AA42DB5BA2A009D0352 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
+		D8E49AA62DB5BA2A009D0352 /* FirebaseRemoteConfig */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseRemoteConfig;
+		};
+		D8E49AA82DB5BA2A009D0352 /* FirebaseStorage */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49A992DB5BA2A009D0352 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseStorage;
+		};
+		D8E49AAB2DB5BA42009D0352 /* GoogleSignIn */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49AAA2DB5BA42009D0352 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignIn;
+		};
+		D8E49AAD2DB5BA42009D0352 /* GoogleSignInSwift */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49AAA2DB5BA42009D0352 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
+			productName = GoogleSignInSwift;
+		};
+		D8E49AB02DB5BA50009D0352 /* Kingfisher */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49AAF2DB5BA50009D0352 /* XCRemoteSwiftPackageReference "Kingfisher" */;
+			productName = Kingfisher;
+		};
+		D8E49AB32DB5BA5C009D0352 /* GoogleDataTransport */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = D8E49AB22DB5BA5C009D0352 /* XCRemoteSwiftPackageReference "GoogleDataTransport" */;
+			productName = GoogleDataTransport;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = D8ED598C2DB578F600E706FA /* Project object */;
+}
