@@ -1037,31 +1037,59 @@ As of the most recent update, we have implemented 13 core services:
 
 Premature restructuring will create unnecessary complications and potentially undo progress made in the service implementation phase.
 
-## Module Import Issues Resolution
+## Module Structure Issue Resolution Update - Latest
 
-We've successfully resolved the "No such module 'Utilities'" errors by taking the following steps:
+### Resolved Issues
+We've made significant progress resolving the module structure and import issues:
 
-1. **Properly defined the Utilities module in Package.swift**:
-   - Added the Utilities library to the products section
-   - Made sure the target had the correct path
-   - Added it as a dependency to the Features module
+1. **Fixed Type Duplication**:
+   - Removed duplicate definitions of ServiceState and ServiceEvent in ServiceProtocol.swift and BaseService.swift
+   - Added typealiases in TimeModels.swift for BusyTimeSlot, BusyTimePeriod, and AvailabilityRating to reference the canonical versions in Services
+   - Updated CoupleAvailability.swift to use Services.TimeRange instead of local definitions
 
-2. **Fixed access modifiers** in the Utilities files:
-   - Added `public` to the Color.init(hex:) extension
-   - Added missing UI-related extensions for ErrorSeverity
-   - Ensured all needed types were properly marked as public
+2. **Fixed Access Control Issues**:
+   - Added proper public access modifiers to CoupleAvailability and related types
+   - Updated ServiceProtocol with proper publisher properties required by BaseService
+   - Made ErrorHandler and UIComponents in Utilities publicly accessible
 
-3. **Updated platform requirements** to be compatible with dependencies:
-   - Set macOS minimum version to 10.15 to resolve compatibility with Kingfisher and GoogleSignIn
+3. **Fixed Import Issues**:
+   - Added explicit imports for Utilities and Services modules in feature files
+   - Updated error handling code to reference UIErrorHandler from Utilities
+   - Fixed imports in AvailabilityErrors.swift to properly reference Utilities
 
-4. **Used direct imports from Utilities**:
-   - Replaced previous workarounds with proper module imports
+4. **Fixed Error Handling**:
+   - Updated CalendarOperationsServiceImpl to use standard ServiceError cases
+   - Fixed AvailabilityError structure to properly conform to LocalizedError
+   - Updated error handling in MutualAvailabilityViewModel to use UIErrorHandler
 
-This approach maintains the module structure while ensuring proper access to required components across module boundaries. All imports are now properly defined and follow Swift's module access control rules.
+### Remaining Issues
+While we've resolved many critical issues, a few key challenges remain:
 
-### Remaining Module Import Tasks
+1. **Firebase Integration**:
+   - Ensure proper integration with Firebase models across the codebase
+   - Resolve potential ambiguities between Firebase User and app User model
 
-1. Continue validating imports throughout the codebase
-2. Check for any other access control issues in shared components
-3. Ensure consistent module dependencies in all parts of the project
-4. Build and test the full codebase to verify all imports are working
+2. **Complete Module Dependency Verification**:
+   - Verify all module imports across the entire codebase
+   - Ensure consistent import patterns in all feature modules
+
+3. **Model Definitions in Frameworks**:
+   - Verify all models referenced from the Frameworks directory are properly defined
+   - Ensure all Framework model imports work correctly
+
+### Next Steps
+To complete the module structure resolution:
+
+1. Continue addressing import issues file by file systematically
+2. Test building each module independently to ensure proper dependencies
+3. Update module dependencies in Package.swift if new issues are discovered
+4. Ensure all public interfaces are properly defined with correct access levels
+
+These improvements have significantly enhanced the project's structure and should resolve most of the module-related build issues. The codebase is now better organized with clearer separation between modules and properly defined interfaces.
+## Module Structure Implementation Progress Update (5:24 pm April 25, 2025)
+
+Today we made substantial progress fixing the key module structure and import issues that were preventing the project from building properly. By systematically addressing each problematic area, we've resolved several critical issues:
+
+### Key Fixes Implemented:
+1. **Type Duplication Resolved**:
+   - Removed redundant ServiceState/ServiceEvent definitions from BaseService.swift
