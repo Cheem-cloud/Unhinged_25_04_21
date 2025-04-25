@@ -206,37 +206,6 @@ struct HangoutParticipantRow: View {
     }
 }
 
-struct HangoutStatusBadge: View {
-    var status: HangoutStatus
-    
-    var body: some View {
-        let (statusColor, text) = statusInfo(for: status)
-        
-        return Text(text)
-            .font(.caption)
-            .padding(.horizontal, 10)
-            .padding(.vertical, 5)
-            .background(statusColor)
-            .foregroundColor(.white)
-            .cornerRadius(20)
-    }
-    
-    private func statusInfo(for status: HangoutStatus) -> (Color, String) {
-        switch status {
-        case .pending:
-            return (.orange, "Pending")
-        case .accepted:
-            return (.green, "Accepted")
-        case .declined:
-            return (.red, "Declined")
-        case .cancelled:
-            return (.gray, "Cancelled")
-        case .completed:
-            return (.blue, "Completed")
-        }
-    }
-}
-
 struct HangoutActionButtons: View {
     var hangout: Hangout
     var onAccept: () -> Void
@@ -410,6 +379,54 @@ class HangoutDetailViewModel: ObservableObject {
                     self.isLoading = false
                 }
             }
+        }
+    }
+}
+
+// Add back the status badge component since we removed the import
+struct HangoutStatusBadge: View {
+    var status: HangoutStatus?
+    
+    var body: some View {
+        Text(statusText)
+            .font(.caption)
+            .fontWeight(.semibold)
+            .foregroundColor(.white)
+            .padding(.horizontal, 10)
+            .padding(.vertical, 5)
+            .background(statusColor)
+            .cornerRadius(20)
+    }
+    
+    private var statusText: String {
+        guard let status = status else { return "Unknown" }
+        
+        switch status {
+        case .pending:
+            return "Pending"
+        case .accepted, .confirmed:
+            return "Accepted"
+        case .declined:
+            return "Declined"
+        case .cancelled:
+            return "Cancelled"
+        case .completed:
+            return "Completed"
+        }
+    }
+    
+    private var statusColor: Color {
+        guard let status = status else { return .gray }
+        
+        switch status {
+        case .pending:
+            return .orange
+        case .accepted, .confirmed:
+            return .green
+        case .declined, .cancelled:
+            return .red
+        case .completed:
+            return .blue
         }
     }
 } 

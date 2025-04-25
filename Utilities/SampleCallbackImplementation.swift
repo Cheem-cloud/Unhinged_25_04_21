@@ -34,6 +34,9 @@ class SampleCallbackViewModel: ObservableObject {
     /// Cancellables for Combine subscriptions
     private var cancellables = Set<AnyCancellable>()
     
+    // Make cancellables public for publisher subscription
+    public var publicCancellables = Set<AnyCancellable>()
+    
     // MARK: - Initialization
     
     init() {
@@ -100,11 +103,12 @@ class SampleCallbackViewModel: ObservableObject {
         isLoading = true
         error = nil
         
-        let onStart = CallbackManager.SimpleCallback {
+        // Define callback functions directly
+        let onStart: CallbackManager.SimpleCallback = {
             print("Loading started")
         }
         
-        let onFinish = CallbackManager.SimpleCallback {
+        let onFinish: CallbackManager.SimpleCallback = {
             print("Loading finished")
         }
         
@@ -254,7 +258,7 @@ struct SampleCallbackView: View {
                             successMessage = "Loaded \(data.count) items via publisher"
                         }
                     )
-                    .store(in: &viewModel.cancellables)
+                    .store(in: &viewModel.publicCancellables)
             }
             .padding()
             

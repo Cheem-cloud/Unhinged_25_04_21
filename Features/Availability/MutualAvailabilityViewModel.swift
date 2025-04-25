@@ -4,7 +4,8 @@ import Combine
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
-// Removed // Removed: import Unhinged.Utilities
+// Importing required utilities directly instead of as a module
+// import Utilities
 
 /// View model for finding and displaying mutual availability between couples
 class MutualAvailabilityViewModel: ObservableObject {
@@ -65,57 +66,11 @@ class MutualAvailabilityViewModel: ObservableObject {
     /// Firestore listener for relationship2 availability
     private var relationship2Listener: ListenerRegistration?
     
-    /// Error types specific to mutual availability
-    enum MutualAvailabilityError: LocalizedError {
-        case noFriendCoupleSelected
-        case noMutualAvailabilityFound
-        case calendarPermissionRequired
-        case searchRangeTooNarrow
-        case internalError(String)
-        case networkError
-        
-        var errorDescription: String? {
-            switch self {
-            case .noFriendCoupleSelected:
-                return "Please select a friend couple first"
-            case .noMutualAvailabilityFound:
-                return "No mutual availability found. Try adjusting your date range or duration."
-            case .calendarPermissionRequired:
-                return "Calendar access is required to check availability. Please grant permission in Settings."
-            case .searchRangeTooNarrow:
-                return "Search range is too narrow. Try extending the date range or shortening the duration."
-            case .internalError(let message):
-                return "Internal error: \(message)"
-            case .networkError:
-                return "Network error. Please check your connection and try again."
-            }
-        }
-        
-        var recoverySuggestion: String? {
-            switch self {
-            case .noFriendCoupleSelected:
-                return "Tap 'Select Friend Couple' to choose a couple to hang out with."
-            case .noMutualAvailabilityFound:
-                return "Consider different days, times, or shortening the duration."
-            case .calendarPermissionRequired:
-                return "You can either grant calendar access in Settings or use manual availability."
-            case .searchRangeTooNarrow:
-                return "Try a wider date range or shorter duration."
-            case .internalError:
-                return "Try again later or contact support if the issue persists."
-            case .networkError:
-                return "Check your internet connection and try again."
-            }
-        }
-    }
+    /// Current state of the mutual availability flow
+    @Published public var state: State = .empty
     
-    /// Navigation states for the mutual availability flow
-    enum MutualAvailabilityNavigationState {
-        case selectingFriend
-        case findingTime
-        case creatingHangout
-        case hangoutDetails
-    }
+    /// Cancellables for subscriptions
+    private var cancellables = Set<AnyCancellable>()
     
     /// Initialize with a relationship ID and optional friend relationship ID
     /// - Parameters:
@@ -149,6 +104,9 @@ class MutualAvailabilityViewModel: ObservableObject {
         } else {
             self.navigationState = .findingTime
         }
+        
+        // Set up error handling
+        setupErrorHandling()
     }
     
     deinit {
@@ -276,15 +234,12 @@ class MutualAvailabilityViewModel: ObservableObject {
     }
     
     /// Handle errors using the centralized error handling system
+    /// Implementation moved to extension in AvailabilityErrors.swift
     private func handleErrorWithCentralizedSystem(_ error: Error) {
+        // Update local error property for backward compatibility
         if let mutualError = error as? MutualAvailabilityError {
-            // Convert MutualAvailabilityError to centralized AvailabilityError
-            let appError = AvailabilityError(legacyError: mutualError)
-            ErrorHandler.shared.showError(appError)
             self.error = mutualError
         } else if let availabilityError = error as? AvailabilityError {
-            // Use existing AvailabilityError directly
-            ErrorHandler.shared.showError(availabilityError)
             // Also update local error property with equivalent MutualAvailabilityError
             switch availabilityError.errorType {
             case .noMutualAvailabilityFound:
@@ -301,10 +256,12 @@ class MutualAvailabilityViewModel: ObservableObject {
                 self.error = MutualAvailabilityError.internalError(availabilityError.localizedDescription)
             }
         } else {
-            // For other errors, use centralized error handler but maintain local error property
-            ErrorHandler.shared.handle(error)
+            // For other errors, maintain local error property
             self.error = MutualAvailabilityError.internalError(error.localizedDescription)
         }
+        
+        // Call the centralized error handler
+        (self as MutualAvailabilityViewModel).handleErrorWithCentralizedSystem(error)
     }
     
     /// Handle errors from the availability service
@@ -638,5 +595,92 @@ class MutualAvailabilityViewModel: ObservableObject {
         
         // Search for mutual availability with the new friend
         findMutualAvailability()
+    }
+    
+    // MARK: - State Management
+    
+    /// State for mutual availability flow
+    public enum State: Equatable {
+        /// Initial empty state
+        case empty
+        
+        /// Loading state with optional progress (0.0 - 1.0)
+        case loading(progress: Float = 0)
+        
+        /// Results available
+        case results
+        
+        /// Success state with hangout ID
+        case success(hangoutID: String)
+        
+        /// Error state
+        case error
+        
+        public static func == (lhs: State, rhs: State) -> Bool {
+            switch (lhs, rhs) {
+            case (.empty, .empty):
+                return true
+            case (.loading(let lhsProgress), .loading(let rhsProgress)):
+                return lhsProgress == rhsProgress
+            case (.results, .results):
+                return true
+            case (.success(let lhsID), .success(let rhsID)):
+                return lhsID == rhsID
+            case (.error, .error):
+                return true
+            default:
+                return false
+            }
+        }
+    }
+    
+    /// Error types for mutual availability
+    public enum MutualAvailabilityError: Error, LocalizedError {
+        /// No friend/couple selected
+        case noFriendCoupleSelected
+        
+        /// No mutual availability found
+        case noMutualAvailabilityFound
+        
+        /// Calendar permission required
+        case calendarPermissionRequired
+        
+        /// Search range too narrow
+        case searchRangeTooNarrow
+        
+        /// Internal error
+        case internalError(String)
+        
+        /// Network error
+        case networkError
+        
+        public var errorDescription: String? {
+            switch self {
+            case .noFriendCoupleSelected:
+                return "Please select a friend couple first"
+            case .noMutualAvailabilityFound:
+                return "No mutual availability found in the selected time range"
+            case .calendarPermissionRequired:
+                return "Calendar access is required to check availability"
+            case .searchRangeTooNarrow:
+                return "The search range is too narrow for the selected duration"
+            case .internalError(let message):
+                return "Internal error: \(message)"
+            case .networkError:
+                return "Network error. Please check your connection and try again."
+            }
+        }
+    }
+    
+    // MARK: - Private Methods
+    
+    /// Set up error handling
+    private func setupErrorHandling() {
+        // When an error is set, update state to error
+        $error
+            .dropFirst()
+            .filter { $0 != nil }
+            .map { _ in State.error }
+            .assign(to: &$state)
     }
 } 

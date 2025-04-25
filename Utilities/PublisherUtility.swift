@@ -20,12 +20,8 @@ public enum PublisherUtility {
     public static func publisher<T>(for action: @escaping () async -> T) -> AnyPublisher<T, Error> {
         return Future<T, Error> { promise in
             Task {
-                do {
-                    let result = try await action()
-                    promise(.success(result))
-                } catch {
-                    promise(.failure(error))
-                }
+                let result = await action()
+                promise(.success(result))
             }
         }.eraseToAnyPublisher()
     }
@@ -112,7 +108,7 @@ extension View {
     ///   - publisher: The publisher to subscribe to
     ///   - action: The action to perform with the emitted value
     /// - Returns: A view with the subscription
-    public func onReceive<P: Publisher>(_ publisher: P, perform action: @escaping (P.Output) -> Void) -> some View where P.Failure == Never {
+    public func addReceiver<P: Publisher>(_ publisher: P, perform action: @escaping (P.Output) -> Void) -> some View where P.Failure == Never {
         return self.modifier(OnReceiveModifier(publisher: publisher, action: action))
     }
 } 

@@ -3,6 +3,12 @@ import FirebaseAuth
 import FirebaseFirestore
 import EventKit
 
+// The CalendarProviderType is now defined in CalendarProviderProtocol.swift
+// We can use it directly or define a compatible type alias here
+
+// Keep typealias but now referring to the local enum
+public typealias CalendarProvider = CalendarProviderType
+
 // Calendar step tracking
 enum CalendarStep: Equatable {
     case overview
@@ -55,22 +61,35 @@ enum SyncFrequency: String, CaseIterable, Identifiable {
     }
 }
 
-// Calendar event structure - simpler version for the UI
-struct CalendarEvent: Identifiable {
-    let id = UUID()
-    let title: String
-    let startTime: Date
-    let endTime: Date
-    let colorHex: String
-    let provider: CalendarProvider
-    let location: String?
+// Calendar event structure - UI-specific version for display in the calendar
+// Replace duplicate definition with custom UI-specific wrapper around CalendarEventModel
+public struct CalendarEventUIModel: Identifiable {
+    public let id = UUID()
+    public let title: String
+    public let startTime: Date
+    public let endTime: Date
+    public let colorHex: String
+    public let provider: CalendarProvider
+    public let location: String?
+    
+    public init(title: String, startTime: Date, endTime: Date, colorHex: String, provider: CalendarProvider, location: String?) {
+        self.title = title
+        self.startTime = startTime
+        self.endTime = endTime
+        self.colorHex = colorHex
+        self.provider = provider
+        self.location = location
+    }
 }
+
+// Compatibility typealias for existing code
+public typealias CalendarEventViewModel = CalendarEventUIModel
 
 class CalendarIntegrationViewModel: ObservableObject {
     // MARK: - Properties
     
     @Published var connectedProviders: [CalendarProvider] = []
-    @Published var calendarEvents: [CalendarEvent] = []
+    @Published var calendarEvents: [CalendarEventViewModel] = []
     @Published var isLoading: Bool = false
     @Published var isSyncing: Bool = false
     @Published var syncSuccessful: Bool = false
@@ -201,10 +220,10 @@ class CalendarIntegrationViewModel: ObservableObject {
             )
             
             // Flatten the events into our UI model
-            var allEvents: [CalendarEvent] = []
+            var allEvents: [CalendarEventViewModel] = []
             for (provider, events) in providerEvents {
                 allEvents.append(contentsOf: events.map { event in
-                    return CalendarEvent(
+                    return CalendarEventViewModel(
                         title: event.title,
                         startTime: event.startTime,
                         endTime: event.endTime,
@@ -363,10 +382,10 @@ class CalendarIntegrationViewModel: ObservableObject {
                 )
                 
                 // Get events only for the specific provider
-                var calendarEvents: [CalendarEvent] = []
+                var calendarEvents: [CalendarEventViewModel] = []
                 if let events = providerEvents[provider] {
                     calendarEvents = events.map { event in
-                        return CalendarEvent(
+                        return CalendarEventViewModel(
                             title: event.title,
                             startTime: event.startTime,
                             endTime: event.endTime,
@@ -538,7 +557,7 @@ class CalendarIntegrationViewModel: ObservableObject {
         }
     }
     
-    private func fetchAppleCalendarEvents() async throws -> [CalendarEvent] {
+    private func fetchAppleCalendarEvents() async throws -> [CalendarEventViewModel] {
         // Make sure we have permission
         guard hasEventKitAccess else {
             throw NSError(domain: "com.cheemhang.calendar", code: 401, userInfo: [NSLocalizedDescriptionKey: "No calendar access"])
@@ -555,7 +574,7 @@ class CalendarIntegrationViewModel: ObservableObject {
         let ekEvents = eventStore.events(matching: predicate)
         
         // Convert EKEvents to our CalendarEvent model
-        var events: [CalendarEvent] = []
+        var events: [CalendarEventViewModel] = []
         
         for ekEvent in ekEvents {
             // Skip events without a title
@@ -565,7 +584,7 @@ class CalendarIntegrationViewModel: ObservableObject {
             let colorHex = ekEvent.calendar.cgColor?.toHexString() ?? "#1E90FF" // Default to blue
             
             // Create our event model
-            let event = CalendarEvent(
+            let event = CalendarEventViewModel(
                 title: title,
                 startTime: ekEvent.startDate,
                 endTime: ekEvent.endDate,
@@ -582,7 +601,7 @@ class CalendarIntegrationViewModel: ObservableObject {
     
     // MARK: - API Calls for Other Calendar Types
     
-    private func fetchGoogleCalendarEvents(userId: String) async throws -> [CalendarEvent] {
+    private func fetchGoogleCalendarEvents(userId: String) async throws -> [CalendarEventViewModel] {
         do {
             // Get provider and tokens from Firestore
             guard let provider = serviceFactory.getProvider(for: .google) as? GoogleCalendarProvider else {
@@ -638,7 +657,7 @@ class CalendarIntegrationViewModel: ObservableObject {
                let items = json["items"] as? [[String: Any]] {
                 
                 // Convert API response to CalendarEvent objects
-                return try items.compactMap { item -> CalendarEvent? in
+                return try items.compactMap { item -> CalendarEventViewModel? in
                     // Extract event details
                     guard let id = item["id"] as? String,
                           let title = item["summary"] as? String,
@@ -686,7 +705,7 @@ class CalendarIntegrationViewModel: ObservableObject {
                         location = nil
                     }
                     
-                    return CalendarEvent(
+                    return CalendarEventViewModel(
                         title: title,
                         startTime: start,
                         endTime: end,
@@ -705,7 +724,7 @@ class CalendarIntegrationViewModel: ObservableObject {
         }
     }
     
-    private func fetchOutlookCalendarEvents(userId: String) async throws -> [CalendarEvent] {
+    private func fetchOutlookCalendarEvents(userId: String) async throws -> [CalendarEventViewModel] {
         do {
             // Get provider and tokens from Firestore
             guard let provider = serviceFactory.getProvider(for: .outlook) as? OutlookCalendarProvider else {
@@ -750,7 +769,7 @@ class CalendarIntegrationViewModel: ObservableObject {
                let items = json["value"] as? [[String: Any]] {
                 
                 // Convert API response to CalendarEvent objects
-                return items.compactMap { item -> CalendarEvent? in
+                return items.compactMap { item -> CalendarEventViewModel? in
                     // Extract event details
                     guard let id = item["id"] as? String,
                           let title = item["subject"] as? String,
@@ -779,7 +798,7 @@ class CalendarIntegrationViewModel: ObservableObject {
                         location = nil
                     }
                     
-                    return CalendarEvent(
+                    return CalendarEventViewModel(
                         title: title,
                         startTime: startTime,
                         endTime: endTime,
@@ -842,8 +861,8 @@ class CalendarIntegrationViewModel: ObservableObject {
         return colorId.flatMap { colors[$0] }
     }
     
-    private func createSampleEventsWithRealDates(for provider: CalendarProvider) -> [CalendarEvent] {
-        var events: [CalendarEvent] = []
+    private func createSampleEventsWithRealDates(for provider: CalendarProvider) -> [CalendarEventViewModel] {
+        var events: [CalendarEventViewModel] = []
         
         // Sample event colors based on provider
         let colorHex: String
@@ -868,7 +887,7 @@ class CalendarIntegrationViewModel: ObservableObject {
                 if let startTime = calendar.date(bySettingHour: 9 + (i % 3), minute: 0, second: 0, of: eventDate),
                    let endTime = calendar.date(byAdding: .hour, value: 1, to: startTime) {
                     
-                    let event = CalendarEvent(
+                    let event = CalendarEventViewModel(
                         title: sampleEventTitles.randomElement() ?? "Meeting",
                         startTime: startTime,
                         endTime: endTime,
@@ -885,7 +904,7 @@ class CalendarIntegrationViewModel: ObservableObject {
                    let startTime = calendar.date(bySettingHour: 14 + (i % 3), minute: 30, second: 0, of: eventDate),
                    let endTime = calendar.date(byAdding: .hour, value: 1, to: startTime) {
                     
-                    let event = CalendarEvent(
+                    let event = CalendarEventViewModel(
                         title: sampleEventTitles.randomElement() ?? "Meeting",
                         startTime: startTime,
                         endTime: endTime,
@@ -954,8 +973,8 @@ class CalendarIntegrationViewModel: ObservableObject {
     }
     
     /// Fetch calendar events for the given user across all providers
-    private func fetchCalendarEvents(userId: String, startDate: Date, endDate: Date) async throws -> [CalendarProvider: [CalendarEvent]] {
-        var results: [CalendarProvider: [CalendarEvent]] = [:]
+    private func fetchCalendarEvents(userId: String, startDate: Date, endDate: Date) async throws -> [CalendarProvider: [CalendarEventViewModel]] {
+        var results: [CalendarProvider: [CalendarEventViewModel]] = [:]
         
         // Collect events from each connected provider
         for provider in connectedProviders {

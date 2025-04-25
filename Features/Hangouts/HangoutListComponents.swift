@@ -1,12 +1,37 @@
 import SwiftUI
 
+/// Filter options for hangouts
+enum HangoutFilter: String, CaseIterable {
+    case all
+    case pending
+    case confirmed
+    case cancelled
+    case completed
+    
+    /// Display name for the filter
+    var displayName: String {
+        switch self {
+        case .all:
+            return "All"
+        case .pending:
+            return "Pending"
+        case .confirmed:
+            return "Confirmed"
+        case .cancelled:
+            return "Cancelled"
+        case .completed:
+            return "Completed"
+        }
+    }
+}
+
 /// Component for displaying the list of hangouts
-public struct HangoutListFeature: View {
+internal struct HangoutListFeature: View {
     @ObservedObject var viewModel: HangoutsViewModel
     let onSelectHangout: (Hangout) -> Void
     let onCreateHangout: () -> Void
     
-    public init(
+    internal init(
         viewModel: HangoutsViewModel,
         onSelectHangout: @escaping (Hangout) -> Void,
         onCreateHangout: @escaping () -> Void

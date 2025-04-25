@@ -232,7 +232,7 @@ extension View {
     /// Executes a callback when the view appears
     /// - Parameter callback: The callback to execute
     /// - Returns: A view with the callback attached
-    public func onAppear(perform callback: @escaping CallbackManager.SimpleCallback) -> some View {
+    public func onAppearCallback(perform callback: @escaping CallbackManager.SimpleCallback) -> some View {
         self.onAppear {
             callback()
         }
@@ -241,7 +241,7 @@ extension View {
     /// Executes a callback when the view disappears
     /// - Parameter callback: The callback to execute
     /// - Returns: A view with the callback attached
-    public func onDisappear(perform callback: @escaping CallbackManager.SimpleCallback) -> some View {
+    public func onDisappearCallback(perform callback: @escaping CallbackManager.SimpleCallback) -> some View {
         self.onDisappear {
             callback()
         }
@@ -252,7 +252,7 @@ extension View {
     ///   - publisher: The publisher to subscribe to
     ///   - callback: The callback to execute when a value is emitted
     /// - Returns: A view with the subscription
-    public func onReceive<P: Publisher>(
+    public func onReceiveValue<P: Publisher>(
         _ publisher: P,
         perform callback: @escaping CallbackManager.Callback<P.Output>
     ) -> some View where P.Failure == Never {
@@ -268,7 +268,7 @@ extension Publisher where Failure == Never {
     /// Subscribes to the publisher and executes a callback when a value is emitted
     /// - Parameter callback: The callback to execute when a value is emitted
     /// - Returns: A cancellable object that can be used to cancel the subscription
-    public func sink(receiveValue callback: @escaping CallbackManager.Callback<Output>) -> AnyCancellable {
+    public func sinkWithCallback(receiveValue callback: @escaping CallbackManager.Callback<Output>) -> AnyCancellable {
         return self.sink(receiveValue: callback)
     }
 }
@@ -279,7 +279,7 @@ extension Publisher {
     ///   - completionCallback: The callback to execute when the publisher completes
     ///   - valueCallback: The callback to execute when a value is emitted
     /// - Returns: A cancellable object that can be used to cancel the subscription
-    public func sink(
+    public func sinkWithCallbacks(
         receiveCompletion completionCallback: @escaping CallbackManager.Callback<Subscribers.Completion<Failure>>,
         receiveValue valueCallback: @escaping CallbackManager.Callback<Output>
     ) -> AnyCancellable {

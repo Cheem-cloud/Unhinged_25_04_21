@@ -2,9 +2,73 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>CFBundleURLTypes</key>
-	<array>
-		<dict/>
-	</array>
+    <key>BGTaskSchedulerPermittedIdentifiers</key>
+    <array>
+        <string>com.yourdomain.CheemHang.refresh</string>
+        <string>com.yourdomain.CheemHang.processing</string>
+    </array>
+    <key>CFBundleURLTypes</key>
+    <array>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.googleusercontent.apps.29334965149-6o4gesooa8qmksef6pi57t0o9cahdj3u</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.googleusercontent.apps.29334965149-6o4gesooa8qmksef6pi57t0o9cahdj3u</string>
+            </array>
+        </dict>
+        <dict>
+            <key>CFBundleTypeRole</key>
+            <string>Editor</string>
+            <key>CFBundleURLName</key>
+            <string>com.cheemhang.app</string>
+            <key>CFBundleURLSchemes</key>
+            <array>
+                <string>com.cheemhang.app</string>
+            </array>
+        </dict>
+    </array>
+    <key>NSAllowsArbitraryLoads</key>
+    <string>YES</string>
+    <key>NSAppTransportSecurity</key>
+    <dict/>
+    <key>NSCameraUsageDescription</key>
+    <string>We need camera access to let you take profile pictures and share photos</string>
+    <key>UIBackgroundModes</key>
+    <array>
+        <string>remote-notification</string>
+        <string>fetch</string>
+        <string>processing</string>
+    </array>
+    <key>NSSpeechRecognitionUsageDescription</key>
+    <string>CheemHang needs to access speech recognition to convert your voice commands into calendar events.</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>CheemHang needs microphone access to record your voice commands for scheduling meetings.</string>
+    
+    <!-- Custom fonts declaration -->
+    <key>UIAppFonts</key>
+    <array>
+        <string>InterVariable.ttf</string>
+        <string>InterVariable-Italic.ttf</string>
+    </array>
+    <!-- Google Calendar API credentials -->
+    <key>GOOGLE_CLIENT_ID</key>
+    <string>YOUR_GOOGLE_CLIENT_ID.apps.googleusercontent.com</string>
+    <key>GOOGLE_CLIENT_SECRET</key>
+    <string>YOUR_GOOGLE_CLIENT_SECRET</string>
+    <key>GOOGLE_REDIRECT_URI</key>
+    <string>com.cheemhang.app:/oauth2callback</string>
+    <!-- Microsoft Graph API credentials -->
+    <key>OUTLOOK_CLIENT_ID</key>
+    <string>fed91416-8c57-4a40-99d8-95028e9b28f5</string>
+    <key>OUTLOOK_CLIENT_SECRET</key>
+    <string>YOUR_MICROSOFT_CLIENT_SECRET</string>
+    <key>OUTLOOK_REDIRECT_URI</key>
+    <string>com.cheemhang.app://outlook-callback</string>
+    <!-- Calendar access reason -->
+    <key>NSCalendarsUsageDescription</key>
+    <string>CheemHang needs access to your calendar to help find available times for hangouts with friends</string>
 </dict>
 </plist>

@@ -553,15 +553,4 @@ struct ProviderSettings {
     let refreshToken: String
     let useForEvents: Bool
     let useForAvailability: Bool
-}
-
-// Error enum for service operations
-enum ServiceError: Error {
-    case notAuthenticated
-    case notImplemented(String = "Feature not implemented")
-    case operationFailed(String)
-    case configurationError(String)
-    case networkError(String)
-    case dataError(String)
-    case notSupported(String)
 } 

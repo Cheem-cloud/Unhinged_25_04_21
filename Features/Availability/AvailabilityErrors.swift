@@ -1,20 +1,20 @@
 import Foundation
 import SwiftUI
-// Removed // Removed: import Unhinged.Utilities
+// import Utilities
 
-/// Errors related to availability functionality
-public enum AvailabilityErrorType {
-    case noFriendCoupleSelected
-    case noMutualAvailabilityFound
-    case calendarPermissionRequired
-    case searchRangeTooNarrow
-    case internalError(String)
-    case networkError
-}
-
-/// Error type for availability features that integrates with the central error handling system
+/// Error type for availability-related issues
 public struct AvailabilityError: AppError {
-    private let errorType: AvailabilityErrorType
+    /// Types of availability errors
+    public enum AvailabilityErrorType {
+        case noFriendCoupleSelected
+        case noMutualAvailabilityFound
+        case calendarPermissionRequired
+        case searchRangeTooNarrow
+        case internalError(String)
+        case networkError
+    }
+    
+    public let errorType: AvailabilityErrorType
     private let underlyingError: Error?
     
     public init(errorType: AvailabilityErrorType, underlyingError: Error? = nil) {
@@ -23,7 +23,8 @@ public struct AvailabilityError: AppError {
     }
     
     /// Create from a MutualAvailabilityViewModel.MutualAvailabilityError
-    public init(legacyError: MutualAvailabilityViewModel.MutualAvailabilityError) {
+    /// Note: This initializer is internal to match the access level of the parameter type
+    internal init(legacyError: MutualAvailabilityViewModel.MutualAvailabilityError) {
         switch legacyError {
         case .noFriendCoupleSelected:
             self.errorType = .noFriendCoupleSelected

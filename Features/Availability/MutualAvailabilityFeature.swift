@@ -1,10 +1,16 @@
+// import Utilities
 import SwiftUI
-// Removed // Removed: import Unhinged.Utilities
-// Removed: // Removed: import Unhinged.Components
-// Removed: // Removed: import Unhinged.TimeSlotComponents
+import Foundation
+
+/// Hangout type used for scheduling
+enum HangoutType: String, Codable, CaseIterable {
+    case inPerson
+    case virtual
+    case hybrid
+}
 
 /// Main container component for displaying and managing mutual availability between couples
-public struct MutualAvailabilityFeature: View {
+internal struct MutualAvailabilityFeature: View {
     // State
     let state: MutualAvailabilityViewModel.State
     let selectedTimeSlot: TimeSlot?
@@ -22,7 +28,7 @@ public struct MutualAvailabilityFeature: View {
     let onCreateHangout: (String, String, String, HangoutType) -> Void
     let onHangoutCreated: (String) -> Void
     
-    public init(
+    internal init(
         state: MutualAvailabilityViewModel.State,
         selectedTimeSlot: TimeSlot?,
         availableTimes: [TimeSlot],
@@ -52,7 +58,7 @@ public struct MutualAvailabilityFeature: View {
         self.onHangoutCreated = onHangoutCreated
     }
     
-    public var body: some View {
+    internal var body: some View {
         VStack {
             switch state {
             case .success(let hangoutID):

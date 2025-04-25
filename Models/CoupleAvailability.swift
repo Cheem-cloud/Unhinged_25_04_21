@@ -1,74 +1,13 @@
 import Foundation
 import FirebaseFirestore
 
-/// Enum representing possible errors when working with availability
-enum AvailabilityError: LocalizedError {
-    case invalidTimeRange
-    case invalidDuration
-    case calendarSyncFailed(String)
-    case relationshipNotFound
-    case preferenceConflict
-    case unavailableTimePeriod
-    case concurrentUpdateConflict
-    case excessiveRecurringCommitments
-    case incompatibleCalendarSettings
-    case networkTimeout
-    case permissionDenied
-    
-    var errorDescription: String? {
-        switch self {
-        case .invalidTimeRange:
-            return "The specified time range is invalid. End time must be after start time."
-        case .invalidDuration:
-            return "Invalid duration specified. Duration must be between 15 minutes and 12 hours."
-        case .calendarSyncFailed(let details):
-            return "Failed to sync with calendar: \(details)"
-        case .relationshipNotFound:
-            return "The specified relationship could not be found."
-        case .preferenceConflict:
-            return "Conflict detected between partner preferences. Please coordinate settings with your partner."
-        case .unavailableTimePeriod:
-            return "The requested time period has no available slots based on your preferences."
-        case .concurrentUpdateConflict:
-            return "Another user updated these preferences. Please refresh and try again."
-        case .excessiveRecurringCommitments:
-            return "Too many recurring commitments may be limiting available time slots."
-        case .incompatibleCalendarSettings:
-            return "Calendar integration settings are incompatible between partners."
-        case .networkTimeout:
-            return "Request timed out. Please check your network connection and try again."
-        case .permissionDenied:
-            return "You don't have permission to modify these availability settings."
-        }
-    }
-    
-    var recoverySuggestion: String? {
-        switch self {
-        case .invalidTimeRange:
-            return "Please ensure the end time is after the start time."
-        case .invalidDuration:
-            return "Choose a duration between 15 minutes and 12 hours."
-        case .calendarSyncFailed:
-            return "Check your calendar permissions or try manually setting availability."
-        case .relationshipNotFound:
-            return "Return to the relationships screen and try again."
-        case .preferenceConflict:
-            return "Discuss and align on availability preferences with your partner."
-        case .unavailableTimePeriod:
-            return "Try extending the date range or adjusting your weekly availability settings."
-        case .concurrentUpdateConflict:
-            return "Refresh the page to see the latest changes, then try again."
-        case .excessiveRecurringCommitments:
-            return "Consider reviewing and removing some recurring commitments to open more time slots."
-        case .incompatibleCalendarSettings:
-            return "Both partners should check calendar integration settings and ensure they're properly configured."
-        case .networkTimeout:
-            return "Check your internet connection and try again. If the problem persists, try again later."
-        case .permissionDenied:
-            return "This action requires both partners to agree on changes to settings."
-        }
-    }
-}
+// Using the consolidated AvailabilityError from Models/AvailabilityError.swift
+// Enum representing possible errors when working with availability
+//enum AvailabilityError: LocalizedError {
+//    case invalidTimeRange
+//    case invalidDuration
+//    ...
+//}
 
 /// Represents a couple's availability preferences and settings
 struct CoupleAvailability: Codable, Identifiable {
@@ -115,15 +54,15 @@ struct CoupleAvailability: Codable, Identifiable {
     }
     
     /// Validates that the time range specified is valid
-    func validateTimeRange(startDate: Date, endDate: Date, duration: Int) -> Result<Bool, AvailabilityError> {
+    func validateTimeRange(startDate: Date, endDate: Date, duration: Int) -> Result<Bool, Error> {
         // Check that end date is after start date
         if endDate <= startDate {
-            return .failure(.invalidTimeRange)
+            return .failure(AvailabilityError(errorType: .invalidTimeRange))
         }
         
         // Check that duration is reasonable
         if duration < 15 || duration > 12 * 60 {
-            return .failure(.invalidDuration)
+            return .failure(AvailabilityError(errorType: .invalidDuration))
         }
         
         return .success(true)

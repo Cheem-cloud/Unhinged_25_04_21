@@ -2,6 +2,7 @@ import SwiftUI
 import Firebase
 import FirebaseAuth
 import UIKit
+import Foundation // Ensure Foundation is imported before using extensions
 
 /// View for editing couple availability preferences
 struct CoupleAvailabilityView: View {
@@ -377,50 +378,14 @@ struct CoupleAvailabilityView: View {
     }
 }
 
-// MARK: - Extensions
-
-extension Date {
-    var weekdayShortName: String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "EEE"
-        return formatter.string(from: self)
-    }
-}
-
-// Local extension to avoid conflicts with CustomTheme.swift
-extension Color {
-    static let background = Color(UIColor.systemBackground)
-    static let secondaryBackground = Color(UIColor.secondarySystemBackground)
-    
-    init(hex: String) {
-        let hex = hex.trimmingCharacters(in: CharacterSet.alphanumerics.inverted)
-        var int: UInt64 = 0
-        Scanner(string: hex).scanHexInt64(&int)
-        let a, r, g, b: UInt64
-        switch hex.count {
-        case 3: // RGB (12-bit)
-            (a, r, g, b) = (255, (int >> 8) * 17, (int >> 4 & 0xF) * 17, (int & 0xF) * 17)
-        case 6: // RGB (24-bit)
-            (a, r, g, b) = (255, int >> 16, int >> 8 & 0xFF, int & 0xFF)
-        case 8: // ARGB (32-bit)
-            (a, r, g, b) = (int >> 24, int >> 16 & 0xFF, int >> 8 & 0xFF, int & 0xFF)
-        default:
-            (a, r, g, b) = (1, 1, 1, 0)
-        }
-        
-        self.init(
-            .sRGB,
-            red: Double(r) / 255,
-            green: Double(g) / 255,
-            blue: Double(b) / 255,
-            opacity: Double(a) / 255
-        )
-    }
-}
-
 // MARK: - Preview
 struct CoupleAvailabilityView_Previews: PreviewProvider {
     static var previews: some View {
         CoupleAvailabilityView()
     }
-} 
+}
+
+// MARK: - Extensions
+// Note: The Date.weekdayShortName extension and Color.init(hex:) extensions were removed
+// to eliminate duplications. These are now imported from Utilities/DateExtensions.swift
+// and should be referenced from there. 

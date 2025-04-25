@@ -56,7 +56,10 @@ open class BaseService: ServiceProtocol {
     /// Verify that the service is in a usable state
     /// - Returns: Whether the service is available
     open func isAvailable() -> Bool {
-        return state != .error && state != .terminated
+        if case .error(_) = state {
+            return false
+        }
+        return state != .terminated
     }
     
     /// Reset the service state
@@ -178,44 +181,5 @@ public struct ServiceEvent {
         self.type = type
         self.data = data
         self.timestamp = Date()
-    }
-}
-
-/// Base service error
-public enum ServiceError: Error, LocalizedError {
-    case notInitialized
-    case alreadyInitialized
-    case configurationError(String)
-    case notAuthenticated
-    case authenticationFailed(String)
-    case networkError(String)
-    case dataError(String)
-    case notSupported(String)
-    case timeout(String)
-    case unknown(String)
-    
-    public var errorDescription: String? {
-        switch self {
-        case .notInitialized:
-            return "Service is not initialized"
-        case .alreadyInitialized:
-            return "Service is already initialized"
-        case .configurationError(let message):
-            return "Configuration error: \(message)"
-        case .notAuthenticated:
-            return "Authentication required"
-        case .authenticationFailed(let message):
-            return "Authentication failed: \(message)"
-        case .networkError(let message):
-            return "Network error: \(message)"
-        case .dataError(let message):
-            return "Data error: \(message)"
-        case .notSupported(let message):
-            return "Not supported: \(message)"
-        case .timeout(let message):
-            return "Timeout: \(message)"
-        case .unknown(let message):
-            return "Unknown error: \(message)"
-        }
     }
 } 

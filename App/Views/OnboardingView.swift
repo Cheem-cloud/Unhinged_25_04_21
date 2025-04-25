@@ -2,6 +2,8 @@ import SwiftUI
 import FirebaseAuth
 import GoogleSignIn
 import EventKit
+import Firebase
+import Authentication
 
 struct OnboardingView: View {
     // Whether this is a new user
@@ -22,8 +24,8 @@ struct OnboardingView: View {
     // User profile info
     @State private var name: String = ""
     
-    // Current user
-    @State private var user: User? = Auth.auth().currentUser
+    // Current user (using proper adapter for conversion)
+    @State private var appUser: AppUser?
     
     // Persona creation
     @State private var personaName: String = ""
@@ -135,6 +137,8 @@ struct OnboardingView: View {
         .onAppear {
             if let currentUser = Auth.auth().currentUser {
                 name = currentUser.displayName ?? ""
+                // Convert Firebase user to AppUser for use throughout the app
+                appUser = FirebaseUserAdapter.toAppUser(currentUser)
             }
         }
     }
@@ -656,7 +660,7 @@ struct OnboardingView: View {
                             .foregroundColor(CustomTheme.Colors.text.opacity(0.7))
                         
                         LazyVGrid(columns: [GridItem(.flexible()), GridItem(.flexible())], spacing: 12) {
-                            if let firstName = user?.displayName?.components(separatedBy: " ").first {
+                            if let firstName = appUser?.displayName?.components(separatedBy: " ").first {
                                 coupleSuggestionButton("\(firstName) & Partner")
                                 coupleSuggestionButton("The \(firstName)s")
                             }

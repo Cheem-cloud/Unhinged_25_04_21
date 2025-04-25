@@ -119,11 +119,6 @@ struct TabButton: View {
     }
 }
 
-// MARK: - Notification Extensions
-extension Notification.Name {
-    static let hangoutCreated = Notification.Name("hangoutCreated")
-}
-
 struct AvailabilityCoordinatorView_Previews: PreviewProvider {
     static var previews: some View {
         AvailabilityCoordinatorView()

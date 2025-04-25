@@ -2,6 +2,9 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 
+// Local forward declarations if needed
+// Note: CRUDService is likely defined elsewhere and needs to be properly imported
+
 /// Service for managing hangouts
 class HangoutsService {
     /// Shared instance for singleton access

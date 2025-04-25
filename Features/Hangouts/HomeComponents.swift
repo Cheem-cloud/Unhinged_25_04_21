@@ -1,11 +1,20 @@
 import SwiftUI
 
+/// Navigation routes for the home screen
+enum HangoutRoute {
+    case hangoutsList
+    case hangoutDetails(String)
+    case availability
+    case findTime(String?)
+    case calendarIntegration
+}
+
 /// Main component for the home screen
-public struct HomeFeature: View {
+internal struct HomeFeature: View {
     @ObservedObject private var viewModel: HangoutsViewModel
     private let onNavigate: (HangoutRoute) -> Void
     
-    public init(viewModel: HangoutsViewModel, onNavigate: @escaping (HangoutRoute) -> Void) {
+    internal init(viewModel: HangoutsViewModel, onNavigate: @escaping (HangoutRoute) -> Void) {
         self.viewModel = viewModel
         self.onNavigate = onNavigate
     }

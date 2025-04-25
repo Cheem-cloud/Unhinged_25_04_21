@@ -1,52 +1,88 @@
 import SwiftUI
 
-/// A common structure for handling alert presentation across the app
-struct AlertItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
-    let dismissButton: Alert.Button
+/// The canonical AlertItem struct used throughout the app
+public struct AlertItem: Identifiable {
+    public var id = UUID()
+    public var title: String
+    public var message: String
+    public var dismissButton: String
+    public var action: (() -> Void)?
     
-    // Convenience initializer with default OK button
-    init(title: String, message: String, dismissButton: Alert.Button = .default(Text("OK"))) {
+    public init(title: String, message: String, dismissButton: String = "OK", action: (() -> Void)? = nil) {
         self.title = title
         self.message = message
         self.dismissButton = dismissButton
+        self.action = action
     }
 }
 
-// Common alert creation extensions
-extension AlertItem {
-    // Create error alert
-    static func error(title: String = "Error", message: String) -> AlertItem {
-        AlertItem(
-            title: title,
-            message: message,
-            dismissButton: .default(Text("OK"))
+// MARK: - Helper Extensions
+
+/// Extension for SwiftUI Alert compatibility
+public extension AlertItem {
+    // Create Alert from AlertItem
+    func asAlert() -> Alert {
+        if let action = self.action {
+            return Alert(
+                title: Text(title),
+                message: Text(message),
+                dismissButton: .default(Text(dismissButton), action: action)
+            )
+        } else {
+            return Alert(
+                title: Text(title),
+                message: Text(message),
+                dismissButton: .default(Text(dismissButton))
+            )
+        }
+    }
+}
+
+// MARK: - Common Alerts
+
+/// Common alerts used throughout the app
+public enum CommonAlerts {
+    // Network error alert
+    public static func networkError() -> AlertItem {
+        return AlertItem(
+            title: "Network Error",
+            message: "There was a problem connecting to the server. Please check your internet connection and try again."
         )
     }
     
-    // Create success alert
-    static func success(title: String = "Success", message: String) -> AlertItem {
-        AlertItem(
-            title: title,
-            message: message,
-            dismissButton: .default(Text("OK"))
+    // Permission error alert
+    public static func permissionError() -> AlertItem {
+        return AlertItem(
+            title: "Permission Denied",
+            message: "You don't have permission to perform this action."
         )
     }
     
-    // Create confirmation alert with custom action
-    static func confirmation(
-        title: String,
-        message: String,
-        confirmText: String = "Confirm",
-        cancelText: String = "Cancel",
-        action: @escaping () -> Void
-    ) -> AlertItem {
-        AlertItem(
+    // Unknown error alert
+    public static func unknownError() -> AlertItem {
+        return AlertItem(
+            title: "Something Went Wrong",
+            message: "An unexpected error occurred. Please try again later."
+        )
+    }
+    
+    // Custom error alert
+    public static func customError(title: String, message: String, action: (() -> Void)? = nil) -> AlertItem {
+        return AlertItem(
             title: title,
             message: message,
-            dismissButton: .default(Text(confirmText), action: action)
+            dismissButton: "OK",
+            action: action
+        )
+    }
+    
+    // Confirmation alert
+    public static func confirmation(title: String, message: String, confirmText: String = "Confirm", action: @escaping () -> Void) -> AlertItem {
+        return AlertItem(
+            title: title,
+            message: message,
+            dismissButton: confirmText,
+            action: action
         )
     }
 } 

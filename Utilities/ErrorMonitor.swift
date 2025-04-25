@@ -3,7 +3,7 @@ import Combine
 
 /// A view component that monitors the centralized error handler and displays errors
 public struct ErrorMonitor: ViewModifier {
-    @ObservedObject var errorHandler = ErrorHandler.shared
+    @ObservedObject var errorHandler = UIErrorHandler.shared
     @Binding var isPresented: Bool
     var onDismiss: ((any AppError) -> Void)?
     
@@ -18,15 +18,17 @@ public struct ErrorMonitor: ViewModifier {
     public func body(content: Content) -> some View {
         content
             .onChange(of: errorHandler.isShowingError) { isShowing in
-                isPresented = isShowing
+                if $isPresented.wrappedValue != isShowing {
+                    $isPresented.wrappedValue = isShowing
+                }
             }
-            .onChange(of: isPresented) { isShowing in
+            .onChange(of: $isPresented.wrappedValue) { isShowing in
                 // When isPresented is set to false by binding, dismiss the error
                 if !isShowing && errorHandler.isShowingError {
                     if let error = errorHandler.currentError {
                         onDismiss?(error)
                     }
-                    errorHandler.dismissError()
+                    errorHandler.clearError()
                 }
             }
             .alert(
@@ -39,12 +41,12 @@ public struct ErrorMonitor: ViewModifier {
                         ForEach(error.recoveryActions, id: \.title) { action in
                             Button(action.title, role: action.isPrimary ? .none : .cancel) {
                                 action.action()
-                                errorHandler.dismissError()
+                                errorHandler.clearError()
                             }
                         }
                     } else {
                         Button("OK", role: .cancel) {
-                            errorHandler.dismissError()
+                            errorHandler.clearError()
                         }
                     }
                 },
@@ -85,7 +87,7 @@ public extension View {
 
 /// A more advanced error display using a custom view instead of an alert
 public struct ErrorOverlayView: View {
-    @ObservedObject var errorHandler = ErrorHandler.shared
+    @ObservedObject var errorHandler = UIErrorHandler.shared
     @Binding var isPresented: Bool
     var onDismiss: ((any AppError) -> Void)?
     
@@ -114,7 +116,7 @@ public struct ErrorOverlayView: View {
                         if let error = errorHandler.currentError {
                             onDismiss?(error)
                         }
-                        errorHandler.dismissError()
+                        errorHandler.clearError()
                     }) {
                         Image(systemName: "xmark.circle.fill")
                             .foregroundColor(.secondary)
@@ -143,7 +145,7 @@ public struct ErrorOverlayView: View {
                         ForEach(error.recoveryActions, id: \.title) { action in
                             Button(action: {
                                 action.action()
-                                errorHandler.dismissError()
+                                errorHandler.clearError()
                             }) {
                                 HStack {
                                     if !action.icon.isEmpty {
@@ -164,7 +166,7 @@ public struct ErrorOverlayView: View {
             .padding()
             .background(
                 RoundedRectangle(cornerRadius: 12)
-                    .fill(Color(.systemBackground))
+                    .fill(CustomTheme.Colors.background)
                     .shadow(color: Color.black.opacity(0.2), radius: 10, x: 0, y: 5)
             )
             .padding()
@@ -184,6 +186,9 @@ public struct ErrorOverlayView: View {
         case .info:
             return Image(systemName: "info.circle.fill")
                 .foregroundColor(.blue)
+        case .critical:
+            return Image(systemName: "xmark.octagon.fill")
+                .foregroundColor(.red)
         }
     }
 }
@@ -206,16 +211,16 @@ public extension View {
                 onDismiss: onDismiss
             )
         }
-        .onChange(of: ErrorHandler.shared.isShowingError) { isShowing in
-            isPresented = isShowing
+        .onChange(of: UIErrorHandler.shared.isShowingError) { isShowing in
+            isPresented.wrappedValue = isShowing
         }
-        .onChange(of: isPresented) { isShowing in
+        .onChange(of: isPresented.wrappedValue) { isShowing in
             // When isPresented is set to false by binding, dismiss the error
-            if !isShowing && ErrorHandler.shared.isShowingError {
-                if let error = ErrorHandler.shared.currentError {
+            if !isShowing && UIErrorHandler.shared.isShowingError {
+                if let error = UIErrorHandler.shared.currentError {
                     onDismiss?(error)
                 }
-                ErrorHandler.shared.dismissError()
+                UIErrorHandler.shared.clearError()
             }
         }
     }

@@ -1,5 +1,10 @@
 import Foundation
 import EventKit
+import UIKit
+import Combine
+
+// We need CalendarProviderType from the protocol file
+// Assuming CalendarProviderProtocol is in the same module/target
 
 /// Implementation of CalendarProviderProtocol for Apple Calendar (EventKit)
 class AppleCalendarProvider: CalendarProviderProtocol {
@@ -74,6 +79,21 @@ class AppleCalendarProvider: CalendarProviderProtocol {
                     continuation.resume(returning: granted)
                 }
             }
+        }
+    }
+    
+    /// Add a local BusyTimeSlot struct to match the protocol requirement
+    struct BusyTimeSlot {
+        let startTime: Date
+        let endTime: Date
+        let title: String?
+        let isAllDay: Bool
+        
+        init(startTime: Date, endTime: Date, title: String? = nil, isAllDay: Bool = false) {
+            self.startTime = startTime
+            self.endTime = endTime
+            self.title = title
+            self.isAllDay = isAllDay
         }
     }
     

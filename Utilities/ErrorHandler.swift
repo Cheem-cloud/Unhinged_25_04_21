@@ -2,185 +2,129 @@ import Foundation
 import SwiftUI
 import Combine
 
-/// Protocol for all app-specific errors to conform to
-public protocol AppError: Error, LocalizedError {
-    var domain: String { get }
-    var errorTitle: String { get }
-    var errorDescription: String? { get }
-    var recoverySuggestion: String? { get }
-    var severity: ErrorSeverity { get }
-    var recoveryActions: [ErrorRecoveryAction] { get }
-}
+// MARK: - Error Handler
 
-/// Standardized severity levels for errors
-public enum ErrorSeverity {
-    case info
-    case warning
-    case error
-    case critical
+/// UI components and helpers for error handling
+/// 
+/// This file contains UI-specific error handling components.
+/// Core error types and protocols are defined in ErrorHandling.swift
+
+/// Global error handler for centralized error management
+public class UIErrorHandler: ObservableObject {
+    /// Shared instance for global access
+    public static let shared = UIErrorHandler()
     
-    var color: Color {
-        switch self {
-        case .info:
-            return .blue
-        case .warning:
-            return .orange
-        case .error:
-            return .red
-        case .critical:
-            return .purple
-        }
+    /// Current error being displayed
+    @Published public var currentError: (any AppError)?
+    
+    /// Publisher for whether the error is being shown
+    @Published public var isShowingError: Bool = false
+    
+    /// Publisher for the error showing state
+    public var isShowingErrorPublisher: AnyPublisher<Bool, Never> {
+        $isShowingError.eraseToAnyPublisher()
     }
     
-    var icon: String {
-        switch self {
-        case .info:
-            return "info.circle"
-        case .warning:
-            return "exclamationmark.triangle"
-        case .error:
-            return "exclamationmark.circle"
-        case .critical:
-            return "xmark.octagon"
-        }
-    }
-}
-
-/// Standard error recovery action model
-public struct ErrorRecoveryAction {
-    let title: String
-    let icon: String
-    let isPrimary: Bool
-    let action: () -> Void
+    /// Collection of error handlers for specific error types
+    private var errorHandlers: [String: (Error) -> Bool] = [:]
     
-    public init(title: String, icon: String, isPrimary: Bool = false, action: @escaping () -> Void) {
-        self.title = title
-        self.icon = icon
-        self.isPrimary = isPrimary
-        self.action = action
-    }
-}
-
-/// Central error handling system for the app
-public class ErrorHandler: ObservableObject {
-    public static let shared = ErrorHandler()
-    
-    @Published public var currentError: AppError?
-    @Published public var isShowingError = false
-    
+    /// Private initializer for singleton
     private init() {}
     
+    /// Handle an error
+    /// - Parameter error: The error to handle
     public func handle(_ error: Error) {
-        DispatchQueue.main.async {
-            // Convert to AppError if needed
-            if let appError = error as? AppError {
-                self.currentError = appError
-            } else if let nsError = error as NSError? {
-                // Check if we have domain-specific error handlers
-                if nsError.domain.contains("Hangout") || nsError.domain == "com.cheemhang.hangoutsviewmodel" {
-                    self.currentError = HangoutError(from: nsError)
-                } else if nsError.domain.contains("Availability") {
-                    self.currentError = AvailabilityError(from: nsError)
-                } else {
-                    // Create a generic app error for unhandled error types
-                    self.currentError = GenericAppError(from: nsError)
-                }
+        // Check if any registered handler can handle this error
+        for (_, handler) in errorHandlers {
+            if handler(error) {
+                return // Error was handled by a specific handler
             }
-            
-            self.isShowingError = true
-            
-            // Log the error (could integrate with analytics/logging service)
-            print("Error handled: \(error.localizedDescription)")
         }
+        
+        // If not handled by a specific handler, show it
+        showError(error)
     }
     
-    public func dismissError() {
-        self.isShowingError = false
-        self.currentError = nil
-    }
-}
-
-/// Generic error for handling non-domain-specific errors
-struct GenericAppError: AppError {
-    private let error: Error
-    private let customMessage: String?
-    
-    init(from error: Error, customMessage: String? = nil) {
-        self.error = error
-        self.customMessage = customMessage
-    }
-    
-    var domain: String {
-        return "General"
-    }
-    
-    var errorTitle: String {
-        return "Error"
-    }
-    
-    var errorDescription: String? {
-        return customMessage ?? error.localizedDescription
-    }
-    
-    var recoverySuggestion: String? {
-        if let localizedError = error as? LocalizedError {
-            return localizedError.recoverySuggestion
+    /// Show an error to the user
+    /// - Parameter error: The error to show
+    public func showError(_ error: Error) {
+        // Convert to AppError if not already
+        if let appError = error as? any AppError {
+            currentError = appError
+        } else {
+            // Create a generic app error
+            currentError = GeneralError(error: error) 
         }
-        return "Please try again later."
+        
+        isShowingError = true
     }
     
-    var severity: ErrorSeverity {
-        return .warning
+    /// Register a handler for a specific error type
+    /// - Parameters:
+    ///   - key: A unique key for this handler
+    ///   - handler: The handler function
+    public func registerHandler(forKey key: String, handler: @escaping (Error) -> Bool) {
+        errorHandlers[key] = handler
     }
     
-    var recoveryActions: [ErrorRecoveryAction] {
-        return [
-            ErrorRecoveryAction(
-                title: "Dismiss",
-                icon: "xmark.circle",
-                isPrimary: true,
-                action: {
-                    ErrorHandler.shared.dismissError()
-                }
-            )
-        ]
+    /// Unregister a handler
+    /// - Parameter key: The key of the handler to remove
+    public func unregisterHandler(forKey key: String) {
+        errorHandlers.removeValue(forKey: key)
+    }
+    
+    /// Clear the current error
+    public func clearError() {
+        currentError = nil
+        isShowingError = false
     }
 }
 
 /// View modifier for presenting errors with the centralized error handler
 public struct HandleErrorViewModifier: ViewModifier {
-    @ObservedObject private var errorHandler = ErrorHandler.shared
+    @ObservedObject private var errorHandler: UIErrorHandler
+    
+    public init(errorHandler: UIErrorHandler = UIErrorHandler.shared) {
+        self.errorHandler = errorHandler
+    }
     
     public func body(content: Content) -> some View {
         content
             .alert(
                 errorHandler.currentError?.errorTitle ?? "Error",
-                isPresented: $errorHandler.isShowingError,
+                isPresented: .init(
+                    get: { errorHandler.isShowingError },
+                    set: { if !$0 { errorHandler.clearError() } }
+                ),
                 actions: {
                     if let actions = errorHandler.currentError?.recoveryActions {
-                        ForEach(0..<actions.count, id: \.self) { index in
-                            let action = actions[index]
+                        ForEach(Array(actions.enumerated()), id: \.offset) { index, action in
                             Button(action.title) {
                                 action.action()
                                 // Only dismiss if not explicitly handled by the action
                                 if !action.title.lowercased().contains("try again") &&
                                    !action.title.lowercased().contains("retry") {
-                                    errorHandler.dismissError()
+                                    errorHandler.clearError()
                                 }
                             }
                         }
                     }
                     
                     Button("Dismiss", role: .cancel) {
-                        errorHandler.dismissError()
+                        errorHandler.clearError()
                     }
                 },
                 message: {
-                    if let suggestion = errorHandler.currentError?.recoverySuggestion,
-                       let description = errorHandler.currentError?.errorDescription {
-                        Text("\(description)\n\n\(suggestion)")
-                    } else if let description = errorHandler.currentError?.errorDescription {
-                        Text(description)
+                    VStack {
+                        if let description = errorHandler.currentError?.errorDescription {
+                            Text(description)
+                        }
+                        
+                        if let suggestion = errorHandler.currentError?.recoverySuggestion {
+                            Text(suggestion)
+                                .font(.caption)
+                                .padding(.top, 4)
+                        }
                     }
                 }
             )
@@ -188,14 +132,14 @@ public struct HandleErrorViewModifier: ViewModifier {
 }
 
 public extension View {
-    func handleAppErrors() -> some View {
-        modifier(HandleErrorViewModifier())
+    func handleAppErrors(errorHandler: UIErrorHandler = UIErrorHandler.shared) -> some View {
+        modifier(HandleErrorViewModifier(errorHandler: errorHandler))
     }
 }
 
 // MARK: - ErrorBanner View for custom error UI
 public struct ErrorBanner: View {
-    let error: AppError
+    let error: any AppError
     let onDismiss: () -> Void
     
     public var body: some View {
@@ -258,29 +202,21 @@ public struct ErrorBanner: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(Color(.systemBackground))
+                .fill(CustomTheme.Colors.background)
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
         )
         .padding(.horizontal)
     }
 }
 
-// Helper for conditional modifier
-extension View {
-    @ViewBuilder
-    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
-        if condition {
-            transform(self)
-        } else {
-            self
-        }
-    }
-}
-
 // MARK: - Custom View Modifier for Custom Error Banner
 public struct CustomErrorBannerModifier: ViewModifier {
-    @ObservedObject private var errorHandler = ErrorHandler.shared
+    @ObservedObject private var errorHandler: UIErrorHandler
     @State private var showBanner = false
+    
+    public init(errorHandler: UIErrorHandler = UIErrorHandler.shared) {
+        self.errorHandler = errorHandler
+    }
     
     public func body(content: Content) -> some View {
         ZStack {
@@ -293,7 +229,7 @@ public struct CustomErrorBannerModifier: ViewModifier {
                             showBanner = false
                             // Short delay before completely removing the error
                             DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) {
-                                errorHandler.dismissError()
+                                errorHandler.clearError()
                             }
                         }
                     }
@@ -314,7 +250,19 @@ public struct CustomErrorBannerModifier: ViewModifier {
 }
 
 public extension View {
-    func customErrorBanner() -> some View {
-        modifier(CustomErrorBannerModifier())
+    func customErrorBanner(errorHandler: UIErrorHandler = UIErrorHandler.shared) -> some View {
+        modifier(CustomErrorBannerModifier(errorHandler: errorHandler))
+    }
+}
+
+// MARK: - Helper for conditional modifier
+extension View {
+    @ViewBuilder
+    func `if`<Content: View>(_ condition: Bool, transform: (Self) -> Content) -> some View {
+        if condition {
+            transform(self)
+        } else {
+            self
+        }
     }
 } 

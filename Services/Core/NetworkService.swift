@@ -280,139 +280,15 @@ public class StandardNetworkService: BaseService, NetworkService, ConfigurableSe
 }
 
 /// Network error
-public struct NetworkError: Error, LocalizedError {
-    /// HTTP status code
-    public let statusCode: Int?
-    
-    /// Response body as string
-    public let responseBody: String?
-    
-    /// Underlying error
-    public let underlyingError: Error?
-    
-    /// Error type
-    public let errorType: ErrorType
-    
-    /// Error types
-    public enum ErrorType {
-        case httpError
-        case connectionError
-        case timeoutError
-        case cancelledError
-        case encodingError
-        case decodingError
-        case authenticationError
-        case serverError
-        case clientError
-        case unknown
+public typealias NetworkError = Utilities.NetworkError
+
+/// Keep the following error handling methods
+public extension NetworkError {
+    static func decodingError(_ error: Error) -> NetworkError {
+        return NetworkError(nsError: error as NSError)
     }
     
-    /// Initialize with HTTP status code
-    /// - Parameters:
-    ///   - statusCode: HTTP status code
-    ///   - responseBody: Response body as string
-    public init(statusCode: Int, responseBody: String? = nil) {
-        self.statusCode = statusCode
-        self.responseBody = responseBody
-        self.underlyingError = nil
-        
-        switch statusCode {
-        case 400..<500:
-            self.errorType = .clientError
-        case 500..<600:
-            self.errorType = .serverError
-        case 401, 403:
-            self.errorType = .authenticationError
-        default:
-            self.errorType = .httpError
-        }
-    }
-    
-    /// Initialize with URL error
-    /// - Parameter error: URL error
-    public init(urlError: Error) {
-        self.underlyingError = urlError
-        self.statusCode = nil
-        self.responseBody = nil
-        
-        if let urlError = urlError as? URLError {
-            switch urlError.code {
-            case .timedOut:
-                self.errorType = .timeoutError
-            case .notConnectedToInternet, .networkConnectionLost:
-                self.errorType = .connectionError
-            case .cancelled:
-                self.errorType = .cancelledError
-            default:
-                self.errorType = .unknown
-            }
-        } else {
-            self.errorType = .unknown
-        }
-    }
-    
-    /// Initialize with encoding error
-    /// - Parameter error: Encoding error
-    public static func encodingError(_ error: Error) -> NetworkError {
-        return NetworkError(
-            statusCode: nil,
-            responseBody: nil,
-            underlyingError: error,
-            errorType: .encodingError
-        )
-    }
-    
-    /// Initialize with decoding error
-    /// - Parameter error: Decoding error
-    public static func decodingError(_ error: Error) -> NetworkError {
-        return NetworkError(
-            statusCode: nil,
-            responseBody: nil,
-            underlyingError: error,
-            errorType: .decodingError
-        )
-    }
-    
-    /// Initialize with custom parameters
-    /// - Parameters:
-    ///   - statusCode: HTTP status code
-    ///   - responseBody: Response body as string
-    ///   - underlyingError: Underlying error
-    ///   - errorType: Error type
-    public init(
-        statusCode: Int? = nil,
-        responseBody: String? = nil,
-        underlyingError: Error? = nil,
-        errorType: ErrorType = .unknown
-    ) {
-        self.statusCode = statusCode
-        self.responseBody = responseBody
-        self.underlyingError = underlyingError
-        self.errorType = errorType
-    }
-    
-    public var errorDescription: String? {
-        switch errorType {
-        case .httpError:
-            return "HTTP error with status code \(statusCode ?? 0)"
-        case .connectionError:
-            return "Connection error: \(underlyingError?.localizedDescription ?? "Network connection lost")"
-        case .timeoutError:
-            return "Request timed out"
-        case .cancelledError:
-            return "Request was cancelled"
-        case .encodingError:
-            return "Failed to encode request data: \(underlyingError?.localizedDescription ?? "Unknown error")"
-        case .decodingError:
-            return "Failed to decode response data: \(underlyingError?.localizedDescription ?? "Unknown error")"
-        case .authenticationError:
-            return "Authentication failed with status code \(statusCode ?? 0)"
-        case .serverError:
-            return "Server error with status code \(statusCode ?? 500)"
-        case .clientError:
-            return "Client error with status code \(statusCode ?? 400)"
-        case .unknown:
-            return "Unknown network error: \(underlyingError?.localizedDescription ?? "No details available")"
-        }
+    static func encodingError(_ error: Error) -> NetworkError {
+        return NetworkError(nsError: error as NSError)
     }
 } 

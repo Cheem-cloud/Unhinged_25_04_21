@@ -50,7 +50,7 @@ class PerformanceOptimizer {
     /// - Parameter userId: User ID to prefetch data for
     func prefetchUserData(for userId: String) {
         Task {
-            async let user = FirestoreService.shared.getUser(id: userId)
+            async let user = Firestore.firestore().collection("users").document(userId).getDocument()
             async let relationships = Firestore.firestore().collection("relationships")
                 .whereField("userIds", arrayContains: userId)
                 .limit(to: 1)

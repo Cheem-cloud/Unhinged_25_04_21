@@ -12,7 +12,7 @@ enum NotificationType: String, Codable {
 }
 
 /// Model representing a notification in the system
-struct Notification: Identifiable, Codable {
+struct AppNotification: Identifiable, Codable {
     /// Unique identifier for the notification
     var id: String = UUID().uuidString
     
@@ -47,7 +47,7 @@ struct Notification: Identifiable, Codable {
 }
 
 // MARK: - Firestore Serialization
-extension Notification: FirestoreSerializable {
+extension AppNotification: FirestoreSerializable {
     init?(documentID: String, data: [String: Any]) {
         self.id = documentID
         
@@ -76,7 +76,8 @@ extension Notification: FirestoreSerializable {
         self.isDeleted = data["isDeleted"] as? Bool ?? false
     }
     
-    func toDictionary() -> [String: Any] {
+    // Implementation of FirestoreSerializable protocol
+    func toFirestore() -> [String: Any] {
         var data: [String: Any] = [
             "recipientID": recipientID,
             "senderID": senderID,
@@ -100,7 +101,36 @@ extension Notification: FirestoreSerializable {
 
 // MARK: - FirestoreConvertible
 
-extension Notification: FirestoreConvertible {
+extension AppNotification: FirestoreConvertible {
+    static func fromFirestore(_ data: [String: Any]) -> Self? {
+        guard let id = data["id"] as? String,
+              let recipientID = data["recipientID"] as? String,
+              let senderID = data["senderID"] as? String,
+              let typeString = data["type"] as? String,
+              let type = NotificationType(rawValue: typeString),
+              let content = data["content"] as? String,
+              let createdTimestamp = data["createdDate"] as? Timestamp else {
+            return nil
+        }
+        
+        var notification = AppNotification(
+            id: id,
+            recipientID: recipientID,
+            senderID: senderID,
+            type: type,
+            content: content,
+            relatedID: data["relatedID"] as? String,
+            createdDate: createdTimestamp.dateValue(),
+            isDeleted: data["isDeleted"] as? Bool ?? false
+        )
+        
+        if let readTimestamp = data["readDate"] as? Timestamp {
+            notification.readDate = readTimestamp.dateValue()
+        }
+        
+        return notification
+    }
+    
     enum CodingKeys: String, CodingKey {
         case id
         case recipientID
@@ -112,4 +142,43 @@ extension Notification: FirestoreConvertible {
         case readDate
         case isDeleted
     }
-} 
+}
+
+// MARK: - Notification Name Constants
+// This was incorrectly nested, now it's at the top level
+
+/// Standard notification names for NotificationCenter
+public extension Notification.Name {
+    // Hangout related notifications
+    static let hangoutCreated = Notification.Name("hangoutCreated")
+    static let hangoutAccepted = Notification.Name("hangoutAccepted")
+    static let hangoutDeclined = Notification.Name("hangoutDeclined")
+    static let hangoutCancelled = Notification.Name("hangoutCancelled")
+    
+    // Partner related notifications
+    static let newPartnerRequest = Notification.Name("newPartnerRequest")
+    static let partnerRequestAccepted = Notification.Name("partnerRequestAccepted")
+    static let partnerRequestDeclined = Notification.Name("partnerRequestDeclined")
+    
+    // Availability related notifications
+    static let availabilityUpdate = Notification.Name("availabilityUpdate")
+    
+    // System notifications
+    static let systemAlert = Notification.Name("systemAlert")
+}
+
+/// Protocol for objects that can be serialized to Firestore
+public protocol FirestoreSerializable {
+    /// Convert to a Firestore friendly dictionary
+    func toFirestore() -> [String: Any]
+}
+
+/// Protocol for objects that can be converted from Firestore
+public protocol FirestoreConvertible {
+    /// Create from a Firestore document
+    static func fromFirestore(_ data: [String: Any]) -> Self?
+}
+
+// MARK: - Backwards Compatibility
+/// For backward compatibility
+public typealias NotificationModel = AppNotification 

@@ -381,13 +381,39 @@ public struct DataError: AppError {
 /// Database-related errors
 public struct DatabaseError: AppError {
     private let underlyingError: Error
+    private let errorType: DatabaseErrorType
+    
+    public enum DatabaseErrorType {
+        case itemNotFound
+        case invalidData
+        case operationFailed
+        case permissionDenied
+        case serviceUnavailable
+        case unknown
+    }
     
     public init(firestoreError: FirestoreError) {
         self.underlyingError = firestoreError
+        
+        switch firestoreError {
+        case .documentNotFound:
+            self.errorType = .itemNotFound
+        case .invalidData:
+            self.errorType = .invalidData
+        case .readFailed, .updateFailed, .deleteFailed, .createFailed:
+            self.errorType = .operationFailed
+        case .permissionDenied, .invalidIdentifier:
+            self.errorType = .permissionDenied
+        case .unavailable, .queryFailed, .listenerFailed:
+            self.errorType = .serviceUnavailable
+        default:
+            self.errorType = .unknown
+        }
     }
     
     public init(error: Error) {
         self.underlyingError = error
+        self.errorType = .unknown
     }
     
     public var domain: String {
@@ -690,28 +716,20 @@ public struct GeneralError: AppError {
 
 // MARK: - Firebase-specific Error Types
 
-/// Firestore error types
-public enum FirestoreError: Error, LocalizedError {
+/// Basic FirestoreError definition to avoid Services.Core dependency
+public enum FirestoreError: Error {
     case documentNotFound
+    case invalidData
+    case readFailed
+    case updateFailed
+    case deleteFailed
+    case createFailed
     case permissionDenied
+    case invalidIdentifier
     case unavailable
+    case queryFailed
+    case listenerFailed
     case dataLost
-    case unknownError(Error)
-    
-    public var errorDescription: String? {
-        switch self {
-        case .documentNotFound:
-            return "The requested document was not found."
-        case .permissionDenied:
-            return "Permission denied. You don't have access to this resource."
-        case .unavailable:
-            return "The service is currently unavailable."
-        case .dataLost:
-            return "Some data was lost or corrupted."
-        case .unknownError(let error):
-            return "Firestore error: \(error.localizedDescription)"
-        }
-    }
 }
 
 // MARK: - Error View Modifiers
@@ -734,9 +752,15 @@ public struct ErrorAlertModifier: ViewModifier {
                 isPresented: $isPresented,
                 presenting: errorHandler.currentError
             ) { error in
-                if let recoveryActions = error.recoveryActions, !recoveryActions.isEmpty {
-                    ForEach(0..<recoveryActions.count, id: \.self) { index in
-                        let recoveryAction = recoveryActions[index]
+                if error.recoveryActions.isEmpty {
+                    Button("OK") {
+                        if let action = action {
+                            action(error)
+                        }
+                    }
+                } else {
+                    ForEach(0..<error.recoveryActions.count, id: \.self) { index in
+                        let recoveryAction = error.recoveryActions[index]
                         Button(recoveryAction.title) {
                             recoveryAction.action()
                             if let action = action {
@@ -744,12 +768,6 @@ public struct ErrorAlertModifier: ViewModifier {
                             }
                         }
                         .bold(recoveryAction.isPrimary)
-                    }
-                } else {
-                    Button("OK") {
-                        if let action = action {
-                            action(error)
-                        }
                     }
                 }
             } message: { error in

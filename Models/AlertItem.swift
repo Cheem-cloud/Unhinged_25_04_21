@@ -1,8 +1,7 @@
+// This is a compatibility file to maintain backward compatibility
+// The canonical AlertItem implementation is in Utilities/AlertModels.swift
+
 import Foundation
 
-struct AlertItem: Identifiable {
-    let id = UUID()
-    let title: String
-    let message: String
-    var dismissButton: Bool = true
-} 
+// Use a typealias to point to the canonical version
+public typealias AlertItem = Utilities.AlertItem 

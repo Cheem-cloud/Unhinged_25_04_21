@@ -1,4 +1,29 @@
 import SwiftUI
+import Foundation
+
+// Instead of importing Models, define the Participant model directly here if needed
+// This is a temporary solution until module structure is properly set up
+
+/// Participant in a hangout
+public struct ParticipantModel: Identifiable, Codable, Hashable {
+    public var id: String { userID + personaID }
+    public let userID: String
+    public let personaID: String
+    public let name: String
+    public var hasResponded: Bool = false
+    public var isAttending: Bool = false
+    
+    public init(userID: String, personaID: String, name: String, hasResponded: Bool = false, isAttending: Bool = false) {
+        self.userID = userID
+        self.personaID = personaID
+        self.name = name
+        self.hasResponded = hasResponded
+        self.isAttending = isAttending
+    }
+}
+
+// For backward compatibility, create a typealias for the old name
+public typealias Participant = ParticipantModel
 
 /// Main form component for creating or editing a hangout
 public struct HangoutFormFeature: View {
@@ -164,9 +189,9 @@ struct ParticipantSelectionSheet: View {
     
     // This would typically come from a user service or similar
     private let availableContacts = [
-        Participant(id: UUID(), name: "John Doe"),
-        Participant(id: UUID(), name: "Jane Smith"),
-        Participant(id: UUID(), name: "Mike Johnson"),
+        Participant(userID: UUID().uuidString, personaID: UUID().uuidString, name: "John Doe"),
+        Participant(userID: UUID().uuidString, personaID: UUID().uuidString, name: "Jane Smith"),
+        Participant(userID: UUID().uuidString, personaID: UUID().uuidString, name: "Mike Johnson"),
         // More contacts...
     ]
     
