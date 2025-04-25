@@ -4,6 +4,7 @@ import GoogleSignIn
 import EventKit
 import Firebase
 import Authentication
+import Core
 
 struct OnboardingView: View {
     // Whether this is a new user
@@ -137,8 +138,14 @@ struct OnboardingView: View {
         .onAppear {
             if let currentUser = Auth.auth().currentUser {
                 name = currentUser.displayName ?? ""
-                // Convert Firebase user to AppUser for use throughout the app
-                appUser = FirebaseUserAdapter.toAppUser(currentUser)
+                // Convert Firebase user to AppUser using the adapter
+                let firebaseAuthUser = FirebaseAuthUser(
+                    uid: currentUser.uid,
+                    email: currentUser.email,
+                    displayName: currentUser.displayName,
+                    photoURL: currentUser.photoURL
+                )
+                appUser = AppUser.fromFirebaseUser(firebaseAuthUser)
             }
         }
     }

@@ -8,6 +8,7 @@ import FirebaseMessaging
 import UIKit
 import AuthenticationServices
 import CryptoKit
+import Core
 
 public enum AuthState {
     case signedIn
@@ -17,7 +18,8 @@ public enum AuthState {
 
 @MainActor
 class AuthViewModel: ObservableObject {
-    @Published var user: User?
+    @Published var user: FirebaseAuth.User?
+    @Published var appUser: AppUser?
     @Published var authState: AuthState = .loading
     @Published var error: Error?
     @Published var isLoading: Bool = false
@@ -73,6 +75,15 @@ class AuthViewModel: ObservableObject {
                     print("AuthViewModel: Auth state changed to signedIn for user: \(user.uid)")
                     print("AuthViewModel: Email verified: \(user.isEmailVerified), Creation time: \(user.metadata.creationDate?.description ?? "unknown")")
                     
+                    // Convert Firebase User to AppUser
+                    let firebaseAuthUser = FirebaseAuthUser(
+                        uid: user.uid,
+                        email: user.email,
+                        displayName: user.displayName,
+                        photoURL: user.photoURL
+                    )
+                    self?.appUser = AppUser.fromFirebaseUser(firebaseAuthUser)
+                    
                     self?.authState = .signedIn
                     self?.updateUserFCMToken(userId: user.uid)
                     
@@ -97,6 +108,7 @@ class AuthViewModel: ObservableObject {
                 } else {
                     print("AuthViewModel: Auth state changed to signedOut")
                     self?.authState = .signedOut
+                    self?.appUser = nil
                     self?.deleteFCMToken()
                 }
             }
@@ -337,15 +349,16 @@ class AuthViewModel: ObservableObject {
                 try await changeRequest.commitChanges()
                 print("AuthViewModel: Display name set to: \(name)")
                 
-                // Create user in Firestore
-                let newUser = AppUser(
-                    id: authResult.user.uid,
+                // Create FirebaseAuthUser struct for conversion
+                let firebaseAuthUser = FirebaseAuthUser(
+                    uid: authResult.user.uid,
                     email: email,
                     displayName: name,
-                    photoURL: nil,
-                    createdAt: Timestamp().dateValue(),
-                    updatedAt: Timestamp().dateValue()
+                    photoURL: nil
                 )
+                
+                // Create user in Firestore using AppUser from Core module
+                let newUser = AppUser.fromFirebaseUser(firebaseAuthUser)
                 
                 try await firestoreService.createUser(newUser)
                 print("AuthViewModel: User document created in Firestore")
@@ -353,6 +366,7 @@ class AuthViewModel: ObservableObject {
                 // Set the user property and mark as signed in
                 await MainActor.run {
                     self.user = authResult.user
+                    self.appUser = newUser
                     self.authState = .signedIn
                     self.isNewUser = true
                     print("AuthViewModel: isNewUser flag set to true")
@@ -441,14 +455,16 @@ class AuthViewModel: ObservableObject {
             print("AuthViewModel: Display name set to: \(name)")
             
             // Step 3: Create user in Firestore
-            let newUser = AppUser(
-                id: authResult.user.uid,
+            // Create FirebaseAuthUser struct for conversion
+            let firebaseAuthUser = FirebaseAuthUser(
+                uid: authResult.user.uid,
                 email: email,
                 displayName: name,
-                photoURL: nil,
-                createdAt: Timestamp().dateValue(),
-                updatedAt: Timestamp().dateValue()
+                photoURL: nil
             )
+            
+            // Create user in Firestore using AppUser from Core module
+            let newUser = AppUser.fromFirebaseUser(firebaseAuthUser)
             
             try await firestoreService.createUser(newUser)
             print("AuthViewModel: User document created in Firestore")
@@ -482,6 +498,7 @@ class AuthViewModel: ObservableObject {
             // Set the user property
             await MainActor.run {
                 self.user = authResult.user
+                self.appUser = newUser
                 self.authState = .signedIn
                 self.isNewUser = true
                 print("AuthViewModel: isNewUser flag set to true")
@@ -682,15 +699,16 @@ class AuthViewModel: ObservableObject {
                     
                 try await changeRequest.commitChanges()
                 
-                // Create user document in Firestore if it doesn't exist
-                let newUser = AppUser(
-                    id: authResult.user.uid,
-                    email: credential.email ?? authResult.user.email ?? "",
+                // Create FirebaseAuthUser struct for conversion
+                let firebaseAuthUser = FirebaseAuthUser(
+                    uid: authResult.user.uid,
+                    email: credential.email ?? authResult.user.email,
                     displayName: displayName,
-                    photoURL: nil,
-                    createdAt: Timestamp().dateValue(),
-                    updatedAt: Timestamp().dateValue()
+                    photoURL: nil
                 )
+                
+                // Create user document in Firestore if it doesn't exist
+                let newUser = AppUser.fromFirebaseUser(firebaseAuthUser)
                 
                 do {
                     try await firestoreService.createUser(newUser)

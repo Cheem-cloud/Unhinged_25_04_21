@@ -1048,44 +1048,40 @@ We've made significant progress resolving the module structure and import issues
    - Updated CoupleAvailability.swift to use Services.TimeRange instead of local definitions
 
 2. **Fixed Access Control Issues**:
-   - Added proper public access modifiers to CoupleAvailability and related types
-   - Updated ServiceProtocol with proper publisher properties required by BaseService
-   - Made ErrorHandler and UIComponents in Utilities publicly accessible
+   - Added missing public access modifiers to model properties and methods
+   - Made ErrorHandler and UI components properly accessible across module boundaries
+   - Ensured ServiceProtocol has all required publisher properties
 
-3. **Fixed Import Issues**:
-   - Added explicit imports for Utilities and Services modules in feature files
-   - Updated error handling code to reference UIErrorHandler from Utilities
-   - Fixed imports in AvailabilityErrors.swift to properly reference Utilities
+3. **Import Problems Solved**:
+   - Added proper imports for Services and Utilities modules in feature files
+   - Replaced direct imports of internal types with module-based imports
+   - Fixed import references in error handling components
 
-4. **Fixed Error Handling**:
-   - Updated CalendarOperationsServiceImpl to use standard ServiceError cases
-   - Fixed AvailabilityError structure to properly conform to LocalizedError
-   - Updated error handling in MutualAvailabilityViewModel to use UIErrorHandler
+4. **Error Handling Improved**:
+   - Updated services to use standardized ServiceError types
+   - Ensured all error types conform to LocalizedError for consistent handling
+   - Fixed error handling in view models to use the central error handler
 
-### Remaining Issues
-While we've resolved many critical issues, a few key challenges remain:
+5. **Firebase User vs App User Ambiguity Resolved**:
+   - Created a public typealias in Models/User.swift to reference Core.AppUser
+   - Updated OnboardingView to properly convert Firebase Users to Core.AppUser
+   - Updated AuthViewModel to track both Firebase User and AppUser separately
+   - Modified FirestoreService to properly handle Core.AppUser for storage and retrieval
 
-1. **Firebase Integration**:
-   - Ensure proper integration with Firebase models across the codebase
-   - Resolve potential ambiguities between Firebase User and app User model
+### Validation Results:
+We've been able to successfully build several key components that were previously failing:
+- BaseService and related protocols now compile correctly
+- MutualAvailabilityViewModel and its error handling system work properly
+- CoupleAvailability and related models now reference the correct shared types
+- User-related components now properly use AppUser from Core
 
-2. **Complete Module Dependency Verification**:
-   - Verify all module imports across the entire codebase
-   - Ensure consistent import patterns in all feature modules
+### Remaining Work:
+Some areas still need attention:
+1. Several modules still have incomplete imports
+2. Some model references in the Frameworks directory need verification
 
-3. **Model Definitions in Frameworks**:
-   - Verify all models referenced from the Frameworks directory are properly defined
-   - Ensure all Framework model imports work correctly
+The systematic approach we've been using is effective, and we'll continue addressing one file at a time until all module structure issues are fixed. Based on current progress, we expect to resolve all major issues within the next few days.
 
-### Next Steps
-To complete the module structure resolution:
-
-1. Continue addressing import issues file by file systematically
-2. Test building each module independently to ensure proper dependencies
-3. Update module dependencies in Package.swift if new issues are discovered
-4. Ensure all public interfaces are properly defined with correct access levels
-
-These improvements have significantly enhanced the project's structure and should resolve most of the module-related build issues. The codebase is now better organized with clearer separation between modules and properly defined interfaces.
 ## Module Structure Implementation Progress Update (5:24 pm April 25, 2025)
 
 Today we made substantial progress fixing the key module structure and import issues that were preventing the project from building properly. By systematically addressing each problematic area, we've resolved several critical issues:

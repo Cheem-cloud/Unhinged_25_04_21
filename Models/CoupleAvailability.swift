@@ -1,5 +1,6 @@
 import Foundation
 import FirebaseFirestore
+import Services
 
 // Using the consolidated AvailabilityError from Models/AvailabilityError.swift
 // Enum representing possible errors when working with availability
@@ -10,51 +11,51 @@ import FirebaseFirestore
 //}
 
 /// Represents a couple's availability preferences and settings
-struct CoupleAvailability: Codable, Identifiable {
+public struct CoupleAvailability: Codable, Identifiable {
     /// Firestore document ID
-    @DocumentID var id: String?
+    @DocumentID public var id: String?
     
     /// Reference to the relationship ID
-    var relationshipID: String
+    public var relationshipID: String
     
     /// Whether to use calendar data for availability
-    var useCalendars: Bool = true
+    public var useCalendars: Bool = true
     
     /// Whether to require both partners to be free
-    var requireBothFree: Bool = true
+    public var requireBothFree: Bool = true
     
     /// Minimum advance notice required in hours (e.g., 2 hours before event)
-    var minimumAdvanceNotice: Int = 2
+    public var minimumAdvanceNotice: Int = 2
     
     /// Maximum days in advance to allow scheduling (e.g., 90 days)
-    var maximumAdvanceDays: Int = 90
+    public var maximumAdvanceDays: Int = 90
     
     /// Preferred hangout duration in minutes (default: 120 minutes / 2 hours)
-    var preferredHangoutDuration: Int = 120
+    public var preferredHangoutDuration: Int = 120
     
     /// Availability by day of week
-    var dayAvailability: [DayAvailability] = []
+    public var dayAvailability: [DayAvailability] = []
     
     /// Recurring commitments that block time slots
-    var recurringCommitments: [RecurringCommitment] = []
+    public var recurringCommitments: [RecurringCommitment] = []
     
     /// Last updated timestamp
-    var updatedAt: Date = Date()
+    public var updatedAt: Date = Date()
     
     /// Initialize with a relationship ID
-    init(relationshipID: String) {
+    public init(relationshipID: String) {
         self.relationshipID = relationshipID
         self.updatedAt = Date()
         
         // Default to all days available with standard hours
         self.dayAvailability = Unhinged.Weekday.allCases.map { weekday in
-            let timeRanges = [TimeRange(startHour: 9, startMinute: 0, endHour: 21, endMinute: 0)]
+            let timeRanges = [Services.TimeRange(startHour: 9, startMinute: 0, endHour: 21, endMinute: 0)]
             return DayAvailability(day: weekday, timeRanges: timeRanges)
         }
     }
     
     /// Validates that the time range specified is valid
-    func validateTimeRange(startDate: Date, endDate: Date, duration: Int) -> Result<Bool, Error> {
+    public func validateTimeRange(startDate: Date, endDate: Date, duration: Int) -> Result<Bool, Error> {
         // Check that end date is after start date
         if endDate <= startDate {
             return .failure(AvailabilityError(errorType: .invalidTimeRange))
@@ -69,7 +70,7 @@ struct CoupleAvailability: Codable, Identifiable {
     }
     
     /// Convert a Firestore document to a CoupleAvailability
-    static func fromFirestore(_ document: QueryDocumentSnapshot) -> CoupleAvailability? {
+    public static func fromFirestore(_ document: QueryDocumentSnapshot) -> CoupleAvailability? {
         do {
             var availability = try document.data(as: CoupleAvailability.self)
             availability.id = document.documentID
@@ -80,36 +81,36 @@ struct CoupleAvailability: Codable, Identifiable {
         }
     }
     
-    mutating func initializeDefaultAvailability() {
+    public mutating func initializeDefaultAvailability() {
         self.dayAvailability = Unhinged.Weekday.allCases.map { weekday in
-            let timeRanges = [TimeRange(startHour: 9, startMinute: 0, endHour: 21, endMinute: 0)]
+            let timeRanges = [Services.TimeRange(startHour: 9, startMinute: 0, endHour: 21, endMinute: 0)]
             return DayAvailability(day: weekday, timeRanges: timeRanges)
         }
     }
 }
 
 /// Represents availability for a day of the week
-struct DayAvailability: Codable, Hashable {
-    var id = UUID()
-    var day: Unhinged.Weekday
-    var timeRanges: [TimeRange]
+public struct DayAvailability: Codable, Hashable {
+    public var id = UUID()
+    public var day: Unhinged.Weekday
+    public var timeRanges: [Services.TimeRange]
     
-    init(day: Unhinged.Weekday, timeRanges: [TimeRange] = []) {
+    public init(day: Unhinged.Weekday, timeRanges: [Services.TimeRange] = []) {
         self.day = day
         self.timeRanges = timeRanges
     }
 }
 
 /// Represents a recurring commitment that blocks availability
-struct RecurringCommitment: Codable, Hashable {
-    var id = UUID()
-    var title: String
-    var day: Unhinged.Weekday
-    var startTime: Date
-    var endTime: Date
-    var isSharedWithPartner: Bool
+public struct RecurringCommitment: Codable, Hashable {
+    public var id = UUID()
+    public var title: String
+    public var day: Unhinged.Weekday
+    public var startTime: Date
+    public var endTime: Date
+    public var isSharedWithPartner: Bool
     
-    init(title: String, day: Unhinged.Weekday, startTime: Date, endTime: Date, isSharedWithPartner: Bool = true) {
+    public init(title: String, day: Unhinged.Weekday, startTime: Date, endTime: Date, isSharedWithPartner: Bool = true) {
         self.title = title
         self.day = day
         self.startTime = startTime
@@ -121,7 +122,7 @@ struct RecurringCommitment: Codable, Hashable {
 /// Extension to handle error recovery suggestions
 extension CoupleAvailability {
     /// Get alternative suggestions when no mutual availability is found
-    func suggestAlternatives(startDate: Date, endDate: Date, duration: Int) -> [TimeSlot] {
+    public func suggestAlternatives(startDate: Date, endDate: Date, duration: Int) -> [TimeSlot] {
         var suggestedSlots: [TimeSlot] = []
         
         // If duration is long, try a shorter duration

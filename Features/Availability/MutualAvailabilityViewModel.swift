@@ -4,8 +4,8 @@ import Combine
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
-// Importing required utilities directly instead of as a module
-// import Utilities
+import Services
+import Utilities
 
 /// View model for finding and displaying mutual availability between couples
 class MutualAvailabilityViewModel: ObservableObject {
@@ -267,40 +267,34 @@ class MutualAvailabilityViewModel: ObservableObject {
     /// Handle errors from the availability service
     private func handleAvailabilityError(_ error: Error) {
         if let availabilityError = error as? AvailabilityError {
-            switch availabilityError {
-            case .invalidTimeRange, .invalidDuration:
-                let appError = AvailabilityError(errorType: .searchRangeTooNarrow, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
+            switch availabilityError.errorType {
+            case .invalidTimeRange, .invalidDuration, .searchRangeTooNarrow:
+                UIErrorHandler.shared.showError(availabilityError)
                 self.error = MutualAvailabilityError.searchRangeTooNarrow
-            case .calendarSyncFailed:
-                let appError = AvailabilityError(errorType: .calendarPermissionRequired, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
+            case .calendarPermissionRequired, .calendarSyncFailed:
+                UIErrorHandler.shared.showError(availabilityError)
                 self.error = MutualAvailabilityError.calendarPermissionRequired
             case .relationshipNotFound:
-                let appError = AvailabilityError(errorType: .internalError("Relationship not found"), underlyingError: error)
-                ErrorHandler.shared.showError(appError)
+                UIErrorHandler.shared.showError(availabilityError)
                 self.error = MutualAvailabilityError.internalError("Relationship not found")
-            case .preferenceConflict, .unavailableTimePeriod:
-                let appError = AvailabilityError(errorType: .noMutualAvailabilityFound, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
+            case .noMutualAvailabilityFound, .preferenceConflict, .unavailableTimePeriod:
+                UIErrorHandler.shared.showError(availabilityError)
                 self.error = MutualAvailabilityError.noMutualAvailabilityFound
-            case .networkTimeout:
-                let appError = AvailabilityError(errorType: .networkError, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
+            case .networkTimeout, .networkError:
+                UIErrorHandler.shared.showError(availabilityError)
                 self.error = MutualAvailabilityError.networkError
-            default:
-                let appError = AvailabilityError(errorType: .internalError(availabilityError.localizedDescription), underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-                self.error = MutualAvailabilityError.internalError(availabilityError.localizedDescription)
+            case .internalError(let message):
+                UIErrorHandler.shared.showError(availabilityError)
+                self.error = MutualAvailabilityError.internalError(message)
             }
         } else if let mutualError = error as? MutualAvailabilityError {
             // Use the centralized error system but also update the local error property
             let appError = AvailabilityError(legacyError: mutualError)
-            ErrorHandler.shared.showError(appError)
+            UIErrorHandler.shared.showError(appError)
             self.error = mutualError
         } else {
             // For unknown errors, show a generic error in the centralized system
-            ErrorHandler.shared.handle(error)
+            UIErrorHandler.shared.handle(error)
             self.error = MutualAvailabilityError.internalError(error.localizedDescription)
         }
     }

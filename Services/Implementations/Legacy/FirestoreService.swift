@@ -2,6 +2,7 @@ import Foundation
 import Firebase
 import FirebaseFirestore
 import FirebaseAuth
+import Core
 
 enum FirestoreError: Error {
     case documentNotFound
@@ -70,20 +71,47 @@ class FirestoreService {
             return nil
         }
         
-        // Explicitly create AppUser to avoid type inference issues
+        // Extract document data
         let data = document.data() ?? [:]
-        var user = try Firestore.Decoder().decode(AppUser.self, from: data)
-        user.id = document.documentID
+        
+        // Create Firebase auth user model for conversion
+        let firebaseAuthUser = FirebaseAuthUser(
+            uid: document.documentID,
+            email: data["email"] as? String,
+            displayName: data["displayName"] as? String,
+            photoURL: data["photoURL"] as? String != nil ? URL(string: data["photoURL"] as! String) : nil
+        )
+        
+        // Convert to AppUser model from Core
+        var user = AppUser.fromFirebaseUser(firebaseAuthUser)
+        
+        // Set additional fields if needed
+        if let relationshipID = data["relationshipID"] as? String {
+            user.relationshipID = relationshipID
+        }
+        
         return user
     }
     
     func createUser(_ user: AppUser) async throws -> String {
         do {
-            let docRef = db.collection(usersCollection).document()
-            var userCopy = user
-            userCopy.id = docRef.documentID
+            let docRef = db.collection(usersCollection).document(user.id)
             
-            try await docRef.setDataAsync(from: userCopy)
+            // Convert Core.AppUser to dictionary for Firestore
+            let userData: [String: Any] = [
+                "id": user.id,
+                "email": user.email,
+                "displayName": user.displayName,
+                "photoURL": user.photoURL,
+                "relationshipID": user.relationshipID as Any,
+                "calendarID": user.calendarID as Any,
+                "calendarAccessToken": user.calendarAccessToken as Any,
+                "calendarRefreshToken": user.calendarRefreshToken as Any,
+                "createdAt": user.createdAt,
+                "updatedAt": user.updatedAt
+            ]
+            
+            try await docRef.setData(userData)
             
             // Initialize FCM token field if it doesn't exist
             try await docRef.updateData([
@@ -107,12 +135,21 @@ class FirestoreService {
     }
     
     func updateUser(_ user: AppUser) async throws {
-        guard let id = user.id else {
-            throw FirestoreError.invalidData
-        }
+        let docRef = db.collection(usersCollection).document(user.id)
         
-        let docRef = db.collection(usersCollection).document(id)
-        try await docRef.setDataAsync(from: user, merge: true)
+        // Convert Core.AppUser to dictionary for Firestore
+        let userData: [String: Any] = [
+            "email": user.email,
+            "displayName": user.displayName,
+            "photoURL": user.photoURL as Any,
+            "relationshipID": user.relationshipID as Any,
+            "calendarID": user.calendarID as Any,
+            "calendarAccessToken": user.calendarAccessToken as Any,
+            "calendarRefreshToken": user.calendarRefreshToken as Any,
+            "updatedAt": FieldValue.serverTimestamp()
+        ]
+        
+        try await docRef.setData(userData, merge: true)
     }
     
     // MARK: - Persona Operations

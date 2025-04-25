@@ -36,7 +36,7 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
     
     func read(_ id: String) async throws -> CalendarEvent {
         // Implementation of calendar event retrieval
-        throw ServiceError.notImplemented("Reading individual calendar events is not implemented yet")
+        throw ServiceError.notImplemented
     }
     
     func update(_ entity: CalendarEvent) async throws -> CalendarEvent {
@@ -81,7 +81,7 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
     
     func list() async throws -> [CalendarEvent] {
         // Implementation of event listing
-        throw ServiceError.notImplemented("Listing calendar events is not implemented yet")
+        throw ServiceError.notImplemented
     }
     
     // MARK: - CalendarOperationsService Methods
@@ -209,13 +209,13 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
         print("Authenticating calendar access for user: \(userID)")
         
         guard let clientID = FirebaseApp.app()?.options.clientID else {
-            throw ServiceError.configurationError("Could not get Firebase client ID")
+            throw ServiceError.invalidOperation("Could not get Firebase client ID")
         }
         
         // Get the top view controller
         guard let windowScene = UIApplication.shared.connectedScenes.first as? UIWindowScene,
               let rootViewController = windowScene.windows.first?.rootViewController else {
-            throw ServiceError.configurationError("Could not get root view controller")
+            throw ServiceError.invalidOperation("Could not get root view controller")
         }
         
         // Configure GIDSignIn
@@ -287,7 +287,7 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
         let settings = try await getCalendarSettings(for: userId)
         
         if settings.connectedProviders.isEmpty {
-            throw ServiceError.configurationError("No calendar providers connected")
+            throw ServiceError.notConfigured
         }
         
         // Try to create on all connected providers
@@ -323,7 +323,7 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
                 userId: userId
             )
         default:
-            throw ServiceError.notSupported("Provider \(provider.providerType) not supported")
+            throw ServiceError.invalidOperation("Provider \(provider.providerType) not supported")
         }
     }
     
@@ -362,18 +362,18 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw ServiceError.networkError("Invalid response")
+            throw ServiceError.invalidOperation("Invalid response")
         }
         
         guard httpResponse.statusCode == 200 || httpResponse.statusCode == 201 else {
             let responseString = String(data: data, encoding: .utf8) ?? "No response body"
-            throw ServiceError.networkError("Status code: \(httpResponse.statusCode), Response: \(responseString)")
+            throw ServiceError.operationFailed("Status code: \(httpResponse.statusCode), Response: \(responseString)")
         }
         
         // Parse response to get event ID
         guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
               let eventId = json["id"] as? String else {
-            throw ServiceError.dataError("Could not parse event ID from response")
+            throw ServiceError.operationFailed("Could not parse event ID from response")
         }
         
         return eventId
@@ -388,11 +388,11 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
         let (_, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw ServiceError.networkError("Invalid response")
+            throw ServiceError.invalidOperation("Invalid response")
         }
         
         guard httpResponse.statusCode == 200 || httpResponse.statusCode == 204 else {
-            throw ServiceError.networkError("Status code: \(httpResponse.statusCode)")
+            throw ServiceError.operationFailed("Status code: \(httpResponse.statusCode)")
         }
     }
     
@@ -459,18 +459,18 @@ class CalendarOperationsServiceImpl: CalendarOperationsService {
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse else {
-            throw ServiceError.networkError("Invalid response")
+            throw ServiceError.invalidOperation("Invalid response")
         }
         
         guard httpResponse.statusCode == 200 else {
-            throw ServiceError.networkError("Status code: \(httpResponse.statusCode)")
+            throw ServiceError.operationFailed("Status code: \(httpResponse.statusCode)")
         }
         
         guard let json = try JSONSerialization.jsonObject(with: data) as? [String: Any],
               let calendars = json["calendars"] as? [String: Any],
               let primary = calendars["primary"] as? [String: Any],
               let busyArray = primary["busy"] as? [[String: String]] else {
-            throw ServiceError.dataError("Could not parse response")
+            throw ServiceError.operationFailed("Could not parse response")
         }
         
         return busyArray.compactMap { busy -> (start: Date, end: Date)? in

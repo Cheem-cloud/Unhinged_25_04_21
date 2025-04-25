@@ -9,6 +9,9 @@ import Combine
 /// This file contains UI-specific error handling components.
 /// Core error types and protocols are defined in ErrorHandling.swift
 
+// Import the CustomTheme from the same module
+// This is needed for the ErrorBanner view
+
 /// Global error handler for centralized error management
 public class UIErrorHandler: ObservableObject {
     /// Shared instance for global access
@@ -137,6 +140,18 @@ public extension View {
     }
 }
 
+// MARK: - CustomTheme for ErrorBanner
+public enum CustomColors {
+    public static let background = Color(UIColor.systemBackground)
+    public static let primary = Color.blue
+    public static let secondary = Color.gray
+    public static let accent = Color.orange
+    public static let error = Color.red
+    public static let warning = Color.yellow
+    public static let success = Color.green
+    public static let info = Color.blue
+}
+
 // MARK: - ErrorBanner View for custom error UI
 public struct ErrorBanner: View {
     let error: any AppError
@@ -202,7 +217,7 @@ public struct ErrorBanner: View {
         .padding()
         .background(
             RoundedRectangle(cornerRadius: 12)
-                .fill(CustomTheme.Colors.background)
+                .fill(CustomColors.background)
                 .shadow(color: .black.opacity(0.1), radius: 5, x: 0, y: 2)
         )
         .padding(.horizontal)

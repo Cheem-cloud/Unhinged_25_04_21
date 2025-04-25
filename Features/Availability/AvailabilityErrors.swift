@@ -1,33 +1,30 @@
 import Foundation
 import SwiftUI
-// import Utilities
+import Utilities
 
-/// Error type for availability-related issues
-public struct AvailabilityError: AppError {
-    /// Types of availability errors
-    public enum AvailabilityErrorType {
-        case noFriendCoupleSelected
-        case noMutualAvailabilityFound
-        case calendarPermissionRequired
-        case searchRangeTooNarrow
-        case internalError(String)
-        case networkError
-    }
+/// Error cases for availability functionality
+public struct AvailabilityError: Error, LocalizedError, Identifiable {
+    public var id = UUID()
     
-    public let errorType: AvailabilityErrorType
-    private let underlyingError: Error?
+    /// The specific error type
+    public var errorType: ErrorType
     
-    public init(errorType: AvailabilityErrorType, underlyingError: Error? = nil) {
+    /// Underlying error, if any
+    public var underlyingError: Error?
+    
+    /// Initialize with an error type
+    /// - Parameter errorType: The type of error
+    public init(errorType: ErrorType, underlyingError: Error? = nil) {
         self.errorType = errorType
         self.underlyingError = underlyingError
     }
     
-    /// Create from a MutualAvailabilityViewModel.MutualAvailabilityError
-    /// Note: This initializer is internal to match the access level of the parameter type
-    internal init(legacyError: MutualAvailabilityViewModel.MutualAvailabilityError) {
+    /// Initialize from a legacy error type
+    /// - Parameter legacyError: The legacy error type to convert
+    public init(legacyError: MutualAvailabilityViewModel.MutualAvailabilityError) {
         switch legacyError {
         case .noFriendCoupleSelected:
-            self.errorType = .noFriendCoupleSelected
+            self.errorType = .relationshipNotFound
         case .noMutualAvailabilityFound:
             self.errorType = .noMutualAvailabilityFound
         case .calendarPermissionRequired:
@@ -42,231 +39,245 @@ public struct AvailabilityError: AppError {
         self.underlyingError = legacyError
     }
     
-    public var domain: String {
-        return "Availability"
-    }
-    
-    public var errorTitle: String {
-        switch errorType {
-        case .noFriendCoupleSelected:
-            return "Select a Friend"
-        case .noMutualAvailabilityFound:
-            return "No Available Times"
-        case .calendarPermissionRequired:
-            return "Calendar Access Required"
-        case .searchRangeTooNarrow:
-            return "Adjust Time Range"
-        case .internalError:
-            return "Error"
-        case .networkError:
-            return "Network Error"
-        }
-    }
-    
+    /// Error description
     public var errorDescription: String? {
-        switch errorType {
-        case .noFriendCoupleSelected:
-            return "Please select a friend couple first"
-        case .noMutualAvailabilityFound:
-            return "No mutual availability found. Try adjusting your date range or duration."
-        case .calendarPermissionRequired:
-            return "Calendar access is required to check availability. Please grant permission in Settings."
-        case .searchRangeTooNarrow:
-            return "Search range is too narrow. Try extending the date range or shortening the duration."
-        case .internalError(let message):
-            return "Internal error: \(message)"
-        case .networkError:
-            return "Network error. Please check your connection and try again."
-        }
+        return errorType.localizedDescription
     }
     
+    /// Recovery suggestion
     public var recoverySuggestion: String? {
-        switch errorType {
-        case .noFriendCoupleSelected:
-            return "Tap 'Select Friend Couple' to choose a couple to hang out with."
-        case .noMutualAvailabilityFound:
-            return "Consider different days, times, or shortening the duration."
-        case .calendarPermissionRequired:
-            return "You can either grant calendar access in Settings or use manual availability."
-        case .searchRangeTooNarrow:
-            return "Try a wider date range or shorter duration."
-        case .internalError:
-            return "Try again later or contact support if the issue persists."
-        case .networkError:
-            return "Check your internet connection and try again."
-        }
+        return errorType.recoverySuggestion
     }
     
+    /// Error title
+    public var errorTitle: String {
+        return errorType.title
+    }
+    
+    /// Error severity
     public var severity: ErrorSeverity {
         switch errorType {
-        case .noFriendCoupleSelected:
-            return .info
-        case .noMutualAvailabilityFound:
-            return .info
-        case .calendarPermissionRequired:
+        case .calendarPermissionRequired, .calendarSyncFailed:
             return .warning
-        case .searchRangeTooNarrow:
+        case .invalidTimeRange, .invalidDuration, .searchRangeTooNarrow, .relationshipNotFound, .noMutualAvailabilityFound, .preferenceConflict, .unavailableTimePeriod:
             return .info
+        case .networkTimeout, .networkError:
+            return .warning
         case .internalError:
             return .error
-        case .networkError:
-            return .warning
         }
     }
     
+    /// Recovery actions
     public var recoveryActions: [ErrorRecoveryAction] {
         var actions: [ErrorRecoveryAction] = []
         
         switch errorType {
-        case .noFriendCoupleSelected:
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Select Friend Couple",
-                    icon: "person.2",
-                    isPrimary: true,
-                    action: {
-                        NotificationManager.shared.showFriendPicker()
-                    }
-                )
-            )
-            
         case .noMutualAvailabilityFound:
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Suggest Alternative Times",
-                    icon: "calendar.badge.plus",
-                    isPrimary: true,
-                    action: {}  // To be filled by client
-                )
-            )
-            
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Adjust Date Range",
-                    icon: "calendar",
-                    action: {
-                        NotificationManager.shared.showDateRangePicker()
+            actions.append(ErrorRecoveryAction(
+                title: "Try Different Times",
+                icon: "arrow.clockwise",
+                isPrimary: true,
+                action: {
+                    // Handled in view code
+                }
+            ))
+        case .calendarPermissionRequired, .calendarSyncFailed:
+            actions.append(ErrorRecoveryAction(
+                title: "Open Settings",
+                icon: "gear",
+                isPrimary: true,
+                action: {
+                    if let url = URL(string: UIApplication.openSettingsURLString) {
+                        UIApplication.shared.open(url)
                     }
-                )
-            )
-            
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Adjust Duration",
-                    icon: "clock",
-                    action: {
-                        NotificationManager.shared.showDurationPicker()
-                    }
-                )
-            )
-            
-        case .calendarPermissionRequired:
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Open Settings",
-                    icon: "gear",
-                    isPrimary: true,
-                    action: {
-                        PlatformUtilities.openSettings()
-                    }
-                )
-            )
-            
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Use Manual Availability",
-                    icon: "hand.raised",
-                    action: {}  // To be filled by client
-                )
-            )
-            
-        case .searchRangeTooNarrow:
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Adjust Date Range",
-                    icon: "calendar",
-                    isPrimary: true,
-                    action: {
-                        NotificationManager.shared.showDateRangePicker()
-                    }
-                )
-            )
-            
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Adjust Duration",
-                    icon: "clock",
-                    action: {
-                        NotificationManager.shared.showDurationPicker()
-                    }
-                )
-            )
-            
-        case .internalError:
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Try Again",
-                    icon: "arrow.clockwise",
-                    isPrimary: true,
-                    action: {}  // To be filled by client
-                )
-            )
-            
-        case .networkError:
-            actions.append(
-                ErrorRecoveryAction(
-                    title: "Retry Connection",
-                    icon: "network",
-                    isPrimary: true,
-                    action: {}  // To be filled by client
-                )
-            )
+                }
+            ))
+            actions.append(ErrorRecoveryAction(
+                title: "Continue Without Calendar",
+                icon: "calendar.badge.minus",
+                isPrimary: false,
+                action: {
+                    // Handled in view code
+                }
+            ))
+        case .networkTimeout, .networkError:
+            actions.append(ErrorRecoveryAction(
+                title: "Try Again",
+                icon: "arrow.clockwise",
+                isPrimary: true,
+                action: {
+                    // Handled in view code
+                }
+            ))
+        default:
+            // No recovery actions for other error types
+            break
         }
         
         return actions
     }
+    
+    /// Specific error types for availability
+    public enum ErrorType: Equatable {
+        /// Invalid time range (start after end, etc.)
+        case invalidTimeRange
+        
+        /// Invalid duration
+        case invalidDuration
+        
+        /// Search range too narrow for finding mutual availability
+        case searchRangeTooNarrow
+        
+        /// Calendar permission required
+        case calendarPermissionRequired
+        
+        /// Calendar sync failed
+        case calendarSyncFailed
+        
+        /// No mutual availability found in the given time range
+        case noMutualAvailabilityFound
+        
+        /// Relationship not found
+        case relationshipNotFound
+        
+        /// Conflicting preferences between users
+        case preferenceConflict
+        
+        /// Unavailable time period
+        case unavailableTimePeriod
+        
+        /// Network timeout
+        case networkTimeout
+        
+        /// Network error
+        case networkError
+        
+        /// Internal error with message
+        case internalError(String)
+        
+        /// Localized description of the error
+        public var localizedDescription: String {
+            switch self {
+            case .invalidTimeRange:
+                return "Invalid time range. End time must be after start time."
+            case .invalidDuration:
+                return "Invalid duration. Duration must be between 15 minutes and 12 hours."
+            case .searchRangeTooNarrow:
+                return "The search range is too narrow. Please select a wider date range or shorter duration."
+            case .calendarPermissionRequired:
+                return "Calendar access is required to find mutual availability."
+            case .calendarSyncFailed:
+                return "Could not sync with your calendar. Please check your calendar connection."
+            case .noMutualAvailabilityFound:
+                return "No mutual availability found in the selected time range."
+            case .relationshipNotFound:
+                return "Could not find the specified relationship."
+            case .preferenceConflict:
+                return "There's a conflict between user preferences that prevents finding mutual availability."
+            case .unavailableTimePeriod:
+                return "The selected time period is unavailable."
+            case .networkTimeout:
+                return "The request timed out. Please check your connection and try again."
+            case .networkError:
+                return "A network error occurred. Please check your connection and try again."
+            case .internalError(let message):
+                return "An internal error occurred: \(message)"
+            }
+        }
+        
+        /// Recovery suggestion for the error
+        public var recoverySuggestion: String? {
+            switch self {
+            case .invalidTimeRange:
+                return "Please select an end time that is after the start time."
+            case .invalidDuration:
+                return "Please select a duration between 15 minutes and 12 hours."
+            case .searchRangeTooNarrow:
+                return "Try selecting a wider date range or reduce the duration of the hangout."
+            case .calendarPermissionRequired:
+                return "Please grant calendar access in settings or continue without using calendar data."
+            case .calendarSyncFailed:
+                return "Try reconnecting your calendar in settings or continue without using calendar data."
+            case .noMutualAvailabilityFound:
+                return "Try a different date range, reduce the duration, or check your availability preferences."
+            case .relationshipNotFound:
+                return "Please select a valid relationship or refresh your connections."
+            case .preferenceConflict:
+                return "Try adjusting your availability preferences to find mutual availability."
+            case .unavailableTimePeriod:
+                return "Please select a different time period."
+            case .networkTimeout:
+                return "Check your internet connection and try again."
+            case .networkError:
+                return "Check your internet connection and try again later."
+            case .internalError:
+                return "Please try again or contact support if the problem persists."
+            }
+        }
+        
+        /// Error title for display
+        public var title: String {
+            switch self {
+            case .invalidTimeRange, .invalidDuration, .searchRangeTooNarrow:
+                return "Invalid Time Selection"
+            case .calendarPermissionRequired, .calendarSyncFailed:
+                return "Calendar Access Required"
+            case .noMutualAvailabilityFound, .preferenceConflict, .unavailableTimePeriod:
+                return "No Mutual Availability"
+            case .relationshipNotFound:
+                return "Relationship Not Found"
+            case .networkTimeout, .networkError:
+                return "Connection Issue"
+            case .internalError:
+                return "Unexpected Error"
+            }
+        }
+        
+        /// Equatable implementation
+        public static func == (lhs: ErrorType, rhs: ErrorType) -> Bool {
+            switch (lhs, rhs) {
+            case (.invalidTimeRange, .invalidTimeRange),
+                 (.invalidDuration, .invalidDuration),
+                 (.searchRangeTooNarrow, .searchRangeTooNarrow),
+                 (.calendarPermissionRequired, .calendarPermissionRequired),
+                 (.calendarSyncFailed, .calendarSyncFailed),
+                 (.noMutualAvailabilityFound, .noMutualAvailabilityFound),
+                 (.relationshipNotFound, .relationshipNotFound),
+                 (.preferenceConflict, .preferenceConflict),
+                 (.unavailableTimePeriod, .unavailableTimePeriod),
+                 (.networkTimeout, .networkTimeout),
+                 (.networkError, .networkError):
+                return true
+            case (.internalError(let lhsMsg), .internalError(let rhsMsg)):
+                return lhsMsg == rhsMsg
+            default:
+                return false
+            }
+        }
+    }
 }
 
-/// Extension to integrate with legacy MutualAvailabilityViewModel
+// MARK: - Error Handling Extension for MutualAvailabilityViewModel
+
 extension MutualAvailabilityViewModel {
-    /// Handle errors using the new centralized error handling system
-    func handleErrorWithCentralizedSystem(_ error: Error) {
-        // Map service errors to our domain-specific error type
-        if let availabilityError = error as? AvailabilityServiceError {
-            switch availabilityError {
-            case .invalidTimeRange, .invalidDuration:
-                let appError = AvailabilityError(errorType: .searchRangeTooNarrow, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-                
-            case .calendarSyncFailed:
-                let appError = AvailabilityError(errorType: .calendarPermissionRequired, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-                
-            case .relationshipNotFound:
-                let appError = AvailabilityError(errorType: .internalError("Relationship not found"), underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-                
-            case .preferenceConflict, .unavailableTimePeriod:
-                let appError = AvailabilityError(errorType: .noMutualAvailabilityFound, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-                
-            case .networkTimeout:
-                let appError = AvailabilityError(errorType: .networkError, underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-                
-            default:
-                let appError = AvailabilityError(errorType: .internalError(availabilityError.localizedDescription), underlyingError: error)
-                ErrorHandler.shared.showError(appError)
-            }
-        } 
-        // Handle existing MutualAvailabilityError
-        else if let mutualError = error as? MutualAvailabilityError {
-            let appError = AvailabilityError(legacyError: mutualError)
-            ErrorHandler.shared.showError(appError)
-        }
-        // Handle unrecognized errors
-        else {
-            ErrorHandler.shared.handle(error)
+    /// Handle errors using the centralized error handling system
+    public func handleErrorWithCentralizedSystem(_ error: Error) {
+        // Convert error to AppError if not already
+        if let availabilityError = error as? AvailabilityError {
+            // Availability error is already conforming to AppError, pass directly
+            UIErrorHandler.shared.showError(availabilityError)
+        } else if let mutualError = error as? MutualAvailabilityError {
+            // Convert legacy error
+            let availabilityError = AvailabilityError(legacyError: mutualError)
+            UIErrorHandler.shared.showError(availabilityError)
+        } else {
+            // Wrap generic error
+            let availabilityError = AvailabilityError(
+                errorType: .internalError(error.localizedDescription),
+                underlyingError: error
+            )
+            UIErrorHandler.shared.showError(availabilityError)
         }
     }
 }

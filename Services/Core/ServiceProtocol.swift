@@ -14,6 +14,12 @@ public protocol ServiceProtocol {
     
     /// Reset the service state
     func reset() async throws
+    
+    /// Publisher for service events
+    var serviceEventPublisher: AnyPublisher<ServiceEvent, Never> { get }
+    
+    /// Publisher for service state changes
+    var statePublisher: AnyPublisher<ServiceState, Never> { get }
 }
 
 /// Protocol for services that support configuration
@@ -189,4 +195,74 @@ public protocol ServiceFactory {
     ///   - serviceType: The type of service to register
     ///   - factory: A factory function that creates the service
     func registerService<T: ServiceProtocol>(_ serviceType: T.Type, factory: @escaping () -> T)
+}
+
+/// Service event struct
+public struct ServiceEvent {
+    /// Event type
+    public let type: EventType
+    
+    /// Event timestamp
+    public let timestamp: Date
+    
+    /// Event data
+    public let data: [String: Any]
+    
+    /// Event types
+    public enum EventType {
+        case stateChanged
+        case configChanged
+        case authChanged
+        case dataChanged
+        case error
+        case logMessage
+        case custom(String)
+    }
+    
+    /// Initialize with type and data
+    /// - Parameters:
+    ///   - type: Event type
+    ///   - data: Event data
+    public init(type: EventType, data: [String: Any] = [:]) {
+        self.type = type
+        self.data = data
+        self.timestamp = Date()
+    }
+}
+
+/// Service state enum
+public enum ServiceState: Equatable {
+    case initialized
+    case configuring
+    case configured
+    case starting
+    case running
+    case pausing
+    case paused
+    case stopping
+    case stopped
+    case resetting
+    case terminated
+    case error(String)
+    
+    public static func == (lhs: ServiceState, rhs: ServiceState) -> Bool {
+        switch (lhs, rhs) {
+        case (.initialized, .initialized),
+             (.configuring, .configuring),
+             (.configured, .configured),
+             (.starting, .starting),
+             (.running, .running),
+             (.pausing, .pausing),
+             (.paused, .paused),
+             (.stopping, .stopping),
+             (.stopped, .stopped),
+             (.resetting, .resetting),
+             (.terminated, .terminated):
+            return true
+        case (.error(let lhsMessage), .error(let rhsMessage)):
+            return lhsMessage == rhsMessage
+        default:
+            return false
+        }
+    }
 } 
